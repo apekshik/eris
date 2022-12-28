@@ -10,19 +10,24 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct LoginView: View {
-    @State var isLoginMode = false
-    
-    // User Details.
+    // MARK: User Details.
     @State var email: String = ""
     @State var password: String = ""
     @State var firstName: String = ""
     @State var lastName: String = ""
     @State var userName: String = ""
+    @State var isLoginMode = false
     
-    // Error Details.
+    // MARK: Error Details.
     @State var errorMessage: String = ""
     @State var showError: Bool = false
     
+    // MARK: UserDefaults
+    @AppStorage("log_status") var logStatus: Bool = false
+    @AppStorage("user_name") var userNameStored: String = ""
+    @AppStorage("user_UID") var userUID: String = ""
+    
+    // MARK: Main View body
     var body: some View {
         VStack {
             
@@ -38,7 +43,7 @@ struct LoginView: View {
                 .font(.system(.headline))
                 .padding()
             
-            // Picker component for login/account creation.
+            // MARK: Picker component for login/account creation.
             Picker(selection: $isLoginMode, label: Text("Picker for login/account creation")) {
                 Text("Login")
                     .tag(true)
@@ -47,7 +52,7 @@ struct LoginView: View {
             }.pickerStyle(SegmentedPickerStyle())
                 .padding([.bottom, .leading, .trailing], 16)
             
-            // Form View to enter Login/Signup details.
+            // MARK: Form View to enter Login/Signup details.
             Group {
                 if isLoginMode == false {
                     VStack(alignment: .leading) {
@@ -86,7 +91,7 @@ struct LoginView: View {
             }
             .padding()
             
-            // Create Account / Login Button
+            // MARK: Button for Login/Signup
             Button {
                 handleAction()
             } label: {
@@ -115,8 +120,17 @@ struct LoginView: View {
         }
     }
     
-    
+    // MARK: Login Method
     private func loginUser() {
+        Task {
+            do {
+                try await FirebaseManager.shared.auth.signIn(withEmail: email, password: password)
+                print("User Signed in successfully")
+            } catch {
+                await setError(error)
+            }
+        }
+        // MARK: Legacy Login Method
 //        Auth.auth().signIn(withEmail: email, password: password) { result, err in
 //            if let err = err {
 //                // handle error
@@ -128,26 +142,33 @@ struct LoginView: View {
 //            self.loginStatusMessage = "succesffuly logged in user! User ID: \(result?.user.uid ?? "")"
 //
 //        }
-        
+    }
+    
+    // MARK: Signup Method
+    private func createAccount() {
         Task {
             do {
-                try await FirebaseManager.shared.auth.signIn(withEmail: email, password: password)
-                print("User Signed in successfully")
+                // Step 1. Create Firebase Account
+                try await FirebaseManager.shared.auth.createUser(withEmail: email, password: password)
+                // Step 2. Create a User object to store in Firestore using the currentUser's UID.
+                guard let userUID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+                let newUser = User(firstName: firstName,
+                                              lastName: lastName,
+                                              userName: userName,
+                                              email: email)
+                // Step 3. Save new User Doc in Firestore
+                let db = FirebaseManager.shared.firestore
+                let _ = try db.collection("Users").document(userUID).setData(from: newUser) { error in
+                    if error == nil {
+                        print("Saved new User Document in Firestore Successfully!")
+                    }
+                }
             } catch {
+                // catch any errors thrown during the account creation and firestore doc saving process.
                 await setError(error)
             }
         }
-    }
-    
-    // Displaying errors via an ALERT
-    func setError(_ error: Error) async {
-        // UI Must be updated on Main Thread.
-        await MainActor.run(body: {
-            errorMessage = error.localizedDescription
-            showError.toggle()
-        })
-    }
-    private func createAccount() {
+        // MARK: Legacy Signup Method.
 //        Auth.auth().createUser(withEmail: email, password: password) { result, err in
 //            if let err = err {
 //                // handle error
@@ -176,30 +197,17 @@ struct LoginView: View {
 //
 //
 //        }
-        
-        Task {
-            do {
-                // Step 1. Create Firebase Account
-                try await FirebaseManager.shared.auth.createUser(withEmail: email, password: password)
-                // Step 2. Create a User object to store in Firestore using the currentUser's UID.
-                guard let userUID = FirebaseManager.shared.auth.currentUser?.uid else { return }
-                let newUser = User(firstName: firstName,
-                                              lastName: lastName,
-                                              userName: userName,
-                                              email: email)
-                // Step 3. Save new User Doc in Firestore
-                let db = FirebaseManager.shared.firestore
-                let _ = try db.collection("Users").document(userUID).setData(from: newUser) { error in
-                    if error == nil {
-                        print("Saved new User Document in Firestore Successfully!")
-                    }
-                }
-            } catch {
-                // catch any errors thrown during the account creation and firestore doc saving process.
-                await setError(error)
-            }
-        }
     }
+    
+    // MARK: Display Errors Via ALERT
+    func setError(_ error: Error) async {
+        // UI Must be updated on Main Thread.
+        await MainActor.run(body: {
+            errorMessage = error.localizedDescription
+            showError.toggle()
+        })
+    }
+
 }
 
 struct LoginView_Previews: PreviewProvider {
