@@ -1,15 +1,13 @@
 //
-//  LoginView.swift
+//  TLoginView.swift
 //  eris
 //
-//  Created by Apekshik Panigrahi on 12/11/22.
+//  Created by Apekshik Panigrahi on 12/27/22.
 //
 
 import SwiftUI
-import Firebase
-import FirebaseFirestoreSwift
 
-struct LoginView: View {
+struct TLoginView: View {
   @State var isLoginMode = false
   @State private var email: String = ""
   @State private var password: String = ""
@@ -75,14 +73,13 @@ struct LoginView: View {
           .padding()
           .background(Color(hex: "#f5f1dc"))
           .cornerRadius(10)
-          
         }
       }
       .padding()
       
       // Create Account / Login Button
       Button {
-        handleAction()
+        // handleAction()
       } label: {
         Text(isLoginMode ? "Login" : "Create Account")
           .frame(maxWidth: .infinity)
@@ -99,68 +96,10 @@ struct LoginView: View {
     .background(Color(hex: "#e0ded5"))
   }
   
-  private func handleAction() {
-    if isLoginMode {
-      print("Logging into firebase with existing creds.")
-      loginUser()
-    } else {
-      print("registering new account inside of firebase")
-      createAccount()
-    }
-  }
-  
-  // State var to catch any login/signup errors that we might encounter.
-  @State var loginStatusMessage: String = ""
-  
-  private func loginUser() {
-    Auth.auth().signIn(withEmail: email, password: password) { result, err in
-      if let err = err {
-        // handle error
-        print("failed to login user", err.localizedDescription)
-        return
-      }
-      
-      print("succesffuly logged in user! \(result?.user.uid ?? "")")
-      self.loginStatusMessage = "succesffuly logged in user! User ID: \(result?.user.uid ?? "")"
-      
-    }
-  }
-  
-  
-  private func createAccount() {
-    Auth.auth().createUser(withEmail: email, password: password) { result, err in
-      if let err = err {
-        // handle error
-        print("failed to create user", err.localizedDescription)
-        return
-      }
-      
-      print("succesffuly created user! \(result?.user.uid ?? "")")
-      
-      self.loginStatusMessage = "succesffuly created user! User ID:  \(result?.user.uid ?? "")"
-      
-      // also add new user to firestore database
-      let newUser = User(firstName: firstName,
-                         lastName: lastName,
-                         userName: userName,
-                         email: email)
-      
-      let db = FirebaseManager.shared.firestore
-      
-      do {
-        try db.collection("Users").document().setData(from: newUser)
-      }
-      catch let err {
-        print("Error writing data to FireStore: \(err)")
-      }
-      
-      
-    }
-  }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct TLoginView_Previews: PreviewProvider {
   static var previews: some View {
-    LoginView()
+    TLoginView()
   }
 }
