@@ -7,20 +7,36 @@
 
 import SwiftUI
 
-struct RoundedCorner: Shape {
+// MARK: UI View Building Extensions
+extension View {
+    // adding a cornerRadius to specific corners of your rectangle View.
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
+    
+    // It's the same as adding these frame modifiers directly to the views.
+    func hAlign(_ alignment: Alignment) -> some View {
+        self
+            .frame(maxWidth: .infinity, alignment: alignment)
+    }
+    
+    func vAlign(_ alignment: Alignment) -> some View {
+        self
+            .frame(maxHeight: .infinity, alignment: alignment)
+    }
 
+}
+
+
+// Needed for cornerRadius View Extension
+struct RoundedCorner: Shape {
+    
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
-
+    
     func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         return Path(path.cgPath)
-    }
-}
-
-extension View {
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
 }
 
@@ -40,7 +56,7 @@ extension Color {
         default:
             (a, r, g, b) = (1, 1, 1, 0)
         }
-
+        
         self.init(
             .sRGB,
             red: Double(r) / 255,
