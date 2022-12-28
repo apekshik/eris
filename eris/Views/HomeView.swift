@@ -12,7 +12,7 @@ struct HomeView: View {
     var body: some View {
         // Redirecting User based on LogStatus
         if logStatus {
-            Text("Logged in")
+            MainView()
         }
         else {
             LoginView()

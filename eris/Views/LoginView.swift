@@ -116,6 +116,10 @@ struct LoginView: View {
         .overlay {
             LoadingView(show: $isLoading)
         }
+        // Alert popup everytime there's an error.
+        .alert(errorMessage, isPresented: $showError) {
+            
+        }
     }
     
     private func handleAction() {
@@ -135,6 +139,7 @@ struct LoginView: View {
             do {
                 try await FirebaseManager.shared.auth.signIn(withEmail: email, password: password)
                 print("User Signed in successfully")
+                logStatus = true
             } catch {
                 await setError(error)
             }
@@ -213,6 +218,25 @@ struct LoginView: View {
 //
 //
 //        }
+    }
+    
+    // MARK: Fetch Current User Data
+    func fetchCurrentUser() async throws {
+        // Fetch the current logged in user ID if user is logged in.
+        guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        // Fetch user data from Firestore using the userID.
+        let user = try await FirebaseManager.shared.firestore.collection("Users").document(userID).getDocument(as: User.self)
+        
+        // UI Updating must run on main thread.
+        await MainActor.run(body: {
+            // Setting UserDefaults and changing App's LogStatus.
+            userUID = userID
+            firstNameStored = user.firstName
+            lastNameStored = user.lastName
+            userNameStored = user.userName
+            logStatus = true
+        })
+                
     }
     
     // MARK: Display Errors Via ALERT
