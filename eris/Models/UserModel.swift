@@ -10,12 +10,19 @@ import Foundation
 // User model to store users in firestore database.
 struct User: Codable, Identifiable  {
   var id = UUID()
-  let uid: String?
   let firstName: String
   let lastName: String
-  var fullName: String {
+  var fullName: String { // a computable property
     return firstName + " " + lastName
   }
-  let emailID: String
+  var userName: String
+  let email: String
   
+  enum CodingKeys: String, CodingKey {
+    case firstName
+    case lastName
+//    case fullName: don't need to store this in the DB since we can always decode and compute this property.
+    case userName
+    case email
+  }
 }

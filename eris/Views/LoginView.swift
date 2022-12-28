@@ -12,6 +12,9 @@ struct LoginView: View {
   @State var isLoginMode = false
   @State private var email: String = ""
   @State private var password: String = ""
+  @State private var firstName: String = ""
+  @State private var lastName: String = ""
+  @State private var userName: String = ""
   
   init() {
     FirebaseApp.configure()
@@ -100,7 +103,8 @@ struct LoginView: View {
       print("succesffuly created user! \(result?.user.uid ?? "")")
       
       self.loginStatusMessage = "succesffuly created user! User ID:  \(result?.user.uid ?? "")"
-
+      
+      let newUser = User(firstName: firstName, lastName: lastName, userName: userName, email: email)
     }
   }
 }
