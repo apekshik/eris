@@ -16,7 +16,7 @@ struct erisApp: App {
   }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }

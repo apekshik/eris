@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct HomeView: View {
+    @AppStorage("log_status") var logStatus: Bool = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        // Redirecting User based on LogStatus
+        if logStatus {
+            Text("Logged in")
+        }
+        else {
+            LoginView()
+        }
     }
 }
 

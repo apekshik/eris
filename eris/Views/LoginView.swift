@@ -26,6 +26,11 @@ struct LoginView: View {
     @AppStorage("log_status") var logStatus: Bool = false
     @AppStorage("user_name") var userNameStored: String = ""
     @AppStorage("user_UID") var userUID: String = ""
+    @AppStorage("first_name") var firstNameStored: String = ""
+    @AppStorage("last_name") var lastNameStored: String = ""
+    
+    // View Properties
+    @State var isLoading: Bool = false
     
     // MARK: Main View body
     var body: some View {
@@ -108,6 +113,9 @@ struct LoginView: View {
             
         } // End of VStack
         .background(Color(hex: "#e0ded5"))
+        .overlay {
+            LoadingView(show: $isLoading)
+        }
     }
     
     private func handleAction() {
@@ -122,6 +130,7 @@ struct LoginView: View {
     
     // MARK: Login Method
     private func loginUser() {
+        isLoading = true
         Task {
             do {
                 try await FirebaseManager.shared.auth.signIn(withEmail: email, password: password)
@@ -146,6 +155,7 @@ struct LoginView: View {
     
     // MARK: Signup Method
     private func createAccount() {
+        isLoading = true
         Task {
             do {
                 // Step 1. Create Firebase Account
@@ -161,6 +171,12 @@ struct LoginView: View {
                 let _ = try db.collection("Users").document(userUID).setData(from: newUser) { error in
                     if error == nil {
                         print("Saved new User Document in Firestore Successfully!")
+                        // store user data in UserDefaults
+                        userNameStored = userName
+                        firstNameStored = firstName
+                        lastNameStored = lastName
+                        self.userUID = userUID
+                        logStatus = true
                     }
                 }
             } catch {
@@ -205,6 +221,7 @@ struct LoginView: View {
         await MainActor.run(body: {
             errorMessage = error.localizedDescription
             showError.toggle()
+            isLoading = false
         })
     }
 

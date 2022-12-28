@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		890F4A4A29413E70003B020D /* erisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F4A4929413E70003B020D /* erisApp.swift */; };
-		890F4A4C29413E70003B020D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F4A4B29413E70003B020D /* ContentView.swift */; };
 		890F4A4E29413E71003B020D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 890F4A4D29413E71003B020D /* Assets.xcassets */; };
 		890F4A5129413E71003B020D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 890F4A5029413E71003B020D /* Preview Assets.xcassets */; };
 		890F4A58294154BA003B020D /* ReviewForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F4A57294154BA003B020D /* ReviewForm.swift */; };
@@ -23,6 +22,7 @@
 		89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B0A295BD2DD00BAC746 /* TLoginView.swift */; };
 		89B53B0D295BD40400BAC746 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B0C295BD40400BAC746 /* Extensions.swift */; };
 		89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B0E295CA99F00BAC746 /* HomeView.swift */; };
+		89B53B11295CB41D00BAC746 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B10295CB41D00BAC746 /* LoadingView.swift */; };
 		89E4AE6E29463985002BE54C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E4AE6D29463985002BE54C /* LoginView.swift */; };
 		89E4AE7029463D32002BE54C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89E4AE6F29463D32002BE54C /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -30,7 +30,6 @@
 /* Begin PBXFileReference section */
 		890F4A4629413E70003B020D /* eris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		890F4A4929413E70003B020D /* erisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = erisApp.swift; sourceTree = "<group>"; };
-		890F4A4B29413E70003B020D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		890F4A4D29413E71003B020D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		890F4A5029413E71003B020D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		890F4A57294154BA003B020D /* ReviewForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewForm.swift; sourceTree = "<group>"; };
@@ -40,6 +39,7 @@
 		89B53B0A295BD2DD00BAC746 /* TLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLoginView.swift; sourceTree = "<group>"; };
 		89B53B0C295BD40400BAC746 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		89B53B0E295CA99F00BAC746 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		89B53B10295CB41D00BAC746 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		89E4AE6D29463985002BE54C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		89E4AE6F29463D32002BE54C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,11 +110,11 @@
 		89B53AFD295BBDFB00BAC746 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				890F4A4B29413E70003B020D /* ContentView.swift */,
 				890F4A57294154BA003B020D /* ReviewForm.swift */,
 				89E4AE6D29463985002BE54C /* LoginView.swift */,
 				89B53B0A295BD2DD00BAC746 /* TLoginView.swift */,
 				89B53B0E295CA99F00BAC746 /* HomeView.swift */,
+				89B53B10295CB41D00BAC746 /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,8 +212,8 @@
 				890F4A58294154BA003B020D /* ReviewForm.swift in Sources */,
 				89B53B0D295BD40400BAC746 /* Extensions.swift in Sources */,
 				89B53AFB295BBCB900BAC746 /* UserModel.swift in Sources */,
+				89B53B11295CB41D00BAC746 /* LoadingView.swift in Sources */,
 				89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */,
-				890F4A4C29413E70003B020D /* ContentView.swift in Sources */,
 				89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */,
 				89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */,
 				89E4AE6E29463985002BE54C /* LoginView.swift in Sources */,
