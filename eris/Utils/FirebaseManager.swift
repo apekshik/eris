@@ -21,4 +21,9 @@ class FirebaseManager: NSObject {
     self.auth = Auth.auth()
     self.firestore = Firestore.firestore()
   }
+  
+  enum FirebaseError: Error {
+    case currentUserIDNotFound
+    case currentUserNotFound
+  }
 }
