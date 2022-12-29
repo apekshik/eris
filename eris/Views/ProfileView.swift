@@ -12,6 +12,9 @@ struct ProfileView: View {
     @State private var myProfile: User?
     @AppStorage("log_status") var logStatus: Bool = false
     
+    // Review Data
+    @State var reviews: [Review] = []
+    
     // MARK: Error data
     @State var errorMessage: String = ""
     @State var showError: Bool = false
@@ -23,12 +26,21 @@ struct ProfileView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 if let myProfile {
                     Text(myProfile.userName)
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    LazyVStack {
+                        ForEach(reviews, id: \.self) { review in
+                           ReviewCardView(user: myProfile, review: review, showName: false)
+                        }
+                    }
                 }
             }
             .refreshable {
-                // TODO: Refresh User Data
+                // refreshes user data when view is pulled down
                 myProfile = nil
                 await fetchUserData()
+                await fetchReviews()
             }
             .navigationTitle("My Profile")
             .toolbar {
@@ -70,6 +82,7 @@ struct ProfileView: View {
             // This modifier is like onAppear, so fetches once in the beginning only.
             // MARK: Initial fetch of data for profile view.
             await fetchUserData()
+            await fetchReviews()
         }
     }
     
@@ -109,8 +122,35 @@ struct ProfileView: View {
         }
     }
     
+    // MARK: Fetch Reviews For Our User and store it in the reviews var.
+    private func fetchReviews() async {
+        // fetch all reviews from reviews collection associated with current user.
+        guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        let reviewsRef = FirebaseManager.shared.firestore.collection("Reviews")
+        // Creates a query object. Next, we use the getDocuments() method to actually fetch the docs.
+        reviewsRef.whereField("uid", isEqualTo: userID).getDocuments() { snapshot, error in
+            if error == nil {
+                if let snapshot = snapshot {
+                    // documents is an array of document items. Each Document item is a dictionary
+                    // that contains the fields as keys and their values are then extracted as shown below.
+                    self.reviews = snapshot.documents.map { d in // d for document
+                        // return a Review object. The map then returns an array of these Review objects which
+                        // is then stored in the reviews state var.
+                        return Review(uid: d["uid"] as? String ?? "",
+                                      relation: d["relation"] as? String ?? "",
+                                      comment: d["comment"] as? String ?? "",
+                                      rating: d["rating"] as? Int ?? -1,
+                                      experienceWithThem: d["experienceWithThem"] as? String ?? "")
+                    }
+                }
+            } else {
+                // Handle error
+            }
+        }
+    }
+    
     // MARK: Display Errors Via ALERT
-    func setError(_ error: Error) async {
+    private func setError(_ error: Error) async {
         // UI Must be updated on Main Thread.
         await MainActor.run(body: {
             errorMessage = error.localizedDescription
