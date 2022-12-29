@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ProfileView: View {
     // Profile Data
-    @State private var myProfile: User?
+    @State private var myProfile: User? = exampleUser
     @AppStorage("log_status") var logStatus: Bool = false
     
     // Review Data
-    @State var reviews: [Review] = []
+    @State var reviews: [Review] = exampleReviews
     
     // MARK: Error data
     @State var errorMessage: String = ""
@@ -25,13 +25,25 @@ struct ProfileView: View {
         NavigationStack {
             ScrollView(.vertical, showsIndicators: false) {
                 if let myProfile {
-                    Text(myProfile.userName)
-                        .font(.headline)
-                        .foregroundColor(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    LazyVStack {
-                        ForEach(reviews, id: \.self) { review in
-                           ReviewCardView(user: myProfile, review: review, showName: false)
+                    VStack {
+                                                
+//                        Text(myProfile.fullName)
+//                            .font(.headline)
+//                            .foregroundColor(.secondary)
+//                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        ProfileBoujeeView()
+
+                        Text("Reviews".uppercased())
+                            .font(.system(.title))
+                            .fontWeight(.bold)
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .padding([.horizontal, .top], 20)
+                        LazyVStack {
+                            ForEach(reviews, id: \.id) { review in
+                               ReviewCardView(user: myProfile, review: review, showName: false)
+                            }
                         }
                     }
                 }
@@ -74,6 +86,12 @@ struct ProfileView: View {
         }
         .overlay {
             LoadingView(show: $isLoading)
+            Text("BOUJÈ")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .font(.system(.largeTitle))
+                .fontWeight(.black)
+                .fontDesign(.serif)
+                .padding([.horizontal], 20)
         }
         .alert(errorMessage, isPresented: $showError) {
         }

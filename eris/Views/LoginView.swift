@@ -37,7 +37,7 @@ struct LoginView: View {
         VStack {
             
             // Header and Title of App.
-            Text("ERIS")
+            Text("BOUJÈ")
                 .frame(maxWidth: .infinity)
                 .font(.system(.largeTitle))
                 .fontWeight(.black)
@@ -173,7 +173,8 @@ struct LoginView: View {
                                               email: email)
                 // Step 3. Save new User Doc in Firestore
                 let db = FirebaseManager.shared.firestore
-                let _ = try db.collection("Users").document(userUID).setData(from: newUser) { error in
+                let document = db.collection("Users").document(userUID)
+                try document.setData(from: newUser) { error in
                     if error == nil {
                         print("Saved new User Document in Firestore Successfully!")
                         // store user data in UserDefaults
@@ -184,6 +185,10 @@ struct LoginView: View {
                         logStatus = true
                     }
                 }
+                
+                // also update the computed property "keywordsForLookup" manually since they aren't directly decodable through the firestore SDK.
+                try await document.updateData(["keywordsForLookup": newUser.keywordsForLookup])
+                
             } catch {
                 // catch any errors thrown during the account creation and firestore doc saving process.
                 await setError(error)

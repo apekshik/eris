@@ -22,6 +22,12 @@ struct MainView: View {
                     Image(systemName: "person.circle.fill")
                     Text("Profile Page")
                 }
+            
+            Text("Search Page")
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Search")
+                }
         } // End of TabView
         .tint(.black)
     }
