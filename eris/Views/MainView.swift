@@ -23,7 +23,7 @@ struct MainView: View {
                     Text("Profile Page")
                 }
             
-            Text("Search Page")
+            SearchPageView()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")

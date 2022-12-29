@@ -7,7 +7,7 @@
 
 import Foundation
 
-// User model to store users in firestore database.
+// MARK: User model to store users in firestore database.
 struct User: Codable, Identifiable  {
     var id = UUID()
     let firstName: String
@@ -17,7 +17,7 @@ struct User: Codable, Identifiable  {
     }
     var userName: String
     let email: String
-    // Computable property to store all keywords for search functionality.
+    // MARK: Computable property to store all keywords for search functionality.
     var keywordsForLookup: [String] {
         // flatMap() -> Returns an array containing the concatenated results of calling the given transformation with each element of this sequence.
         [self.userName.generateStringSequence(), self.fullName.generateStringSequence(), self.firstName.generateStringSequence(), self.lastName.generateStringSequence()].flatMap { $0 }
