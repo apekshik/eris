@@ -10,7 +10,7 @@ import SwiftUI
 struct UserProfileView: View {
     @State var user: User
     @State var reviews: [Review] = []
-    
+    @State var following: Bool = false
     // MARK: Error Details.
     @State var errorMessage: String = ""
     @State var showError: Bool = false
@@ -28,7 +28,15 @@ struct UserProfileView: View {
                         Spacer()
                         Button {
                             // TODO: trigger action when follow button is pressed.
-                            follow(user: user)
+                            // if you're following, you have to unfollow on button press,
+                            // else you have to follow on button press.
+                            if following == false {
+                                follow()
+                                following = true
+                            } else {
+                                unfollow()
+                                following = false
+                            }
                         } label: {
                             Text("Follow")
                         }
@@ -55,13 +63,14 @@ struct UserProfileView: View {
         }
         .task {
             fetchReviews(for: user)
+            updateFollowing() // check when the view loads if you're following the user already and update the following variable accordingly.
         }
         // Alert popup everytime there's an error.
         .alert(errorMessage, isPresented: $showError) {}
     }
     
     // MARK: helper function invoked upon clicking the follow button that sets new documents in the followings and followers subcollections in your and the user's document, respectively.
-    private func follow(user: User) {
+    private func follow() {
         // TODO: Check if the user passed in is the current user and then terminate the function call (You don't want to be following yourself).
         // Task lets you run an asynchronous chunk of code in a synchronous environment, i.e, a function that isn't declared async.
         Task {
@@ -90,7 +99,26 @@ struct UserProfileView: View {
                await setError(error)
             }
         }
+    }
+    
+    private func unfollow() {
         
+    }
+    // MARK: Updates the following variable based on whether you're following the user or not.
+    private func updateFollowing() {
+        // Handy Note from Firestore Docs (Get Data Page): If there is no document at the location referenced by docRef, the resulting document will be empty and calling exists on it will return false.
+        Task {
+            do {
+                guard let myID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+                let docRef = FirebaseManager.shared.firestore.collection("Users").document(myID).collection("Following").document(user.firestoreID)
+                // checking to see if the documentSnapshot we're trying to fetch exists. Then we set following to true if it does exist (meaning the document exists and you're following this user) or set it to false if it doesn't.
+                let docExists = try await docRef.getDocument().exists
+                if docExists == true { following = true }
+                else { following = false }
+            } catch {
+                await setError(error)
+            }
+        }
     }
     
     // MARK: Fetch reviews specifically for the user you're looking at.
