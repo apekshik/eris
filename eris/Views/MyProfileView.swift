@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileView: View {
+struct MyProfileView: View {
     // Profile Data
     @State private var myProfile: User? = exampleUser
     @AppStorage("log_status") var logStatus: Bool = false
@@ -178,8 +178,8 @@ struct ProfileView: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
+struct MyProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        MyProfileView()
     }
 }

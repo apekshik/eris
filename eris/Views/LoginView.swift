@@ -117,9 +117,7 @@ struct LoginView: View {
             LoadingView(show: $isLoading)
         }
         // Alert popup everytime there's an error.
-        .alert(errorMessage, isPresented: $showError) {
-            
-        }
+        .alert(errorMessage, isPresented: $showError) {}
     }
     
     private func handleAction() {
@@ -145,17 +143,17 @@ struct LoginView: View {
             }
         }
         // MARK: Legacy Login Method
-//        Auth.auth().signIn(withEmail: email, password: password) { result, err in
-//            if let err = err {
-//                // handle error
-//                print("failed to login user", err.localizedDescription)
-//                return
-//            }
-//
-//            print("succesffuly logged in user! \(result?.user.uid ?? "")")
-//            self.loginStatusMessage = "succesffuly logged in user! User ID: \(result?.user.uid ?? "")"
-//
-//        }
+        //        Auth.auth().signIn(withEmail: email, password: password) { result, err in
+        //            if let err = err {
+        //                // handle error
+        //                print("failed to login user", err.localizedDescription)
+        //                return
+        //            }
+        //
+        //            print("succesffuly logged in user! \(result?.user.uid ?? "")")
+        //            self.loginStatusMessage = "succesffuly logged in user! User ID: \(result?.user.uid ?? "")"
+        //
+        //        }
     }
     
     // MARK: Signup Method
@@ -167,10 +165,11 @@ struct LoginView: View {
                 try await FirebaseManager.shared.auth.createUser(withEmail: email, password: password)
                 // Step 2. Create a User object to store in Firestore using the currentUser's UID.
                 guard let userUID = FirebaseManager.shared.auth.currentUser?.uid else { return }
-                let newUser = User(firstName: firstName,
-                                              lastName: lastName,
-                                              userName: userName,
-                                              email: email)
+                let newUser = User(firestoreID: userUID,
+                                   firstName: firstName,
+                                   lastName: lastName,
+                                   userName: userName,
+                                   email: email)
                 // Step 3. Save new User Doc in Firestore
                 let db = FirebaseManager.shared.firestore
                 let document = db.collection("Users").document(userUID)
@@ -195,34 +194,34 @@ struct LoginView: View {
             }
         }
         // MARK: Legacy Signup Method.
-//        Auth.auth().createUser(withEmail: email, password: password) { result, err in
-//            if let err = err {
-//                // handle error
-//                print("failed to create user", err.localizedDescription)
-//                return
-//            }
-//
-//            print("succesffuly created user! \(result?.user.uid ?? "")")
-//
-//            self.loginStatusMessage = "succesffuly created user! User ID:  \(result?.user.uid ?? "")"
-//
-//            let newUser = User(firstName: firstName,
-//                               lastName: lastName,
-//                               userName: userName,
-//                               email: email)
-//
-//            let db = FirebaseManager.shared.firestore
-//            // important to create document with the results uid since this is the signed in user's UID.
-//            let userUID = result?.user.uid
-//            do {
-//                try db.collection("Users").document(userUID!).setData(from: newUser)
-//            }
-//            catch let err {
-//                print("Error writing data to FireStore: \(err)")
-//            }
-//
-//
-//        }
+        //        Auth.auth().createUser(withEmail: email, password: password) { result, err in
+        //            if let err = err {
+        //                // handle error
+        //                print("failed to create user", err.localizedDescription)
+        //                return
+        //            }
+        //
+        //            print("succesffuly created user! \(result?.user.uid ?? "")")
+        //
+        //            self.loginStatusMessage = "succesffuly created user! User ID:  \(result?.user.uid ?? "")"
+        //
+        //            let newUser = User(firstName: firstName,
+        //                               lastName: lastName,
+        //                               userName: userName,
+        //                               email: email)
+        //
+        //            let db = FirebaseManager.shared.firestore
+        //            // important to create document with the results uid since this is the signed in user's UID.
+        //            let userUID = result?.user.uid
+        //            do {
+        //                try db.collection("Users").document(userUID!).setData(from: newUser)
+        //            }
+        //            catch let err {
+        //                print("Error writing data to FireStore: \(err)")
+        //            }
+        //
+        //
+        //        }
     }
     
     // MARK: Fetch Current User Data
@@ -241,7 +240,7 @@ struct LoginView: View {
             userNameStored = user.userName
             logStatus = true
         })
-                
+        
     }
     
     // MARK: Display Errors Via ALERT
@@ -253,7 +252,7 @@ struct LoginView: View {
             isLoading = false
         })
     }
-
+    
 }
 
 struct LoginView_Previews: PreviewProvider {

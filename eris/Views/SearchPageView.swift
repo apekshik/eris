@@ -27,17 +27,15 @@ struct SearchPageView: View {
             List {
                 ForEach(userQueries, id: \.id) { user in
                     NavigationLink {
-                        Text("Page to which you're redirected for \(user.fullName)")
+//                        Text("Page to which you're redirected for \(user.fullName)")
+                        UserProfileView(user: user)
                     } label: {
-                        VStack {
-                            Text(user.fullName)
-                            Text("some more text")
-                        }
+                        UserCardView(user: user)
                     }
                 }
             }
             .navigationTitle("Search People")
-                
+            
         }
         .searchable(text: keywordBinding)
     }

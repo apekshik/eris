@@ -11,6 +11,8 @@
 		890F4A4E29413E71003B020D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 890F4A4D29413E71003B020D /* Assets.xcassets */; };
 		890F4A5129413E71003B020D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 890F4A5029413E71003B020D /* Preview Assets.xcassets */; };
 		890F4A58294154BA003B020D /* ReviewForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F4A57294154BA003B020D /* ReviewForm.swift */; };
+		894600EA295F5CE2007D498C /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600E9295F5CE2007D498C /* UserCardView.swift */; };
+		894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600EB295F5EE8007D498C /* UserProfileView.swift */; };
 		8979E4BC295DDAF800B0DEEA /* ProfileBoujeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8979E4BB295DDAF800B0DEEA /* ProfileBoujeeView.swift */; };
 		8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8979E4BD295E405C00B0DEEA /* SearchPageView.swift */; };
 		89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4BF8029466C8C005910FF /* FirebaseManager.swift */; };
@@ -26,7 +28,7 @@
 		89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B0E295CA99F00BAC746 /* HomeView.swift */; };
 		89B53B11295CB41D00BAC746 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B10295CB41D00BAC746 /* LoadingView.swift */; };
 		89B53B13295CDAC900BAC746 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B12295CDAC900BAC746 /* MainView.swift */; };
-		89B53B15295CDB5A00BAC746 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B14295CDB5900BAC746 /* ProfileView.swift */; };
+		89B53B15295CDB5A00BAC746 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B14295CDB5900BAC746 /* MyProfileView.swift */; };
 		89B53B19295D281C00BAC746 /* ReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B18295D281C00BAC746 /* ReviewCardView.swift */; };
 		89B53B1B295D393E00BAC746 /* Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B1A295D393E00BAC746 /* Examples.swift */; };
 		89E4AE6E29463985002BE54C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E4AE6D29463985002BE54C /* LoginView.swift */; };
@@ -39,6 +41,8 @@
 		890F4A4D29413E71003B020D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		890F4A5029413E71003B020D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		890F4A57294154BA003B020D /* ReviewForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewForm.swift; sourceTree = "<group>"; };
+		894600E9295F5CE2007D498C /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
+		894600EB295F5EE8007D498C /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		8979E4BB295DDAF800B0DEEA /* ProfileBoujeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBoujeeView.swift; sourceTree = "<group>"; };
 		8979E4BD295E405C00B0DEEA /* SearchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageView.swift; sourceTree = "<group>"; };
 		89A4BF8029466C8C005910FF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -49,7 +53,7 @@
 		89B53B0E295CA99F00BAC746 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		89B53B10295CB41D00BAC746 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		89B53B12295CDAC900BAC746 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		89B53B14295CDB5900BAC746 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		89B53B14295CDB5900BAC746 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		89B53B18295D281C00BAC746 /* ReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCardView.swift; sourceTree = "<group>"; };
 		89B53B1A295D393E00BAC746 /* Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examples.swift; sourceTree = "<group>"; };
 		89E4AE6D29463985002BE54C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -129,7 +133,9 @@
 				89B53B10295CB41D00BAC746 /* LoadingView.swift */,
 				89B53B12295CDAC900BAC746 /* MainView.swift */,
 				8979E4BD295E405C00B0DEEA /* SearchPageView.swift */,
-				89B53B14295CDB5900BAC746 /* ProfileView.swift */,
+				894600EB295F5EE8007D498C /* UserProfileView.swift */,
+				894600E9295F5CE2007D498C /* UserCardView.swift */,
+				89B53B14295CDB5900BAC746 /* MyProfileView.swift */,
 				89B53B18295D281C00BAC746 /* ReviewCardView.swift */,
 				8979E4BB295DDAF800B0DEEA /* ProfileBoujeeView.swift */,
 			);
@@ -228,15 +234,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				89B53B1B295D393E00BAC746 /* Examples.swift in Sources */,
+				894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */,
 				890F4A58294154BA003B020D /* ReviewForm.swift in Sources */,
 				89B53B0D295BD40400BAC746 /* Extensions.swift in Sources */,
 				89B53AFB295BBCB900BAC746 /* UserModel.swift in Sources */,
 				89B53B11295CB41D00BAC746 /* LoadingView.swift in Sources */,
-				89B53B15295CDB5A00BAC746 /* ProfileView.swift in Sources */,
+				89B53B15295CDB5A00BAC746 /* MyProfileView.swift in Sources */,
 				89B53B19295D281C00BAC746 /* ReviewCardView.swift in Sources */,
 				89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */,
 				89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */,
 				89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */,
+				894600EA295F5CE2007D498C /* UserCardView.swift in Sources */,
 				89B53B13295CDAC900BAC746 /* MainView.swift in Sources */,
 				89E4AE6E29463985002BE54C /* LoginView.swift in Sources */,
 				8979E4BC295DDAF800B0DEEA /* ProfileBoujeeView.swift in Sources */,

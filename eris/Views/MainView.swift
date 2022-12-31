@@ -17,7 +17,7 @@ struct MainView: View {
                     Text("Recent Activities")
                 }
             
-            ProfileView()
+            MyProfileView()
                 .tabItem {
                     Image(systemName: "person.circle.fill")
                     Text("Profile Page")

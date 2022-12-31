@@ -10,6 +10,7 @@ import Foundation
 // MARK: User model to store users in firestore database.
 struct User: Codable, Identifiable  {
     var id = UUID()
+    var firestoreID: String
     let firstName: String
     let lastName: String
     var fullName: String { // a computable property
@@ -24,6 +25,7 @@ struct User: Codable, Identifiable  {
     }
     
     enum CodingKeys: String, CodingKey {
+        case firestoreID 
         case firstName
         case lastName
         case userName
