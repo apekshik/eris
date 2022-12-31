@@ -38,7 +38,11 @@ struct UserProfileView: View {
                                 following = false
                             }
                         } label: {
-                            Text("Follow")
+                            Text(following ? "Unfollow" : "Follow")
+                                .padding(8)
+                                .foregroundColor(.white)
+                                .background(.black)
+                                .cornerRadius(10)
                         }
                     }
                     .padding([.horizontal], 20)
@@ -101,9 +105,26 @@ struct UserProfileView: View {
         }
     }
     
+    // MARK: As the name implies, the method allows you to unfollow the user you're not interested in anymore.
     private func unfollow() {
-        
+        // Task lets you run an asynchronous chunk of code in a synchronous environment, i.e, a function that isn't declared async.
+        Task {
+            do {
+                // get your ID.
+                guard let myID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+                let db = FirebaseManager.shared.firestore
+                
+                // delete the user's doc from your followings subcollection.
+                try await db.collection("Users").document(myID).collection("Following").document(user.firestoreID).delete()
+                // delete your user doc from their followers subcollection.
+                // MARK: Tried specifying the path in one single string instead of going down the collection().document().collection().document() path. See if this works.
+                try await db.document("Users/\(user.firestoreID)/Followers/\(myID)").delete()
+            } catch {
+                await setError(error)
+            }
+        }
     }
+    
     // MARK: Updates the following variable based on whether you're following the user or not.
     private func updateFollowing() {
         // Handy Note from Firestore Docs (Get Data Page): If there is no document at the location referenced by docRef, the resulting document will be empty and calling exists on it will return false.
