@@ -20,6 +20,10 @@ struct MyProfileView: View {
     @State var showError: Bool = false
     @State var isLoading: Bool = false
     
+    // MARK: View Control data
+    @State var showAppTitle: Bool = true
+    
+    
     // MARK: Main View Body
     var body: some View {
         NavigationStack {
@@ -42,7 +46,14 @@ struct MyProfileView: View {
                             .padding([.horizontal, .top], 20)
                         LazyVStack {
                             ForEach(reviews, id: \.id) { review in
-                               ReviewCardView(user: myProfile, review: review, showName: false)
+                                NavigationLink {
+                                    ReviewPageView(user: myProfile, review: review, showName: false)
+                                        .onAppear{ withAnimation(.linear(duration: 0.1)) { self.showAppTitle = false } }
+                                } label: {
+                                    ReviewCardView(user: myProfile, review: review, showName: false)
+                                }
+                                .onAppear{ withAnimation { self.showAppTitle = true } }
+            
                             }
                         }
                     }
@@ -86,15 +97,16 @@ struct MyProfileView: View {
         }
         .overlay {
             LoadingView(show: $isLoading)
-            Text("BOUJÈ")
+            
+            Text(showAppTitle ? "BOUJÈ" : "")
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .font(.system(.largeTitle))
                 .fontWeight(.black)
                 .fontDesign(.serif)
                 .padding([.horizontal], 20)
+
         }
-        .alert(errorMessage, isPresented: $showError) {
-        }
+        .alert(errorMessage, isPresented: $showError) {}
         .task {
             if myProfile != nil { return }
             // This modifier is like onAppear, so fetches once in the beginning only.
@@ -103,6 +115,8 @@ struct MyProfileView: View {
             await fetchReviews()
         }
     }
+    
+    
     
     // MARK: Fetch User Data
     private func fetchUserData() async {

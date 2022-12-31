@@ -13,6 +13,7 @@
 		890F4A58294154BA003B020D /* ReviewForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F4A57294154BA003B020D /* ReviewForm.swift */; };
 		894600EA295F5CE2007D498C /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600E9295F5CE2007D498C /* UserCardView.swift */; };
 		894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600EB295F5EE8007D498C /* UserProfileView.swift */; };
+		894600EE2960B80B007D498C /* ReviewPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600ED2960B80B007D498C /* ReviewPageView.swift */; };
 		8979E4BC295DDAF800B0DEEA /* ProfileBoujeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8979E4BB295DDAF800B0DEEA /* ProfileBoujeeView.swift */; };
 		8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8979E4BD295E405C00B0DEEA /* SearchPageView.swift */; };
 		89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4BF8029466C8C005910FF /* FirebaseManager.swift */; };
@@ -43,6 +44,7 @@
 		890F4A57294154BA003B020D /* ReviewForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewForm.swift; sourceTree = "<group>"; };
 		894600E9295F5CE2007D498C /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
 		894600EB295F5EE8007D498C /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		894600ED2960B80B007D498C /* ReviewPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPageView.swift; sourceTree = "<group>"; };
 		8979E4BB295DDAF800B0DEEA /* ProfileBoujeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBoujeeView.swift; sourceTree = "<group>"; };
 		8979E4BD295E405C00B0DEEA /* SearchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageView.swift; sourceTree = "<group>"; };
 		89A4BF8029466C8C005910FF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				894600E9295F5CE2007D498C /* UserCardView.swift */,
 				89B53B14295CDB5900BAC746 /* MyProfileView.swift */,
 				89B53B18295D281C00BAC746 /* ReviewCardView.swift */,
+				894600ED2960B80B007D498C /* ReviewPageView.swift */,
 				8979E4BB295DDAF800B0DEEA /* ProfileBoujeeView.swift */,
 			);
 			path = Views;
@@ -241,6 +244,7 @@
 				89B53B11295CB41D00BAC746 /* LoadingView.swift in Sources */,
 				89B53B15295CDB5A00BAC746 /* MyProfileView.swift in Sources */,
 				89B53B19295D281C00BAC746 /* ReviewCardView.swift in Sources */,
+				894600EE2960B80B007D498C /* ReviewPageView.swift in Sources */,
 				89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */,
 				89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */,
 				89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */,

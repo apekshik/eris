@@ -12,8 +12,6 @@ struct ReviewCardView: View {
     @State var review: Review
     @State var showName: Bool
     @State var liked: Bool = false
-    @State var scale: CGSize = CGSize(width: 1, height: 1)
-    @State var fullReview: Bool = false
     var body: some View {
         VStack {
             HStack {
@@ -71,7 +69,6 @@ struct ReviewCardView: View {
         .cornerRadius(10)
         .shadow(radius: 5)
         .padding([.top, .horizontal])
-        .scaleEffect(scale)
         .onTapGesture(count: 2) {
             liked.toggle()
             let impactMed = UIImpactFeedbackGenerator(style: .medium)
@@ -85,9 +82,9 @@ struct ReviewCardView: View {
     private func bounceAnimation() {
         let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
         impactHeavy.impactOccurred()
-        withAnimation(.spring()) {
-            scale = CGSize(width: 1.05, height: 1.05)
-        }
+//        withAnimation(.spring()) {
+//            scale = CGSize(width: 1.05, height: 1.05)
+//        }
 //        withAnimation(.spring()) {
 //            scale = CGSize(width: 1, height: 1)
 //        }
