@@ -24,41 +24,61 @@ struct SearchPageView: View {
       })
     
     
-    VStack {
-      // MARK: Navigation Stack for search Page
-      NavigationStack {
-        ZStack {
-          // Search Bar results List.
-          List {
-            ForEach(userQueries, id: \.id) { user in
-              NavigationLink {
-                UserProfileView(user: user)
-              } label: {
-                UserCardView(user: user)
-              }
-            }
-          }
-          .navigationTitle("Search People")
-          
-          // Body of the Search Page
-          LazyVStack {
-            ForEach(usersIFollow) { user in
-              Text(user.fullName)
-            }
-          }
-          .blur(radius: userQueries.count == 0 ? 0 : 10)
+    // MARK: Navigation Stack for search Page
+    NavigationStack {
+      ZStack {
+        if userQueries.count > 0 {
+          searchBarResults
         }
-      } // End of NavigationStack for Search Page.
-      .searchable(text: keywordBinding)
-      
-      
-    } // End of VStack
-    .task {
-      // call to fetch users I follow.
-    }
+        
+        searchPageBody
+        
+      }
+      .navigationTitle("Search People")
+    } // End of NavigationStack for Search Page.
+    .searchable(text: keywordBinding)
   }
   
-  // 
+  // Search Bar results List.
+  var searchBarResults: some View {
+    VStack {
+      LazyVStack(alignment: .leading) {
+        ForEach(userQueries, id: \.id) { user in
+          NavigationLink {
+            UserProfileView(user: user)
+          } label: {
+            SearchUserCardView(user: user)
+              .padding([.horizontal], 12)
+              .padding([.vertical], 8)
+          }
+        }
+      }
+      .background(.thickMaterial)
+      .cornerRadius(10)
+      .padding()
+      
+      Spacer()
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(.ultraThinMaterial)
+    .zIndex(userQueries.count > 0 ? 1 : 0)
+  }
+  
+  // Body of the Search Page
+  var searchPageBody: some View {
+    ScrollView(.vertical, showsIndicators: false){
+      LazyVStack {
+        ForEach(usersIFollow) { user in
+          UserCardView(user: user)
+        }
+      }
+      .background(Color(hex: "#FAF9F6"))
+      .cornerRadius(10)
+      .padding()
+    }
+//    .blur(radius: userQueries.count == 0 ? 0 : 20)
+  }
+  //
   private func fetchUsersIFollow() {
     
   }
@@ -75,7 +95,7 @@ struct SearchPageView: View {
       }
       
     }
-  }
+  } // End of method fetchUsers()
 }
 
 struct SearchPageView_Previews: PreviewProvider {

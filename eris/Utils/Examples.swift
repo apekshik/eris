@@ -8,8 +8,8 @@
 import Foundation
 
 let exampleUsers: [User] =  [
-  User(firestoreID: "j7ZfXsnfHvXm2C6OiqnOCXUmbpj2", firstName: "Tim", lastName: "Henson", userName: "Tim Henson", email: "test2@gmail.com"),
-  User(firestoreID: "j7ZfXsnfHvXm2C6OiqnOCXUmbpj2", firstName: "Tim", lastName: "Henson", userName: "Tim Henson", email: "test2@gmail.com"),
+  User(firestoreID: "j7ZfXsnfHvXm2C6OiqnOCXUmbpj2", firstName: "Tim", lastName: "Henson", userName: "timTheHenson", email: "test2@gmail.com"),
+  User(firestoreID: "j7ZfXsnfHvXm2C6OiqnOCXUmbpj2", firstName: "Rob", lastName: "Myers", userName: "halloween", email: "test2@gmail.com"),
   ]
 
 

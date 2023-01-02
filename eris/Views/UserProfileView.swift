@@ -33,7 +33,7 @@ struct UserProfileView: View {
           HStack {
             
             // Title for review section.
-            Text("Reviews".uppercased())
+            Text("Boujees".uppercased())
               .font(.system(.title))
               .fontWeight(.bold)
               .foregroundColor(.secondary)

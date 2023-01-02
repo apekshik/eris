@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfileBoujeeView: View {
     var body: some View {
         VStack {
-            Text("Boujees".uppercased())
+            Text("Live Boujees".uppercased())
                 .font(.headline)
                 .fontWeight(.heavy)
                 .foregroundColor(.secondary)
