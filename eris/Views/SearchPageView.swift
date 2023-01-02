@@ -27,30 +27,43 @@ struct SearchPageView: View {
     VStack {
       // MARK: Navigation Stack for search Page
       NavigationStack {
-        List {
-          ForEach(userQueries, id: \.id) { user in
-            NavigationLink {
-              UserProfileView(user: user)
-            } label: {
-              UserCardView(user: user)
+        ZStack {
+          // Search Bar results List.
+          List {
+            ForEach(userQueries, id: \.id) { user in
+              NavigationLink {
+                UserProfileView(user: user)
+              } label: {
+                UserCardView(user: user)
+              }
             }
           }
-          .background(.blue)
+          .navigationTitle("Search People")
           
-//          Section("Following") {
-//            ForEach(usersIFollow) { user in
-//              UserCardView(user: user)
-//            }
-//          }
+          // Body of the Search Page
+          LazyVStack {
+            ForEach(usersIFollow) { user in
+              Text(user.fullName)
+            }
+          }
+          .blur(radius: userQueries.count == 0 ? 0 : 10)
         }
-        .navigationTitle("Search People")
       } // End of NavigationStack for Search Page.
       .searchable(text: keywordBinding)
       
-      Text("Test")
+      
     } // End of VStack
+    .task {
+      // call to fetch users I follow.
+    }
   }
   
+  // 
+  private func fetchUsersIFollow() {
+    
+  }
+  
+  // fetch users for the search functionality. Fetches those users that have the keyword that you type in the search bar in their userName and Full Name.
   private func fetchUsers(containing keyword: String) {
     let db = FirebaseManager.shared.firestore
     db.collection("Users").whereField("keywordsForLookup", arrayContains: keyword).getDocuments { querySnapshot, error in
