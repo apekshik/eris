@@ -23,9 +23,13 @@ struct UserCardView: View {
       HStack {
         reviewButton
         Spacer()
-        Image(systemName: "rectangle.portrait.and.arrow.forward") // chevron.forward.circle
-          .resizable()
-          .frame(width: 25, height: 25)
+        NavigationLink {
+          UserProfileView(user: user)
+        } label: {
+          Image(systemName: "rectangle.portrait.and.arrow.forward") // chevron.forward.circle
+            .resizable()
+            .frame(width: 25, height: 25)
+        }
       }
     }
     .sheet(isPresented: $showReviewForm, content: {
