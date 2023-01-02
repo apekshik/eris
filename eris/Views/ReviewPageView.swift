@@ -14,7 +14,7 @@ struct ReviewPageView: View {
   @State var review: Review
   @State var showName: Bool = true
   @State var liked: Bool = false
-  @State var comments: [Comment]
+  @State var comments: [Comment] = []
   @State var showAddCommentView: Bool = false
   
   var body: some View {
@@ -49,12 +49,7 @@ struct ReviewPageView: View {
       .navigationTitle("Review".uppercased())
     }
     .overlay {
-      AddCommentView(show: $showAddCommentView, review: review)
-        // FIXME: This doesn't trigger the comments to refresh on the page. temporary fix is to just use the refreshable modifier. 
-        .onDisappear {
-          // We refetch the comments after this view closes since we added a new one comment through this view.
-          Task { await fetchComments() }
-        }
+      AddCommentView(show: $showAddCommentView, comments: $comments, review: review)
     }
     .task {
       // call a comments fetch method.

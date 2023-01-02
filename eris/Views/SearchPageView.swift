@@ -35,25 +35,19 @@ struct SearchPageView: View {
               UserCardView(user: user)
             }
           }
+          .background(.blue)
+          
+//          Section("Following") {
+//            ForEach(usersIFollow) { user in
+//              UserCardView(user: user)
+//            }
+//          }
         }
         .navigationTitle("Search People")
-        
-        List {
-          ForEach(usersIFollow) { user in
-            NavigationLink {
-              // Destination
-            } label: {
-              Text(user.fullName)
-            }
-          }
-        }
-      }
+      } // End of NavigationStack for Search Page.
       .searchable(text: keywordBinding)
       
-      // Body of the Search Page.
-      NavigationStack {
-        
-      }
+      Text("Test")
     } // End of VStack
   }
   

@@ -10,6 +10,7 @@ import FirebaseFirestoreSwift
 
 struct AddCommentView: View {
   @Binding var show: Bool
+  @Binding var comments: [Comment]
   @State var newCommentContent: String = ""
   @State var author: User? = nil
   let review: Review
@@ -41,8 +42,10 @@ struct AddCommentView: View {
               
               // Button to submit post.
               Button {
-                // Post comment to firestore.
-                postComment()
+                // Post comment to firestore and update
+                Task {
+                  await postComment()
+                }
                 show = false // close the add comment view.
               } label : {
                 Text("Post")
@@ -68,24 +71,46 @@ struct AddCommentView: View {
   }
   
   // post comment to firestore
-  private func postComment() {
+  private func postComment() async {
     Task {
       do {
         // in the case that some bombaclut tries to post an empty comment.
         guard newCommentContent.count > 0 else { return }
         
+        // Populates the author variable.
         await fetchMyData()
+        
         // We can use the bang (!) operator on the author var becauase we know we fetched the data and then tried to create a new Comment Instance.
         let newComment = Comment(authorID: author!.firestoreID,
                                  authorUserName: author!.userName,
                                  reviewID: review.reviewID,
                                  content: newCommentContent)
         
+        // TODO: THis is again a temporary fix. Because in the case we want to order the comments a particular way from the server side, this won't work.
+        comments.insert(newComment, at: 0)
         let db = FirebaseManager.shared.firestore
         try db.collection("Comments").document().setData(from: newComment)
+        
+        
       } catch {
         // do something about the errors.
       }
+    }
+  }
+  
+  // Update comments to be displayed.
+  // TODO: here comments is unnecessarrily passed into the AddCOmment view from its parent ReivewPageView. See if you can find a way to avoid this and still manage to update the comments on the ReviewPageView.
+  private func updateComments() async {
+    print("Comments: \(comments.count)")
+    let db = FirebaseManager.shared.firestore
+    db.collection("Comments").whereField("reviewID", isEqualTo: review.reviewID).getDocuments { querySnapshot, error in
+      guard let documents = querySnapshot?.documents, error == nil else { return }
+      
+      // compactMap() -> Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
+      comments = documents.compactMap({ documentSnapshot in
+        try? documentSnapshot.data(as: Comment.self)
+      })
+      print("Comments after update: \(comments.count)")
     }
   }
   
@@ -102,6 +127,6 @@ struct AddCommentView: View {
 
 struct AddCommentView_Previews: PreviewProvider {
   static var previews: some View {
-    AddCommentView(show: .constant(true), review: exampleReviews[0])
+    AddCommentView(show: .constant(true), comments: .constant(exampleComments), review: exampleReviews[0])
   }
 }

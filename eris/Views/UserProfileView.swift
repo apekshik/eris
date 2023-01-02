@@ -53,11 +53,13 @@ struct UserProfileView: View {
           .padding([.horizontal, .top], 20)
           
           // Start of Review Cards
-          LazyVStack {
-            ForEach(reviews, id: \.id) { review in
-              ReviewCardView(user: user, review: review, showName: false)
-            }
-          }
+//          LazyVStack {
+//            ForEach(reviews, id: \.id) { review in
+//              ReviewCardView(user: user, review: review, showName: false)
+//            }
+//          }
+          reviewSection
+          
         }
         .navigationTitle(user.fullName)
       }
@@ -71,6 +73,18 @@ struct UserProfileView: View {
       // Alert popup everytime there's an error.
       .alert(errorMessage, isPresented: $showError) {}
    
+  }
+  
+  var reviewSection: some View {
+    LazyVStack {
+      ForEach(reviews, id: \.id) { review in
+        NavigationLink {
+          ReviewPageView(user: user, review: review, showName: true)
+        } label: {
+          ReviewCardView(user: user, review: review, showName: true)
+        }
+      }
+    } // End of LazyVStack
   }
   
   var followerSection: some View {
