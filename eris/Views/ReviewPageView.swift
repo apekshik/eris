@@ -7,93 +7,146 @@
 
 import SwiftUI
 
+
+// TODO: Make this page refreshable.
 struct ReviewPageView: View {
-    @State var user: User
-    @State var review: Review
-    @State var showName: Bool = true
-    @State var liked: Bool = false
-    
-    var body: some View {
-        NavigationStack {
-            ScrollView(.vertical, showsIndicators: false){
-                VStack {
-                    reviewSection
-                    
-        //            commentSection
-                    VStack {
-                        HStack {
-                            Text("Comments".uppercased())
-                                .font(.caption)
-                            Image(systemName: "bubble.right")
-                                .scaleEffect(0.8)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .opacity(0.65)
-                    }
-                    .padding(12)
-                    .background(.white)
-                }
-                .background(Color(hex: "#e6e5e1"))
-                .cornerRadius(10)
-                .shadow(radius: 5)
-                .padding([.top, .horizontal])
-            }
-            .navigationTitle("Review".uppercased())
-        }
-        
-    }
-    
-    var reviewSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
+  @State var user: User
+  @State var review: Review
+  @State var showName: Bool = true
+  @State var liked: Bool = false
+  @State var comments: [Comment]
+  @State var showAddCommentView: Bool = false
+  
+  var body: some View {
+    NavigationStack {
+      ScrollView(.vertical, showsIndicators: false){
+        VStack {
+          reviewSection
+          
+          VStack {
+            commentSectionHeader
             
-            
-            HStack {
-                Text(showName ? user.fullName : "")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
-                Text("\(review.rating) Star Rating")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-            
-            // written review
-            Text(review.comment)
-                .font(.title)
-                .fontWeight(.black)
-                .foregroundColor(.primary)
-            
-            // HStack under the written review.
-            HStack {
-                Text("Written by a \(review.relation)".uppercased())
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                HStack(spacing: 20) {
-                    // Button for Like/Unlike
-                    Button {
-                        liked.toggle()
-                        let impactLight = UIImpactFeedbackGenerator(style: .light)
-                        impactLight.impactOccurred()
-                    } label: {
-                        Image(systemName: liked ? "heart.fill" : "heart")
-                            .scaleEffect(1.1)
-                    }
-                }
-                .font(.headline)
+            if comments.count > 0 {
+              CommentSectionBodyView(comments: $comments)
+            } else {
+              Text("No Comments Yet".uppercased())
                 .foregroundColor(.secondary)
-                .frame(maxWidth: .infinity, alignment: .trailing)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding([.bottom], 24)
             }
+          }
+          .background(.white)
+          
         }
-        .padding()
+        .background(Color(hex: "#e6e5e1"))
+        .cornerRadius(10)
+        .shadow(radius: 5)
+        .padding([.top, .horizontal])
+      }
+      .refreshable {
+        await fetchComments()
+      }
+      .navigationTitle("Review".uppercased())
+    }
+    .overlay {
+      AddCommentView(show: $showAddCommentView, review: review)
+        // FIXME: This doesn't trigger the comments to refresh on the page. temporary fix is to just use the refreshable modifier. 
+        .onDisappear {
+          // We refetch the comments after this view closes since we added a new one comment through this view.
+          Task { await fetchComments() }
+        }
+    }
+    .task {
+      // call a comments fetch method.
+      await fetchComments()
     }
     
-//    var commentSection: some View {
-//
-//    }
+  }
+  
+  var reviewSection: some View {
+    VStack(alignment: .leading, spacing: 10) {
+      
+      
+      HStack {
+        Text(showName ? user.fullName : "")
+          .font(.headline)
+          .foregroundColor(.secondary)
+        Text("\(review.rating) Star Rating")
+          .font(.headline)
+          .foregroundColor(.secondary)
+          .frame(maxWidth: .infinity, alignment: .trailing)
+      }
+      
+      // written review
+      Text(review.comment)
+        .font(.title)
+        .fontWeight(.black)
+        .foregroundColor(.primary)
+      
+      // HStack under the written review.
+      HStack {
+        Text("Written by a \(review.relation)".uppercased())
+          .font(.caption)
+          .foregroundColor(.secondary)
+        HStack(spacing: 20) {
+          // Button for Like/Unlike
+          Button {
+            liked.toggle()
+            let impactLight = UIImpactFeedbackGenerator(style: .light)
+            impactLight.impactOccurred()
+          } label: {
+            Image(systemName: liked ? "heart.fill" : "heart")
+              .scaleEffect(1.1)
+          }
+        }
+        .font(.headline)
+        .foregroundColor(.secondary)
+        .frame(maxWidth: .infinity, alignment: .trailing)
+      }
+    }
+    .padding()
+  }
+  
+  var commentSectionHeader: some View {
+    VStack {
+      HStack {
+        Text("Comments".uppercased())
+          .font(.caption)
+        Image(systemName: "bubble.right")
+          .scaleEffect(0.8)
+        
+        Button {
+          showAddCommentView = true
+        } label: {
+          Image(systemName: "plus.circle")
+            .tint(.black)
+            .opacity(0.8)
+        }
+        .frame(maxWidth: .infinity, alignment: .trailing)
+      }
+      .frame(maxWidth: .infinity, alignment: .leading)
+      .opacity(0.65)
+      Divider()
+    }
+    .padding([.top, .horizontal])
+  }
+
+  // MARK: Method to fetch comments for the specific review being viewed.
+  private func fetchComments() async {
+    let db = FirebaseManager.shared.firestore
+    db.collection("Comments").whereField("reviewID", isEqualTo: review.reviewID).getDocuments { querySnapshot, error in
+      guard let documents = querySnapshot?.documents, error == nil else { return }
+      
+      // compactMap() -> Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
+      comments = documents.compactMap({ documentSnapshot in
+        try? documentSnapshot.data(as: Comment.self)
+      })
+    }
+  }
 }
 
 struct ReviewPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReviewPageView(user: exampleUser, review: exampleReviews[0], showName: true)
-    }
+  static var previews: some View {
+    ReviewPageView(user: exampleUsers[0], review: exampleReviews[0], showName: true, comments: exampleComments)
+  }
 }

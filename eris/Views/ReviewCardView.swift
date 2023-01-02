@@ -94,7 +94,7 @@ struct ReviewCardView: View {
 struct ReviewCardView_Previews: PreviewProvider {
 
     static var previews: some View {
-        ReviewCardView(user: exampleUser, review: exampleReviews[0], showName: true)
+        ReviewCardView(user: exampleUsers[0], review: exampleReviews[0], showName: true)
     }
 }
 

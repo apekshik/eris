@@ -14,6 +14,10 @@
 		894600EA295F5CE2007D498C /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600E9295F5CE2007D498C /* UserCardView.swift */; };
 		894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600EB295F5EE8007D498C /* UserProfileView.swift */; };
 		894600EE2960B80B007D498C /* ReviewPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600ED2960B80B007D498C /* ReviewPageView.swift */; };
+		894600F02960DB12007D498C /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600EF2960DB12007D498C /* CommentModel.swift */; };
+		894600F22960ED64007D498C /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600F12960ED64007D498C /* TestView.swift */; };
+		894600F4296100B7007D498C /* CommentSectionBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600F3296100B7007D498C /* CommentSectionBodyView.swift */; };
+		894600F62961D99A007D498C /* AddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600F52961D99A007D498C /* AddCommentView.swift */; };
 		8979E4BC295DDAF800B0DEEA /* ProfileBoujeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8979E4BB295DDAF800B0DEEA /* ProfileBoujeeView.swift */; };
 		8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8979E4BD295E405C00B0DEEA /* SearchPageView.swift */; };
 		89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4BF8029466C8C005910FF /* FirebaseManager.swift */; };
@@ -45,6 +49,10 @@
 		894600E9295F5CE2007D498C /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
 		894600EB295F5EE8007D498C /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		894600ED2960B80B007D498C /* ReviewPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPageView.swift; sourceTree = "<group>"; };
+		894600EF2960DB12007D498C /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
+		894600F12960ED64007D498C /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		894600F3296100B7007D498C /* CommentSectionBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentSectionBodyView.swift; sourceTree = "<group>"; };
+		894600F52961D99A007D498C /* AddCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentView.swift; sourceTree = "<group>"; };
 		8979E4BB295DDAF800B0DEEA /* ProfileBoujeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBoujeeView.swift; sourceTree = "<group>"; };
 		8979E4BD295E405C00B0DEEA /* SearchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageView.swift; sourceTree = "<group>"; };
 		89A4BF8029466C8C005910FF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -121,6 +129,7 @@
 			children = (
 				89B53AFA295BBCB900BAC746 /* UserModel.swift */,
 				89B53AF8295BA54B00BAC746 /* ReviewModel.swift */,
+				894600EF2960DB12007D498C /* CommentModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -141,6 +150,9 @@
 				89B53B18295D281C00BAC746 /* ReviewCardView.swift */,
 				894600ED2960B80B007D498C /* ReviewPageView.swift */,
 				8979E4BB295DDAF800B0DEEA /* ProfileBoujeeView.swift */,
+				894600F3296100B7007D498C /* CommentSectionBodyView.swift */,
+				894600F52961D99A007D498C /* AddCommentView.swift */,
+				894600F12960ED64007D498C /* TestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +248,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				894600F22960ED64007D498C /* TestView.swift in Sources */,
+				894600F62961D99A007D498C /* AddCommentView.swift in Sources */,
 				89B53B1B295D393E00BAC746 /* Examples.swift in Sources */,
 				894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */,
 				890F4A58294154BA003B020D /* ReviewForm.swift in Sources */,
@@ -249,10 +263,12 @@
 				89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */,
 				89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */,
 				894600EA295F5CE2007D498C /* UserCardView.swift in Sources */,
+				894600F4296100B7007D498C /* CommentSectionBodyView.swift in Sources */,
 				89B53B13295CDAC900BAC746 /* MainView.swift in Sources */,
 				89E4AE6E29463985002BE54C /* LoginView.swift in Sources */,
 				8979E4BC295DDAF800B0DEEA /* ProfileBoujeeView.swift in Sources */,
 				8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */,
+				894600F02960DB12007D498C /* CommentModel.swift in Sources */,
 				890F4A4A29413E70003B020D /* erisApp.swift in Sources */,
 				89B53AF9295BA54B00BAC746 /* ReviewModel.swift in Sources */,
 			);
