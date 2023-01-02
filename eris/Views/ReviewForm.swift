@@ -42,7 +42,7 @@ struct ReviewForm: View {
             .frame(width: 35, height: 35)
             .tint(.black)
         }
-        Text("Review Form".uppercased())
+        Text("Fill Boujee".uppercased())
           .font(.title)
           .fontWeight(.bold)
           .opacity(0.75)
@@ -84,7 +84,7 @@ struct ReviewForm: View {
         } // End of Comments Section
         
         // Submit button
-        Button("Submit") {
+        Button("Post Boujee".uppercased()) {
           // TODO: handle errors properly.
           handleFormSubmit()
           show = false

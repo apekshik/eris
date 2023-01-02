@@ -67,6 +67,11 @@ struct SearchPageView: View {
   // Body of the Search Page
   var searchPageBody: some View {
     ScrollView(.vertical, showsIndicators: false){
+      Text("Following".uppercased())
+        .fontWeight(.bold)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding([.horizontal], 20)
+        .opacity(0.6)
       LazyVStack {
         ForEach(usersIFollow) { user in
           UserCardView(user: user)
@@ -74,7 +79,7 @@ struct SearchPageView: View {
       }
       .background(Color(hex: "#FAF9F6"))
       .cornerRadius(10)
-      .padding()
+      .padding([.horizontal])
     }
 //    .blur(radius: userQueries.count == 0 ? 0 : 20)
   }
