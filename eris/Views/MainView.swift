@@ -11,7 +11,7 @@ struct MainView: View {
     var body: some View {
         TabView {
             // TODO: Come up with a new name for recent posts/activities (like how twitter has tweets).
-            Text("Recent Activities Go Here")
+            Text("Feed View")
                 .tabItem {
                     Image(systemName: "square.and.arrow.down")
                     Text("Recent Activities")
