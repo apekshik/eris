@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 struct ReviewForm: View {
   
@@ -126,6 +127,7 @@ struct ReviewForm: View {
         let newReview = Review(uid: user.firestoreID,
                                authorID: userID,
                                reviewID: documentReference.documentID,
+                               createdAt: Date(),
                                relation: relation,
                                comment: comment,
                                rating: rating,

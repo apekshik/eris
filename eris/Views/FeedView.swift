@@ -6,41 +6,57 @@
 //
 
 import SwiftUI
+import FirebaseFirestoreSwift
 
 struct FeedView: View {
-  
-  /// The users on the feed are stored in a hashtable with the key being the
-  /// reviewID for the specific review shown on the feed.
-  @State var users: [String: User] = [:]
   @State var reviews: [Review] = []
-
+  
   var body: some View {
     ScrollView {
       if reviews.count > 0 {
         // This view is defined below.
-        reviewSection
+        feed
       } else {
         Text("No Reviews for you yet!".uppercased())
           .foregroundColor(.secondary)
       }
     }
+    .refreshable {
+      
+    }
+    .task {
+      fetchReviews()
+    }
   }
   
-  var reviewSection: some View {
+  var feed: some View {
     LazyVStack {
       ForEach(reviews, id: \.self) { review in
-        NavigationLink {
-          ReviewPageView(user: users[review.authorID]!, review: review, showName: false, comments: exampleComments)
-        } label: {
-          ReviewCardView(user: users[review.authorID]!, review: review, showName: false)
-        }
+        //        NavigationLink {
+        //          ReviewPageView(user: users[review.authorID]!, review: review, showName: true, comments: exampleComments)
+        //        } label: {
+        //          ReviewCardView(user: users[review.authorID]!, review: review, showName: true)
+        //        }
+        Text(review.comment)
+          .padding()
       }
     } // End of LazyVStack
   }
   
-  // fetch reviews and fetch users and store users in a hashmap.
-  private func fetchReviewsAndUsers() {
-    
+  private func fetchReviews() {
+    let reviewRef = FirebaseManager.shared.firestore.collection("Reviews")
+    reviewRef
+      .whereField("uid", isEqualTo: "ETJq3FZgpjZNJpKIdMh4BUXcEJh2")
+      .order(by: "createdAt", descending: true)
+      .limit(to: 3)
+      .getDocuments { querySnapshot, error in
+        guard let documents = querySnapshot?.documents, error == nil else { return }
+        
+        reviews = documents.compactMap({ queryDocumentSnapshot in
+          try? queryDocumentSnapshot.data(as: Review.self)
+        })
+        
+      }
   }
 }
 

@@ -60,7 +60,7 @@ struct MyProfileView: View {
         await fetchUserData()
         await fetchReviews()
       }
-      .navigationTitle("My Profile")
+      .navigationTitle(myProfile?.fullName ?? "No Profile Loaded")
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Menu {
