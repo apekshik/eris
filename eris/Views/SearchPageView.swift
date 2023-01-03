@@ -37,6 +37,9 @@ struct SearchPageView: View {
       .navigationTitle("Search People")
     } // End of NavigationStack for Search Page.
     .searchable(text: keywordBinding)
+    .task {
+      fetchUsersIFollow()
+    }
   }
   
   // Search Bar results List.
@@ -83,9 +86,19 @@ struct SearchPageView: View {
     }
 //    .blur(radius: userQueries.count == 0 ? 0 : 20)
   }
-  //
+  
+  // Fetches all users I follow and stores it in the usersIFollow var.
   private func fetchUsersIFollow() {
-    
+    // fetch the "following" subcollection within the current user's document.
+    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+    let db = FirebaseManager.shared.firestore
+    db.collection("Users").document(userID).collection("Following").getDocuments { querySnapshot, error in
+      guard let documents = querySnapshot?.documents, error == nil else { return }
+      
+      usersIFollow = documents.compactMap { queryDocumentSnapshot in
+        try? queryDocumentSnapshot.data(as: User.self)
+      }
+    }
   }
   
   // fetch users for the search functionality. Fetches those users that have the keyword that you type in the search bar in their userName and Full Name.
