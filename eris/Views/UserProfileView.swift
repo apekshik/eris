@@ -26,7 +26,7 @@ struct UserProfileView: View {
           // Followers and Follow button go here
           followerSection
           
-          ProfileBoujeeView()
+          LiveBoujeeView()
           
           // Set of Reviews start here (with Title ofcourse).
           // HStack is Reviews Section Header

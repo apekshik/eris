@@ -27,9 +27,8 @@ struct FeedView: View {
       }
       .task {
         fetchFeedReviews()
-      }
-    }
-    .navigationTitle("Feed")
+      }.navigationTitle("Feed")
+    } 
   }
   
   var feed: some View {

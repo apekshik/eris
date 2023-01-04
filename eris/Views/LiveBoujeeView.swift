@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProfileBoujeeView: View {
+struct LiveBoujeeView: View {
     var body: some View {
         VStack {
             Text("Live Boujees".uppercased())
@@ -38,8 +38,8 @@ struct ProfileBoujeeView: View {
     }
 }
 
-struct ProfileBoujeeView_Previews: PreviewProvider {
+struct LiveBoujeeView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileBoujeeView()
+        LiveBoujeeView()
     }
 }

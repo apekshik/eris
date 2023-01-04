@@ -31,7 +31,7 @@ struct MyProfileView: View {
         if myProfile != nil {
           VStack {
             // TODO: Implement this in next update!
-            ProfileBoujeeView()
+            LiveBoujeeView()
             
             Text("Reviews".uppercased())
               .font(.system(.title))
