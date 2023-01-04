@@ -107,7 +107,7 @@ struct FeedReviewCardView: View {
     // Fetch your own uid
     guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
     // First get the "Likes" subcollection reference of the user whose review is being liked by you.
-    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(user.firestoreID).collection("Likes")
+    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(review.uid).collection("Likes")
     Task {
       do {
         // delete the like that is associated with you and this specific review.
@@ -142,7 +142,7 @@ struct FeedReviewCardView: View {
       guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
       
       // First get the "Likes" subcollection reference of the user whose review is being liked by you.
-      let likeDocRef = FirebaseManager.shared.firestore.collection("Users").document(user.firestoreID).collection("Likes").document()
+      let likeDocRef = FirebaseManager.shared.firestore.collection("Users").document(review.uid).collection("Likes").document()
       let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: review.reviewID, authorID: uid)
       
       try likeDocRef.setData(from: newLike)
@@ -155,7 +155,7 @@ struct FeedReviewCardView: View {
     // Fetch your own uid
     guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
     // First get the "Likes" subcollection reference of the user whose review is being liked by you.
-    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(user.firestoreID).collection("Likes")
+    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(review.uid).collection("Likes")
     Task {
       do {
         // delete the like that is associated with you and this specific review.
