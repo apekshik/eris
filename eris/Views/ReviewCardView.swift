@@ -75,7 +75,43 @@ struct ReviewCardView: View {
       let impactMed = UIImpactFeedbackGenerator(style: .medium)
       impactMed.impactOccurred()
     }
+    .onAppear {
+      // check if this post is liked or not.
+      checkLike()
+    }
     
+  }
+  
+  private func checkLike() {
+//    let docRef = FirebaseManager.shared.firestore.collection("Users").document("SF")
+//
+//    docRef.getDocument { (document, error) in
+//        if let document = document, document.exists {
+//            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//            print("Document data: \(dataDescription)")
+//        } else {
+//            print("Document does not exist")
+//        }
+//    }
+    
+    // Fetch your own uid
+    guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+    // First get the "Likes" subcollection reference of the user whose review is being liked by you.
+    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(user.firestoreID).collection("Likes")
+    Task {
+      do {
+        // delete the like that is associated with you and this specific review.
+        let querySnapshot = try await likesRef
+          .whereField("reviewID", isEqualTo: review.reviewID)
+          .whereField("authorID", isEqualTo: uid)
+          .getDocuments()
+        
+        if querySnapshot.isEmpty { liked = false }
+        else { liked = true }
+      } catch {
+        // TODO: handle errors
+      }
+    }
   }
   
   private func likeButtonPress() {
