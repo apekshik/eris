@@ -71,7 +71,7 @@ struct ReviewCardView: View {
     .shadow(radius: 5)
     .padding([.top, .horizontal])
     .onTapGesture(count: 2) {
-      liked.toggle()
+      likeButtonPress()
       let impactMed = UIImpactFeedbackGenerator(style: .medium)
       impactMed.impactOccurred()
     }
