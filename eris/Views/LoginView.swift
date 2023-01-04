@@ -160,6 +160,8 @@ struct LoginView: View {
     private func createAccount() {
         isLoading = true
         Task {
+            
+            let validator : CreateLoginValidator = CreateLoginValidator()
             do {
                 // Step 1. Create Firebase Account
                 try await FirebaseManager.shared.auth.createUser(withEmail: email, password: password)
@@ -170,6 +172,8 @@ struct LoginView: View {
                                    lastName: lastName,
                                    userName: userName,
                                    email: email)
+                
+                    try validator.validateLogin(newUser)
                 // Step 3. Save new User Doc in Firestore
                 let db = FirebaseManager.shared.firestore
                 let document = db.collection("Users").document(userUID)

@@ -38,7 +38,8 @@
 		89B53B1B295D393E00BAC746 /* Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B1A295D393E00BAC746 /* Examples.swift */; };
 		89E4AE6E29463985002BE54C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E4AE6D29463985002BE54C /* LoginView.swift */; };
 		89E4AE7029463D32002BE54C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89E4AE6F29463D32002BE54C /* GoogleService-Info.plist */; };
-		D96CA7FC29637C2A00064EC5 /* CreateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CA7FB29637C2A00064EC5 /* CreateValidator.swift */; };
+		D96CA7FC29637C2A00064EC5 /* CreateReviewFormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CA7FB29637C2A00064EC5 /* CreateReviewFormValidator.swift */; };
+		D96CA7FE2964EB6100064EC5 /* CreateLoginValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CA7FD2964EB6100064EC5 /* CreateLoginValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +70,8 @@
 		89B53B1A295D393E00BAC746 /* Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examples.swift; sourceTree = "<group>"; };
 		89E4AE6D29463985002BE54C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		89E4AE6F29463D32002BE54C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D96CA7FB29637C2A00064EC5 /* CreateValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateValidator.swift; sourceTree = "<group>"; };
+		D96CA7FB29637C2A00064EC5 /* CreateReviewFormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReviewFormValidator.swift; sourceTree = "<group>"; };
+		D96CA7FD2964EB6100064EC5 /* CreateLoginValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLoginValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +175,8 @@
 		D96CA7FA29637C0400064EC5 /* Validator */ = {
 			isa = PBXGroup;
 			children = (
-				D96CA7FB29637C2A00064EC5 /* CreateValidator.swift */,
+				D96CA7FB29637C2A00064EC5 /* CreateReviewFormValidator.swift */,
+				D96CA7FD2964EB6100064EC5 /* CreateLoginValidator.swift */,
 			);
 			path = Validator;
 			sourceTree = "<group>";
@@ -269,7 +272,8 @@
 				89B53B11295CB41D00BAC746 /* LoadingView.swift in Sources */,
 				89B53B15295CDB5A00BAC746 /* MyProfileView.swift in Sources */,
 				89B53B19295D281C00BAC746 /* ReviewCardView.swift in Sources */,
-				D96CA7FC29637C2A00064EC5 /* CreateValidator.swift in Sources */,
+				D96CA7FE2964EB6100064EC5 /* CreateLoginValidator.swift in Sources */,
+				D96CA7FC29637C2A00064EC5 /* CreateReviewFormValidator.swift in Sources */,
 				894600EE2960B80B007D498C /* ReviewPageView.swift in Sources */,
 				89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */,
 				89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */,

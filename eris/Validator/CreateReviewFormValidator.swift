@@ -7,30 +7,30 @@
 
 import Foundation
 
-struct CreateValidator {
+struct CreateReviewFormValidator {
     // Validator to check for user input and throw errors for all possible invalid inputs
-    func validate(_ review: Review) throws {
+    func validateForm(_ review: Review) throws {
         if review.relation.isEmpty {
-            throw CreateValidatorError.invalidRelation
+            throw CreateReviewFormValidatorError.invalidRelation
         }
         if review.comment.isEmpty {
-            throw CreateValidatorError.invalidComment
+            throw CreateReviewFormValidatorError.invalidComment
         }
         if review.experienceWithThem.isEmpty {
-            throw CreateValidatorError.invalidExperience
+            throw CreateReviewFormValidatorError.invalidExperience
         }
     }
 }
 
-extension CreateValidator {
-    enum CreateValidatorError: LocalizedError {
+extension CreateReviewFormValidator {
+    enum CreateReviewFormValidatorError: LocalizedError {
         case invalidRelation
         case invalidComment
         case invalidExperience
     }
 }
 
-extension CreateValidator.CreateValidatorError {
+extension CreateReviewFormValidator.CreateReviewFormValidatorError {
     
     var errorDescription: String? {
         switch self {

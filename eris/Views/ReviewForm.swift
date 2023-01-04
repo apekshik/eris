@@ -106,7 +106,7 @@ struct ReviewForm: View {
   /// sends it out to the firestore database.
   private func handleFormSubmit() {
     Task {
-        let validator : CreateValidator = CreateValidator()
+        let validator : CreateReviewFormValidator = CreateReviewFormValidator()
       do {
       
         // guard to check if currentUserID can be extracted or not.
@@ -132,7 +132,7 @@ struct ReviewForm: View {
                                rating: rating,
                                experienceWithThem: experienceWithThem)
           
-          try validator.validate(newReview)
+          try validator.validateForm(newReview)
         
         // finally post the data for the review to firestore.
         try documentReference.setData(from: newReview)
