@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FeedCardView: View {
+struct FeedReviewCardView: View {
   @State var user: User?
   @State var review: Review
   @State var liked: Bool = false
@@ -89,8 +89,8 @@ struct FeedCardView: View {
   }
 }
 
-struct FeedCardView_Previews: PreviewProvider {
+struct FeedReviewCardView_Previews: PreviewProvider {
   static var previews: some View {
-    FeedCardView(user: exampleUsers[0], review: exampleReviews[0])
+    FeedReviewCardView(user: exampleUsers[0], review: exampleReviews[0])
   }
 }
