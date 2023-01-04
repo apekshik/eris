@@ -10,7 +10,7 @@ import FirebaseFirestoreSwift
 
 struct FeedView: View {
   @State var reviews: [Review] = []
-  
+  @State var usersIFollow: [User] = []
   var body: some View {
     ScrollView {
       if reviews.count > 0 {
@@ -32,30 +32,30 @@ struct FeedView: View {
   var feed: some View {
     LazyVStack {
       ForEach(reviews, id: \.self) { review in
-        //        NavigationLink {
-        //          ReviewPageView(user: users[review.authorID]!, review: review, showName: true, comments: exampleComments)
-        //        } label: {
-        //          ReviewCardView(user: users[review.authorID]!, review: review, showName: true)
-        //        }
-        Text(review.comment)
-          .padding()
+        //                NavigationLink {
+        //                  ReviewPageView(user: users[review.authorID]!, review: review, showName: true, comments: exampleComments)
+        //                } label: {
+        //                  ReviewCardView(user: users[review.authorID]!, review: review, showName: true)
+        //                }
+        FeedCardView(review: review)
       }
     } // End of LazyVStack
   }
   
   private func fetchReviews() {
     let reviewRef = FirebaseManager.shared.firestore.collection("Reviews")
+    
+    
     reviewRef
-      .whereField("uid", isEqualTo: "ETJq3FZgpjZNJpKIdMh4BUXcEJh2")
+    //        .whereField("uid", isEqualTo: user.firestoreID)
       .order(by: "createdAt", descending: true)
-      .limit(to: 3)
+      .limit(to: 30)
       .getDocuments { querySnapshot, error in
         guard let documents = querySnapshot?.documents, error == nil else { return }
         
         reviews = documents.compactMap({ queryDocumentSnapshot in
           try? queryDocumentSnapshot.data(as: Review.self)
         })
-        
       }
   }
 }
