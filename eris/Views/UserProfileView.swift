@@ -21,8 +21,9 @@ struct UserProfileView: View {
   @State var errorMessage: String = ""
   @State var showError: Bool = false
   
-  // Review Form Data
+  // Form Data
   @State var showReviewForm: Bool = false
+  @State var showReportForm: Bool = false
   
   var body: some View {
       NavigationStack {
@@ -34,6 +35,12 @@ struct UserProfileView: View {
       }
       .sheet(isPresented: $showReviewForm, content: {
         ReviewForm(user: user, show: $showReviewForm)
+          .presentationDetents([.fraction(0.9)])
+      })
+      .sheet(isPresented: $showReportForm, content: {
+        ReportFormView(user: user, show: $showReportForm)
+          .presentationDetents([.medium, .large])
+          .presentationDragIndicator(.hidden)
       })
       .task {
         youAreBlockedStatus = youAreBlocked()
@@ -114,6 +121,7 @@ struct UserProfileView: View {
           
           Button {
             // action
+            showReportForm.toggle()
           } label: {
             HStack {
               Image(systemName: "exclamationmark.triangle")

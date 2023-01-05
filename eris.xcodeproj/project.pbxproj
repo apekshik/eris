@@ -26,6 +26,8 @@
 		89B4DFDC296545FC00BE584A /* FeedReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFDB296545FC00BE584A /* FeedReviewCardView.swift */; };
 		89B4DFDE2965FAC400BE584A /* FeedReviewPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFDD2965FAC400BE584A /* FeedReviewPageView.swift */; };
 		89B4DFE0296629DC00BE584A /* LikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFDF296629DC00BE584A /* LikeModel.swift */; };
+		89B4DFE22967682800BE584A /* ReportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFE12967682800BE584A /* ReportFormView.swift */; };
+		89B4DFE429676F4200BE584A /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFE329676F4200BE584A /* ReportModel.swift */; };
 		89B53AF9295BA54B00BAC746 /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53AF8295BA54B00BAC746 /* ReviewModel.swift */; };
 		89B53AFB295BBCB900BAC746 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53AFA295BBCB900BAC746 /* UserModel.swift */; };
 		89B53B01295BCF0D00BAC746 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 89B53B00295BCF0D00BAC746 /* FirebaseAuth */; };
@@ -66,6 +68,8 @@
 		89B4DFDB296545FC00BE584A /* FeedReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedReviewCardView.swift; sourceTree = "<group>"; };
 		89B4DFDD2965FAC400BE584A /* FeedReviewPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedReviewPageView.swift; sourceTree = "<group>"; };
 		89B4DFDF296629DC00BE584A /* LikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeModel.swift; sourceTree = "<group>"; };
+		89B4DFE12967682800BE584A /* ReportFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportFormView.swift; sourceTree = "<group>"; };
+		89B4DFE329676F4200BE584A /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
 		89B53AF8295BA54B00BAC746 /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		89B53AFA295BBCB900BAC746 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		89B53B0A295BD2DD00BAC746 /* TLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLoginView.swift; sourceTree = "<group>"; };
@@ -141,6 +145,7 @@
 				89B4DFDF296629DC00BE584A /* LikeModel.swift */,
 				89B53AF8295BA54B00BAC746 /* ReviewModel.swift */,
 				894600EF2960DB12007D498C /* CommentModel.swift */,
+				89B4DFE329676F4200BE584A /* ReportModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				890F4A57294154BA003B020D /* ReviewForm.swift */,
+				89B4DFE12967682800BE584A /* ReportFormView.swift */,
 				89E4AE6D29463985002BE54C /* LoginView.swift */,
 				89B53B0A295BD2DD00BAC746 /* TLoginView.swift */,
 				89B53B0E295CA99F00BAC746 /* HomeView.swift */,
@@ -280,6 +286,7 @@
 				894600EE2960B80B007D498C /* ReviewPageView.swift in Sources */,
 				89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */,
 				89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */,
+				89B4DFE22967682800BE584A /* ReportFormView.swift in Sources */,
 				89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */,
 				894600EA295F5CE2007D498C /* SearchUserCardView.swift in Sources */,
 				894600F4296100B7007D498C /* CommentSectionBodyView.swift in Sources */,
@@ -289,6 +296,7 @@
 				8979E4BC295DDAF800B0DEEA /* LiveBoujeeView.swift in Sources */,
 				8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */,
 				894600F02960DB12007D498C /* CommentModel.swift in Sources */,
+				89B4DFE429676F4200BE584A /* ReportModel.swift in Sources */,
 				890F4A4A29413E70003B020D /* erisApp.swift in Sources */,
 				89B53AF9295BA54B00BAC746 /* ReviewModel.swift in Sources */,
 			);
