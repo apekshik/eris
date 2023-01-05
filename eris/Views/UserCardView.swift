@@ -11,7 +11,15 @@ struct UserCardView: View {
   @State var user: User
   @State var showReviewForm: Bool = false
   var body: some View {
-    VStack(alignment: .leading, spacing: 12) {
+    NavigationLink {
+      UserProfileView(user: user)
+    } label: {
+      fullBody
+    }
+  }
+  
+  var fullBody: some View {
+    VStack(alignment: .leading) {
       VStack(alignment: .leading) {
         Text(user.fullName)
           .fontWeight(.bold)
@@ -23,13 +31,16 @@ struct UserCardView: View {
       HStack {
         reviewButton
         Spacer()
-        NavigationLink {
-          UserProfileView(user: user)
-        } label: {
-          Image(systemName: "rectangle.portrait.and.arrow.forward") // chevron.forward.circle
-            .resizable()
-            .frame(width: 25, height: 25)
-        }
+  //        NavigationLink {
+  //          UserProfileView(user: user)
+  //        } label: {
+  //          Image(systemName: "rectangle.portrait.and.arrow.forward") // chevron.forward.circle
+  //            .resizable()
+  //            .frame(width: 25, height: 25)
+  //        }
+        Image(systemName: "rectangle.portrait.and.arrow.forward") // chevron.forward.circle
+          .resizable()
+          .frame(width: 25, height: 25)
       }
     }
     .sheet(isPresented: $showReviewForm, content: {

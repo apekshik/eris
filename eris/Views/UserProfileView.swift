@@ -15,6 +15,7 @@ struct UserProfileView: View {
   @State var following: Bool = false
   @State var blocked: Bool = false
   @State var youAreBlockedStatus: Bool = false
+  @State var followerCount: Int = 0
   
   // MARK: Error Details.
   @State var errorMessage: String = ""
@@ -53,7 +54,10 @@ struct UserProfileView: View {
     ScrollView(.vertical, showsIndicators: false) {
       
       // Followers and Follow button go here
-      followerSection
+      // if you blocked this person, you shouldn't be able to follow/unfollow them, so this feature should be removed in that case using an if check.
+      if !blocked {
+        followerSection
+      }
       
       LiveBoujeeView()
       
@@ -147,13 +151,10 @@ struct UserProfileView: View {
       Button {
         // if you're following, you have to unfollow on button press,
         // else you have to follow on button press.
-        if following == false {
-          follow()
-          following = true
-        } else {
-          unfollow()
-          following = false
-        }
+        if following == false { follow() }
+        else { unfollow() }
+        following.toggle()
+        
       } label: {
         Text(following ? "Unfollow" : "Follow")
           .padding(8)
@@ -282,6 +283,7 @@ struct UserProfileView: View {
     if blocked == false {
       blockUser()
       unfollow()
+      following.toggle()
     }
     else { unblockUser() }
     blocked.toggle()
