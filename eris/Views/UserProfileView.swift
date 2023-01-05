@@ -14,7 +14,7 @@ struct UserProfileView: View {
   @State var reviews: [Review] = []
   @State var following: Bool = false
   @State var blocked: Bool = false
-  @State var youBlocked: Bool = false
+  @State var youAreBlockedStatus: Bool = false
   
   // MARK: Error Details.
   @State var errorMessage: String = ""
@@ -25,7 +25,7 @@ struct UserProfileView: View {
   
   var body: some View {
       NavigationStack {
-        if youBlocked == false {
+        if youAreBlockedStatus == false {
           fullBody
         } else {
           Text("You've been blocked by this person")
@@ -35,7 +35,7 @@ struct UserProfileView: View {
         ReviewForm(user: user, show: $showReviewForm)
       })
       .task {
-        youBlocked = youAreBlocked()
+        youAreBlockedStatus = youAreBlocked()
         blocked = await checkBlockedStatus()
         
         fetchReviews(for: user)
@@ -118,8 +118,14 @@ struct UserProfileView: View {
           }
           
         } label: { // Label for Menu
-          Image(systemName: "shield.lefthalf.fill")
-            .tint(.black)
+          HStack {
+            if blocked {
+              Text("Blocked")
+                .foregroundColor(.red)
+            }
+            Image(systemName: "shield.lefthalf.fill")
+              .tint(.black)
+          }
         }
       }
     }
