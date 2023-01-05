@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+
 
 struct UserProfileView: View {
   @State var user: User
   @State var reviews: [Review] = []
   @State var following: Bool = false
+  @State var blocked: Bool = false
+  @State var youBlocked: Bool = false
   
   // MARK: Error Details.
   @State var errorMessage: String = ""
@@ -21,60 +25,105 @@ struct UserProfileView: View {
   
   var body: some View {
       NavigationStack {
-        ScrollView(.vertical, showsIndicators: false) {
-          
-          // Followers and Follow button go here
-          followerSection
-          
-          LiveBoujeeView()
-          
-          // Set of Reviews start here (with Title ofcourse).
-          // HStack is Reviews Section Header
-          HStack {
-            
-            // Title for review section.
-            Text("Boujees".uppercased())
-              .font(.system(.title))
-              .fontWeight(.bold)
-              .foregroundColor(.secondary)
-              .frame(maxWidth: .infinity, alignment: .center)
-              
-            
-            // Button to post a new review
-            Button {
-              showReviewForm = true
-            } label: {
-              Image(systemName: "plus.square.fill")
-                .resizable()
-                .frame(width: 30, height: 30)
-                .tint(.black)
-            }
-          }
-          .padding([.horizontal, .top], 20)
-          
-          // Start of Review Cards
-//          LazyVStack {
-//            ForEach(reviews, id: \.id) { review in
-//              ReviewCardView(user: user, review: review, showName: false)
-//            }
-//          }
-          reviewSection
-          
+        if youBlocked == false {
+          fullBody
+        } else {
+          Text("You've been blocked by this person")
         }
-        .navigationTitle(user.fullName)
       }
       .sheet(isPresented: $showReviewForm, content: {
         ReviewForm(user: user, show: $showReviewForm)
       })
       .task {
+        youBlocked = youAreBlocked()
+        blocked = await checkBlockedStatus()
+        
         fetchReviews(for: user)
         updateFollowing() // check when the view loads if you're following the user already and update the following variable accordingly.
+        
       }
       // Alert popup everytime there's an error.
-      .alert(errorMessage, isPresented: $showError) {}
+      .alert(errorMessage, isPresented: $showError) {
+        
+      }
    
   }
   
+  var fullBody: some View {
+    ScrollView(.vertical, showsIndicators: false) {
+      
+      // Followers and Follow button go here
+      followerSection
+      
+      LiveBoujeeView()
+      
+      // Set of Reviews start here (with Title ofcourse).
+      // HStack is Reviews Section Header
+      HStack {
+        
+        // Title for review section.
+        Text("Boujees".uppercased())
+          .font(.system(.title))
+          .fontWeight(.bold)
+          .foregroundColor(.secondary)
+          .frame(maxWidth: .infinity, alignment: .center)
+          
+        
+        // Button to post a new review
+        Button {
+          showReviewForm = true
+        } label: {
+          Image(systemName: "plus.square.fill")
+            .resizable()
+            .frame(width: 30, height: 30)
+            .tint(.black)
+        }
+      }
+      .padding([.horizontal, .top], 20)
+      
+      // Start of Review Cards
+//          LazyVStack {
+//            ForEach(reviews, id: \.id) { review in
+//              ReviewCardView(user: user, review: review, showName: false)
+//            }
+//          }
+      reviewSection
+      
+    }
+    .navigationTitle(user.fullName)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Menu {
+          // Actions:
+          // 1. Logout
+          // 2. Delete Account
+          Button {
+            // action
+            handleBlocking()
+            
+          } label: {
+            HStack {
+              Image(systemName: blocked ? "person.fill.questionmark" : "person.fill.xmark")
+              Text(blocked ? "Unblock" : "Block")
+            }
+          }
+          
+          Button {
+            // action
+          } label: {
+            HStack {
+              Image(systemName: "exclamationmark.triangle")
+              Text("Report User")
+            }
+          }
+          
+        } label: { // Label for Menu
+          Image(systemName: "shield.lefthalf.fill")
+            .tint(.black)
+        }
+      }
+    }
+  }
   var reviewSection: some View {
     LazyVStack {
       ForEach(reviews, id: \.id) { review in
@@ -194,6 +243,69 @@ struct UserProfileView: View {
         try? queryDocumentSnapshot.data(as: Review.self)
       }
     }
+  }
+  
+  private func youAreBlocked() -> Bool {
+    guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+      // TODO: Please throw approriate errors!
+      return false
+    }
+    return user.blockedUsers.contains(uid)
+  }
+  
+  // MARK: Check in the beginning for blocked status of the user we've selected.
+  private func checkBlockedStatus() async -> Bool {
+    do {
+      guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
+        // TODO: PLEASE THROW APPROPRIATE ERROR
+        return false
+      }
+      let db = FirebaseManager.shared.firestore
+      let myProfile = try await db.collection("Users").document(uid).getDocument(as: User.self)
+      if myProfile.blockedUsers.contains(user.firestoreID) { return true }
+      else { return false }
+    } catch {
+      await setError(error)
+    }
+    print("do {} block in checkBlockedStatus() didn't execute??")
+    return false
+  }
+  
+  // Method that controls blocking/unblocking based on current blocked status of user we're viewing.
+  private func handleBlocking() {
+    if blocked == false { blockUser() }
+    else { unblockUser() }
+    blocked.toggle()
+  }
+  
+  // MARK: Block this user from your account.
+  private func blockUser() {
+    Task {
+      do {
+        let db = FirebaseManager.shared.firestore
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        try await db.collection("Users").document(uid).updateData(["blockedUsers": FieldValue.arrayUnion([user.firestoreID])])
+      } catch {
+        await setError(error)
+      }
+    }
+  }
+  
+  private func unblockUser() {
+    Task {
+      do {
+        let db = FirebaseManager.shared.firestore
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        try await db.collection("Users").document(uid).updateData(["blockedUsers": FieldValue.arrayRemove([user.firestoreID])])
+      } catch {
+        await setError(error)
+      }
+    }
+  }
+  
+  // MARK: Report user and mention why you're reporting them.
+  private func reportUser() {
+    
   }
   
   // MARK: Display Errors Via ALERT

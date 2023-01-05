@@ -31,11 +31,19 @@ struct SearchPageView: View {
           searchBarResults
         }
         
-        searchPageBody
+        if usersIFollow.count > 0 {
+          searchPageBody
+        } else {
+          Text("Not Following anyone yet".uppercased())
+            .foregroundColor(.secondary)
+        }
         
       }
       .navigationTitle("Search People")
     } // End of NavigationStack for Search Page.
+    .refreshable {
+      fetchUsersIFollow()
+    }
     .searchable(text: keywordBinding)
     .task {
       fetchUsersIFollow()

@@ -11,6 +11,11 @@ import FirebaseFirestoreSwift
 struct FeedView: View {
   @State var reviews: [Review] = []
   @State var usersIFollow: [User] = []
+  
+  // MARK: Error Details.
+  @State var errorMessage: String = ""
+  @State var showError: Bool = false
+  
   var body: some View {
     NavigationStack {
       ScrollView {
@@ -27,8 +32,12 @@ struct FeedView: View {
       }
       .task {
         fetchFeedReviews()
-      }.navigationTitle("Feed")
-    } 
+      }
+      .navigationTitle("Feed")
+    }
+    .alert(errorMessage, isPresented: $showError) {
+      
+    }
   }
   
   var feed: some View {
@@ -66,7 +75,7 @@ struct FeedView: View {
       }
       return users
     } catch {
-      // handle errors
+      await setError(error)
     }
     print("Didn't return users through do block!")
     return []
@@ -105,10 +114,19 @@ struct FeedView: View {
       }
       return reviews
     } catch {
-      // handle errors
+      await setError(error)
     }
     
     return []
+  }
+  
+  // MARK: Display Errors Via ALERT
+  private func setError(_ error: Error) async {
+    // UI Must be updated on Main Thread.
+    await MainActor.run(body: {
+      errorMessage = error.localizedDescription
+      showError.toggle()
+    })
   }
 }
 

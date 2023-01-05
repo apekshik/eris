@@ -169,7 +169,9 @@ struct LoginView: View {
                                    firstName: firstName,
                                    lastName: lastName,
                                    userName: userName,
-                                   email: email)
+                                   email: email,
+                                   blockedUsers: [])
+              
                 // Step 3. Save new User Doc in Firestore
                 let db = FirebaseManager.shared.firestore
                 let document = db.collection("Users").document(userUID)
