@@ -39,7 +39,7 @@ struct UserProfileView: View {
         blocked = await checkBlockedStatus()
         
         fetchReviews(for: user)
-        updateFollowing() // check when the view loads if you're following the user already and update the following variable accordingly.
+        following = await updateFollowing() // check when the view loads if you're following the user already and update the following variable accordingly.
         
       }
       // Alert popup everytime there's an error.
@@ -119,12 +119,8 @@ struct UserProfileView: View {
           
         } label: { // Label for Menu
           HStack {
-            if blocked {
-              Text("Blocked")
-                .foregroundColor(.red)
-            }
             Image(systemName: "shield.lefthalf.fill")
-              .tint(.black)
+              .tint(blocked ? .red : .black)
           }
         }
       }
@@ -215,6 +211,7 @@ struct UserProfileView: View {
         // delete your user doc from their followers subcollection.
         // MARK: Tried specifying the path in one single string instead of going down the collection().document().collection().document() path. See if this works.
         try await db.document("Users/\(user.firestoreID)/Followers/\(myID)").delete()
+        print("Unfollowed user \(user.fullName)")
       } catch {
         await setError(error)
       }
@@ -222,20 +219,22 @@ struct UserProfileView: View {
   }
   
   // MARK: Updates the following variable based on whether you're following the user or not.
-  private func updateFollowing() {
+  private func updateFollowing() async -> Bool {
     // Handy Note from Firestore Docs (Get Data Page): If there is no document at the location referenced by docRef, the resulting document will be empty and calling exists on it will return false.
-    Task {
-      do {
-        guard let myID = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        let docRef = FirebaseManager.shared.firestore.collection("Users").document(myID).collection("Following").document(user.firestoreID)
-        // checking to see if the documentSnapshot we're trying to fetch exists. Then we set following to true if it does exist (meaning the document exists and you're following this user) or set it to false if it doesn't.
-        let docExists = try await docRef.getDocument().exists
-        if docExists == true { following = true }
-        else { following = false }
-      } catch {
-        await setError(error)
-      }
+    do {
+      
+      guard let myID = FirebaseManager.shared.auth.currentUser?.uid else { return false }
+      let docRef = FirebaseManager.shared.firestore.collection("Users").document(myID).collection("Following").document(user.firestoreID)
+      // checking to see if the documentSnapshot we're trying to fetch exists. Then we set following to true if it does exist (meaning the document exists and you're following this user) or set it to false if it doesn't.
+      let docExists = try await docRef.getDocument().exists
+      if docExists == true { return true }
+      else { return false }
+      
+    } catch {
+      await setError(error)
     }
+    print("do {} block in updateFollowing() - UserProfileView - didn't execute??")
+    return false
   }
   
   // MARK: Fetch reviews specifically for the user you're looking at.
@@ -251,6 +250,7 @@ struct UserProfileView: View {
     }
   }
   
+  // MARK: Returns whether the user you're looking at has you in their blocklist.
   private func youAreBlocked() -> Bool {
     guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
       // TODO: Please throw approriate errors!
@@ -277,9 +277,12 @@ struct UserProfileView: View {
     return false
   }
   
-  // Method that controls blocking/unblocking based on current blocked status of user we're viewing.
+  // MARK: Method that controls blocking/unblocking based on current blocked status of user we're viewing.
   private func handleBlocking() {
-    if blocked == false { blockUser() }
+    if blocked == false {
+      blockUser()
+      unfollow()
+    }
     else { unblockUser() }
     blocked.toggle()
   }
@@ -291,6 +294,7 @@ struct UserProfileView: View {
         let db = FirebaseManager.shared.firestore
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
         try await db.collection("Users").document(uid).updateData(["blockedUsers": FieldValue.arrayUnion([user.firestoreID])])
+        print("Blocked User \(user.fullName), ID: \(user.firestoreID)")
       } catch {
         await setError(error)
       }
