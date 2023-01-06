@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyProfileView: View {
   // Profile Data
-  @State private var myProfile: User? = nil
+  @State var myProfile: User? = nil
   @AppStorage("log_status") var logStatus: Bool = false
   
   // Review Data
@@ -22,7 +22,7 @@ struct MyProfileView: View {
   
   // MARK: View Control data
   @State var showAppTitle: Bool = true
-  
+  @State var showAboutSheet: Bool = false
   
   // MARK: Main View Body
   var body: some View {
@@ -31,9 +31,9 @@ struct MyProfileView: View {
         if myProfile != nil {
           VStack {
             // TODO: Implement this in next update!
-            LiveBoujeeView()
+//            LiveBoujeeView()
             
-            Text("Reviews".uppercased())
+            Text("BOUJEEs".uppercased())
               .font(.system(.title))
               .fontWeight(.bold)
               .foregroundColor(.secondary)
@@ -44,7 +44,7 @@ struct MyProfileView: View {
               // This view is defined below.
               reviewSection
             } else {
-              Text("No Reviews for you yet!".uppercased())
+              Text("No Boujees for you yet!".uppercased())
                 .foregroundColor(.secondary)
             }
           }
@@ -69,16 +69,21 @@ struct MyProfileView: View {
             // 2. Delete Account
             Button("Logout", action: logoutUser)
             
+            Button("Delete Account", role: .destructive, action: deleteAccount)
+            
             Button {
-              
+              showAboutSheet.toggle()
             } label: {
               HStack {
-                Text("Account Settings")
+                Text("About The Developer(s)")
               }
             }
             
-            Button("Delete Account", role: .destructive, action: deleteAccount)
-            
+            Link(destination: URL(string: "https://www.privacypolicies.com/live/ba318495-b2b0-4f1c-af21-7bde81a37a81")!) {
+              HStack {
+                Text("Privacy Policy")
+              }
+            }
           } label: { // Label for Menu
             Image(systemName: "line.3.horizontal")
               .tint(.black)
@@ -88,6 +93,10 @@ struct MyProfileView: View {
         }
       }
     }
+    .sheet(isPresented: $showAboutSheet, content: {
+      AboutSheetView()
+        .presentationDetents([.medium, .large])
+    })
     .overlay {
       LoadingView(show: $isLoading)
       
@@ -208,6 +217,6 @@ struct MyProfileView: View {
 
 struct MyProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    MyProfileView()
+    MyProfileView(myProfile: exampleUsers[0])
   }
 }

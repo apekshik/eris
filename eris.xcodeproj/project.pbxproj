@@ -43,6 +43,7 @@
 		89B53B15295CDB5A00BAC746 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B14295CDB5900BAC746 /* MyProfileView.swift */; };
 		89B53B19295D281C00BAC746 /* ReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B18295D281C00BAC746 /* ReviewCardView.swift */; };
 		89B53B1B295D393E00BAC746 /* Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B1A295D393E00BAC746 /* Examples.swift */; };
+		89D3ADAC2967AC22005B89FE /* AboutSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */; };
 		89E4AE6E29463985002BE54C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E4AE6D29463985002BE54C /* LoginView.swift */; };
 		89E4AE7029463D32002BE54C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89E4AE6F29463D32002BE54C /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -80,6 +81,7 @@
 		89B53B14295CDB5900BAC746 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		89B53B18295D281C00BAC746 /* ReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCardView.swift; sourceTree = "<group>"; };
 		89B53B1A295D393E00BAC746 /* Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examples.swift; sourceTree = "<group>"; };
+		89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSheetView.swift; sourceTree = "<group>"; };
 		89E4AE6D29463985002BE54C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		89E4AE6F29463D32002BE54C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +176,7 @@
 				894600F3296100B7007D498C /* CommentSectionBodyView.swift */,
 				894600F52961D99A007D498C /* AddCommentView.swift */,
 				894600F12960ED64007D498C /* TestView.swift */,
+				89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */,
 				890F4A58294154BA003B020D /* ReviewForm.swift in Sources */,
 				89B53B0D295BD40400BAC746 /* Extensions.swift in Sources */,
+				89D3ADAC2967AC22005B89FE /* AboutSheetView.swift in Sources */,
 				89B4DFDE2965FAC400BE584A /* FeedReviewPageView.swift in Sources */,
 				89B53AFB295BBCB900BAC746 /* UserModel.swift in Sources */,
 				89B53B11295CB41D00BAC746 /* LoadingView.swift in Sources */,

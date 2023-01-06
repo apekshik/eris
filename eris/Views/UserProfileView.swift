@@ -66,7 +66,7 @@ struct UserProfileView: View {
         followerSection
       }
       
-      LiveBoujeeView()
+//      LiveBoujeeView()
       
       // Set of Reviews start here (with Title ofcourse).
       // HStack is Reviews Section Header
@@ -152,9 +152,9 @@ struct UserProfileView: View {
   
   var followerSection: some View {
     HStack {
-      VStack {
-        Text("432 Followers")
-      }
+//      VStack {
+//        Text("432 Followers")
+//      }
       Spacer()
       Button {
         // if you're following, you have to unfollow on button press,
@@ -168,7 +168,7 @@ struct UserProfileView: View {
           .padding(8)
           .foregroundColor(.white)
           .background(.black)
-          .cornerRadius(10)
+          .cornerRadius(8)
       }
     }
     .padding([.horizontal], 20)
@@ -290,8 +290,11 @@ struct UserProfileView: View {
   private func handleBlocking() {
     if blocked == false {
       blockUser()
-      unfollow()
-      following.toggle()
+      // The if check exists in case you try to block someone you don't follow. 
+      if following == true {
+        unfollow()
+        following.toggle()
+      }
     }
     else { unblockUser() }
     blocked.toggle()

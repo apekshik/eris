@@ -27,11 +27,30 @@ struct AddCommentView: View {
           
           // VStack for adding a comment.
           VStack(alignment: .leading, spacing: 8) {
+            
+            //Add Comment Header
+            HStack {
+              Text("Post a comment".uppercased())
+                .fontWeight(.bold)
+              Spacer()
+              // Close Button
+              Button {
+                show = false
+              } label: {
+                Image(systemName: "xmark.square.fill")
+                  .resizable()
+                  .frame(width: 20, height: 20)
+                  .tint(.black)
+              }
+            }
+            
+            // Body
             // axis: paramater makes a text field grow (vertically) dynamically with the content as long as there is enough space.
             TextField("Add Comment", text: $newCommentContent, axis: .vertical)
               .textFieldStyle(.roundedBorder)
               .lineLimit(4, reservesSpace: true)
             
+            // Footer
             HStack {
               // To show the character count
               Text("\(newCommentContent.count) characters")
