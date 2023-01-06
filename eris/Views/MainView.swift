@@ -14,7 +14,7 @@ struct MainView: View {
       // TODO: Come up with a new name for recent posts/activities (like how twitter has tweets).
       FeedView()
         .tabItem {
-          Image(systemName: "square.and.arrow.down")
+          Image(systemName: "circle.hexagongrid.fill")
           Text("Recent Activities")
         }
       

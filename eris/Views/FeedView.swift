@@ -41,7 +41,7 @@ struct FeedView: View {
   }
   
   var feed: some View {
-    LazyVStack {
+    LazyVStack(spacing: 8) {
       ForEach(reviews, id: \.self) { review in
         NavigationLink {
           // Destination

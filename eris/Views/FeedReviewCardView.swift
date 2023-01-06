@@ -16,29 +16,36 @@ struct FeedReviewCardView: View {
       HStack {
         VStack(alignment: .leading, spacing: 10) {
           
-          
+          // Header Section
           HStack {
             Text(user?.fullName ?? "")
               .font(.headline)
-              .foregroundColor(.secondary)
+              .fontWeight(.heavy)
+//              .foregroundColor(.secondary)
             Text("\(review.rating) Star Rating")
               .font(.headline)
-              .foregroundColor(.secondary)
+//              .foregroundColor(.secondary)
               .frame(maxWidth: .infinity, alignment: .trailing)
           }
+          .foregroundColor(.black)
+          .padding([.horizontal, .top])
+//          .opacity(0.6)
           
-          // written review
+          // Review Body
           Text(review.comment)
             .font(.title)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .fontWeight(.black)
-            .foregroundColor(.primary)
+            .foregroundColor(.black)
+//            .foregroundColor(.black)
             .lineLimit(3)
+            .padding([.horizontal])
           
-          // HStack under the written review.
+          // HStack Footer
           HStack {
             Text("Written by a \(review.relation)".uppercased())
               .font(.caption)
-              .foregroundColor(.secondary)
+              .foregroundColor(.black)
             HStack(spacing: 20) {
               // Button for comments section.
               Button {
@@ -53,26 +60,34 @@ struct FeedReviewCardView: View {
                 impactLight.impactOccurred()
               } label: {
                 Image(systemName: liked ? "heart.fill" : "heart")
-                  .scaleEffect(1.1)
+                  .scaleEffect(1.0)
               }
             }
             .font(.headline)
-            .foregroundColor(.secondary)
+            .foregroundColor(.black)
             .frame(maxWidth: .infinity, alignment: .trailing)
           }
+          .opacity(0.6)
+          .padding()
+          .background(Color(hex: "F5F5F4"))
+//          .shadow(radius: 4)
         }
+        
       }
-      .padding()
+//      .padding()
     }
-    .background(Color(hex: "#e6e5e1"))
-    .cornerRadius(10)
+//    .background(Color("Mellow Apricot"))
+    .background(Color(hex: "E1E1DF"))
+    .cornerRadius(5)
+    .padding()
     .shadow(radius: 5)
-    .padding([.top, .horizontal])
+    
     .onTapGesture(count: 2) {
-      likeButtonPress()
+            likeButtonPress()
       let impactMed = UIImpactFeedbackGenerator(style: .medium)
       impactMed.impactOccurred()
     }
+  
     .task {
       await fetchUser()
     }

@@ -46,6 +46,7 @@ struct LoginView: View {
       }
       .pickerStyle(SegmentedPickerStyle())
       .padding([.bottom, .leading, .trailing], 16)
+      .shadow(radius: 4)
       
       // MARK: Form View to enter Login/Signup details.
       Group {
@@ -71,7 +72,7 @@ struct LoginView: View {
       }
       .foregroundColor(.black)
     } // End of VStack
-    .background(Color(hex: "F07B00"))
+    .background(Color(hex: "F5F5F4"))
     .overlay {
       LoadingView(show: $isLoading)
     }
@@ -105,7 +106,6 @@ struct LoginView: View {
     }
     .foregroundColor(.black)
     .padding()
-    .background(Color(hex: "F07B00"))
   }
   
   
@@ -115,17 +115,15 @@ struct LoginView: View {
         .font(.headline)
       Divider()
       TextField("Email ID", text: $email)
-//        .textFieldStyle(.roundedBorder)
         .padding([.vertical])
       SecureField("Password", text: $password)
-        .textFieldStyle(.plain)
         .padding([.vertical])
         
     }
     .padding()
-    .background(.black)
+    .background(Color(hex: "E1E1DF")) // 1F1F1F
+    .cornerRadius(5)
     .shadow(radius: 8)
-//    .cornerRadius(5)
   }
   
   
@@ -148,9 +146,10 @@ struct LoginView: View {
       SecureField("Password", text: $password)
     }
     .padding()
-    .background(.black)
+    .background(Color(hex: "E1E1DF")) // 1F1F1F
+//    .foregroundColor(.white)
+    .cornerRadius(5)
     .shadow(radius: 8)
-//    .cornerRadius(10)
   }
   
   var signInButton: some View {
@@ -164,9 +163,10 @@ struct LoginView: View {
         .foregroundColor(.white)
         .background(.black)
         .cornerRadius(5)
-        .shadow(radius: 5)
+        
     }
     .padding()
+    .shadow(radius: 5)
   }
   
   

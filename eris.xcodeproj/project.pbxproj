@@ -44,6 +44,7 @@
 		89B53B19295D281C00BAC746 /* ReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B18295D281C00BAC746 /* ReviewCardView.swift */; };
 		89B53B1B295D393E00BAC746 /* Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B1A295D393E00BAC746 /* Examples.swift */; };
 		89D3ADAC2967AC22005B89FE /* AboutSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */; };
+		89D3ADAE2968C314005B89FE /* TFeedReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D3ADAD2968C314005B89FE /* TFeedReviewCardView.swift */; };
 		89E4AE6E29463985002BE54C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E4AE6D29463985002BE54C /* LoginView.swift */; };
 		89E4AE7029463D32002BE54C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89E4AE6F29463D32002BE54C /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		89B53B18295D281C00BAC746 /* ReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCardView.swift; sourceTree = "<group>"; };
 		89B53B1A295D393E00BAC746 /* Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examples.swift; sourceTree = "<group>"; };
 		89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSheetView.swift; sourceTree = "<group>"; };
+		89D3ADAD2968C314005B89FE /* TFeedReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFeedReviewCardView.swift; sourceTree = "<group>"; };
 		89E4AE6D29463985002BE54C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		89E4AE6F29463D32002BE54C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,6 +167,7 @@
 				89B4DFD729640C1E00BE584A /* FeedView.swift */,
 				89B4DFDD2965FAC400BE584A /* FeedReviewPageView.swift */,
 				89B4DFDB296545FC00BE584A /* FeedReviewCardView.swift */,
+				89D3ADAD2968C314005B89FE /* TFeedReviewCardView.swift */,
 				8979E4BD295E405C00B0DEEA /* SearchPageView.swift */,
 				894600EB295F5EE8007D498C /* UserProfileView.swift */,
 				894600E9295F5CE2007D498C /* SearchUserCardView.swift */,
@@ -275,6 +278,7 @@
 				894600F22960ED64007D498C /* TestView.swift in Sources */,
 				894600F62961D99A007D498C /* AddCommentView.swift in Sources */,
 				89B53B1B295D393E00BAC746 /* Examples.swift in Sources */,
+				89D3ADAE2968C314005B89FE /* TFeedReviewCardView.swift in Sources */,
 				894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */,
 				890F4A58294154BA003B020D /* ReviewForm.swift in Sources */,
 				89B53B0D295BD40400BAC746 /* Extensions.swift in Sources */,
@@ -441,7 +445,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -473,7 +477,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
