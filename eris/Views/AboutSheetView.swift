@@ -40,6 +40,15 @@ struct AboutSheetView: View {
           .font(.system(.largeTitle))
           .fontWeight(.heavy)
           .fontDesign(.serif)
+        
+        // Copyright Notice Footer
+        VStack {
+          Text("Copyright © 2023 Apekshik Panigrahi.")
+            .font(.footnote)
+          Text("All Rights Reserved.")
+            .font(.footnote)
+        }
+        
       }
     }
 }

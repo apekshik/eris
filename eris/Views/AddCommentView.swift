@@ -46,14 +46,14 @@ struct AddCommentView: View {
             
             // Body
             // axis: paramater makes a text field grow (vertically) dynamically with the content as long as there is enough space.
-            TextField("Add Comment", text: $newCommentContent, axis: .vertical)
+            TextField("Type here...", text: $newCommentContent, axis: .vertical)
               .textFieldStyle(.roundedBorder)
               .lineLimit(4, reservesSpace: true)
             
             // Footer
             HStack {
               // To show the character count
-              Text("\(newCommentContent.count) characters")
+              Text("\(newCommentContent.count) Characters")
                 .foregroundColor(.secondary)
               
               // spacer to push out the character count and post button to the far ends of the view.

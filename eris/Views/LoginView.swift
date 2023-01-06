@@ -35,18 +35,7 @@ struct LoginView: View {
   // MARK: Main View body
   var body: some View {
     VStack {
-      
-      // Header and Title of App.
-      Text("BOUJÈ")
-        .frame(maxWidth: .infinity)
-        .font(.system(.largeTitle))
-        .fontWeight(.black)
-        .fontDesign(.serif)
-      Divider()
-      Text("Login or Sign up")
-        .fontWeight(.semibold)
-        .font(.system(.headline))
-        .padding()
+      titleSection
       
       // MARK: Picker component for login/account creation.
       Picker(selection: $isLoginMode, label: Text("Picker for login/account creation")) {
@@ -54,8 +43,9 @@ struct LoginView: View {
           .tag(true)
         Text("Create Account")
           .tag(false)
-      }.pickerStyle(SegmentedPickerStyle())
-        .padding([.bottom, .leading, .trailing], 16)
+      }
+      .pickerStyle(SegmentedPickerStyle())
+      .padding([.bottom, .leading, .trailing], 16)
       
       // MARK: Form View to enter Login/Signup details.
       Group {
@@ -68,13 +58,20 @@ struct LoginView: View {
       }
       .padding()
       
-      // Sign In Button.
       signInButton
       
       Spacer()
       
+      // Copyright Notice Footer
+      VStack {
+        Text("Copyright © 2023 Apekshik Panigrahi.")
+          .font(.footnote)
+        Text("All Rights Reserved.")
+          .font(.footnote)
+      }
+      .foregroundColor(.black)
     } // End of VStack
-    .background(Color(hex: "#e0ded5"))
+    .background(Color(hex: "F07B00"))
     .overlay {
       LoadingView(show: $isLoading)
     }
@@ -84,23 +81,53 @@ struct LoginView: View {
   
   
   /// UI Components of the view start here.
+  
+  // MARK: Header and Title of App.
+  var titleSection: some View {
+    
+    VStack(spacing: 8) {
+      Text("BOUJÈ")
+        .frame(maxWidth: .infinity)
+        .font(.system(.largeTitle))
+        .fontWeight(.black)
+        .fontDesign(.serif)
+      
+      VStack( spacing: 0 ){
+        Text("Created By".uppercased())
+          .font(.caption2)
+          .fontDesign(.rounded)
+        Text("Apekshik Panigrahi".uppercased())
+          .font(.caption)
+          .fontWeight(.semibold)
+          .fontDesign(.rounded)
+      }
+      
+    }
+    .foregroundColor(.black)
+    .padding()
+    .background(Color(hex: "F07B00"))
+  }
+  
+  
   var loginAccountView: some View {
     VStack(alignment: .leading) {
       Text("Enter Credentials")
         .font(.headline)
-      
+      Divider()
       TextField("Email ID", text: $email)
-        .textFieldStyle(.roundedBorder)
+//        .textFieldStyle(.roundedBorder)
         .padding([.vertical])
       SecureField("Password", text: $password)
-        .textFieldStyle(.roundedBorder)
+        .textFieldStyle(.plain)
         .padding([.vertical])
         
     }
     .padding()
-    .background(Color(hex: "#f5f1dc"))
-    .cornerRadius(10)
+    .background(.black)
+    .shadow(radius: 8)
+//    .cornerRadius(5)
   }
+  
   
   
   var createAccountView: some View {
@@ -121,8 +148,9 @@ struct LoginView: View {
       SecureField("Password", text: $password)
     }
     .padding()
-    .background(Color(hex: "#f5f1dc"))
-    .cornerRadius(10)
+    .background(.black)
+    .shadow(radius: 8)
+//    .cornerRadius(10)
   }
   
   var signInButton: some View {
@@ -135,7 +163,8 @@ struct LoginView: View {
         .padding()
         .foregroundColor(.white)
         .background(.black)
-        .cornerRadius(10)
+        .cornerRadius(5)
+        .shadow(radius: 5)
     }
     .padding()
   }
