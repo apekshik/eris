@@ -21,16 +21,20 @@ struct CommentSectionBodyView: View {
             Text(comment.content)
               .font(.caption)
               .lineLimit(2)
-            HStack {
-              Text("Reply".uppercased())
-                .font(.caption)
-              Text("Send".uppercased())
-                .font(.caption)
-            }
-            .opacity(0.7)
+//            HStack {
+//              Text("Reply".uppercased())
+//                .font(.caption)
+//              Text("Send".uppercased())
+//                .font(.caption)
+//            }
+//            .opacity(0.7)
           }
-          Image(systemName: "heart")
-            .frame(alignment: .trailing)
+//          Button {
+//            
+//          } label: {
+//            Image(systemName: "heart")
+//              .frame(alignment: .trailing)
+//          }
         }
       }
     }

@@ -56,7 +56,7 @@ struct SearchPageView: View {
       LazyVStack(alignment: .leading) {
         ForEach(userQueries, id: \.id) { user in
           NavigationLink {
-            UserProfileView(user: user)
+            UserProfileView(user: user, usersIFollow: $usersIFollow)
           } label: {
             SearchUserCardView(user: user)
               .padding([.horizontal], 12)
@@ -85,7 +85,7 @@ struct SearchPageView: View {
         .opacity(0.6)
       LazyVStack {
         ForEach(usersIFollow) { user in
-          UserCardView(user: user)
+          UserCardView(user: user, usersIFollow: $usersIFollow)
         }
       }
       .background(Color(hex: "#FAF9F6"))

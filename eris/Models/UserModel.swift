@@ -9,6 +9,7 @@ import Foundation
 
 // MARK: User model to store users in firestore database.
 struct User: Codable, Identifiable  {
+  
   var id = UUID()
   var firestoreID: String
   let firstName: String

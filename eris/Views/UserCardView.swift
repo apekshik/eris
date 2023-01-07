@@ -10,9 +10,10 @@ import SwiftUI
 struct UserCardView: View {
   @State var user: User
   @State var showReviewForm: Bool = false
+  @Binding var usersIFollow: [User]
   var body: some View {
     NavigationLink {
-      UserProfileView(user: user)
+      UserProfileView(user: user, usersIFollow: $usersIFollow)
     } label: {
       fullBody
     }
@@ -71,6 +72,6 @@ struct UserCardView: View {
 
 struct UserCardView_Previews: PreviewProvider {
   static var previews: some View {
-    UserCardView(user: exampleUsers[0])
+    UserCardView(user: exampleUsers[0], usersIFollow: .constant([]))
   }
 }
