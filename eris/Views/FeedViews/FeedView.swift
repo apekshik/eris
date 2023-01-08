@@ -23,12 +23,11 @@ struct FeedView: View {
           // This view is defined below.
           feed
         } else {
-          Text("No Boujees for you yet!".uppercased())
-            .foregroundColor(.secondary)
+          EmptyFeedView()
         }
       }
       .refreshable {
-        
+        fetchFeedReviews()
       }
       .task {
         fetchFeedReviews()

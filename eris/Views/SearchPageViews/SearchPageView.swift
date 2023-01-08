@@ -34,8 +34,7 @@ struct SearchPageView: View {
         if usersIFollow.count > 0 {
           searchPageBody
         } else {
-          Text("Not Following anyone yet".uppercased())
-            .foregroundColor(.secondary)
+          EmptySearchView()
         }
         
       }
@@ -92,7 +91,6 @@ struct SearchPageView: View {
       .cornerRadius(10)
       .padding([.horizontal])
     }
-//    .blur(radius: userQueries.count == 0 ? 0 : 20)
   }
   
   // Fetches all users I follow and stores it in the usersIFollow var.

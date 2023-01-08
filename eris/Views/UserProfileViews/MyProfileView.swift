@@ -29,24 +29,14 @@ struct MyProfileView: View {
     NavigationStack {
       ScrollView(.vertical, showsIndicators: false) {
         if myProfile != nil {
-          VStack {
+          if reviews.count > 0 {
+            // This view is defined below.
             // TODO: Implement this in next update!
 //            LiveBoujeeView()
             
-            Text("BOUJEEs".uppercased())
-              .font(.system(.title))
-              .fontWeight(.bold)
-              .foregroundColor(.secondary)
-              .frame(maxWidth: .infinity, alignment: .center)
-              .padding([.horizontal, .top], 20)
-            
-            if reviews.count > 0 {
-              // This view is defined below.
-              reviewSection
-            } else {
-              Text("No Boujees for you yet!".uppercased())
-                .foregroundColor(.secondary)
-            }
+            reviewSection
+          } else {
+            EmptyMyProfileView()
           }
         } else {
           Text("")
@@ -119,18 +109,27 @@ struct MyProfileView: View {
   }
   
   var reviewSection: some View {
-    LazyVStack {
-      ForEach(reviews, id: \.id) { review in
-        NavigationLink {
-          ReviewPageView(user: myProfile!, review: review, showName: false, comments: exampleComments)
-            .onAppear{ withAnimation(.linear(duration: 0.1)) { self.showAppTitle = false } }
-        } label: {
-          ReviewCardView(user: myProfile!, review: review, showName: false)
+    VStack {
+      Text("BOUJEEs".uppercased())
+        .font(.system(.title))
+        .fontWeight(.bold)
+        .foregroundColor(.secondary)
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding([.horizontal, .top], 20)
+      
+      LazyVStack {
+        ForEach(reviews, id: \.id) { review in
+          NavigationLink {
+            ReviewPageView(user: myProfile!, review: review, showName: false, comments: exampleComments)
+              .onAppear{ withAnimation(.linear(duration: 0.1)) { self.showAppTitle = false } }
+          } label: {
+            ReviewCardView(user: myProfile!, review: review, showName: false)
+          }
+          .onAppear{ withAnimation { self.showAppTitle = true } }
+          
         }
-        .onAppear{ withAnimation { self.showAppTitle = true } }
-        
-      }
-    } // End of LazyVStack
+      } // End of LazyVStack
+    }
   }
   
   // MARK: Fetch User Data

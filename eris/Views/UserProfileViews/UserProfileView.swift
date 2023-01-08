@@ -68,7 +68,7 @@ struct UserProfileView: View {
       
       //      LiveBoujeeView()
       
-      // Set of Reviews start here (with Title ofcourse).
+      // Set of Reviews start here (with Title of course).
       // HStack is Reviews Section Header
       HStack {
         
@@ -92,13 +92,11 @@ struct UserProfileView: View {
       }
       .padding([.horizontal, .top], 20)
       
-      // Start of Review Cards
-      //          LazyVStack {
-      //            ForEach(reviews, id: \.id) { review in
-      //              ReviewCardView(user: user, review: review, showName: false)
-      //            }
-      //          }
-      reviewSection
+      if reviews.count > 0 {
+        reviewSection
+      } else {
+        EmptyUserProfileView()
+      }
       
     }
     .navigationTitle(user.fullName)

@@ -1,21 +1,21 @@
 //
-//  EmptyMyProfileView.swift
+//  EmptySearchView.swift
 //  eris
 //
-//  Created by Apekshik Panigrahi on 1/7/23.
+//  Created by Apekshik Panigrahi on 1/8/23.
 //
 
 import SwiftUI
 
-struct EmptyMyProfileView: View {
+struct EmptySearchView: View {
     var body: some View {
       VStack(spacing: 12) {
         
-        Image("ProfileEmpty")
+        Image("SearchEmpty")
           .resizable()
           .scaledToFit()
         
-        Text("Looks Like you don't have any Boujees right now! This means none of your followers (yet) have posted a Boujee for you. So go ahead, start following friends (if you haven't already) and start Boujee-ing them!")
+        Text("Looks Like you don't have any Followers right now! Start following friends by searching them up on the Search Bar and start Boujee-ing!")
           .multilineTextAlignment(.center)
           .font(.title3)
           .fontDesign(.rounded)
@@ -39,8 +39,8 @@ struct EmptyMyProfileView: View {
     }
 }
 
-struct EmptyMyProfileView_Previews: PreviewProvider {
+struct EmptySearchView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyMyProfileView()
+        EmptySearchView()
     }
 }
