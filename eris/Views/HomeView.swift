@@ -9,15 +9,21 @@ import SwiftUI
 
 struct HomeView: View {
   @AppStorage("log_status") var logStatus: Bool = false
+  @AppStorage("showOnboardingView") var showOnboardingView: Bool = true
   @State var usersIFollow: [User] = []
   var body: some View {
     // Redirecting User based on LogStatus
     if logStatus {
       mainView
+        .fullScreenCover(isPresented: $showOnboardingView, content: {
+          OnboardingView(showOnboardingView: $showOnboardingView)
+        })
+        
     }
     else {
       LoginView()
     }
+      
   }
   
   var mainView: some View {
