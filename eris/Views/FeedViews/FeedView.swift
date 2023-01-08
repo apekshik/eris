@@ -23,7 +23,7 @@ struct FeedView: View {
           // This view is defined below.
           feed
         } else {
-          Text("No Reviews for you yet!".uppercased())
+          Text("No Boujees for you yet!".uppercased())
             .foregroundColor(.secondary)
         }
       }
@@ -33,7 +33,7 @@ struct FeedView: View {
       .task {
         fetchFeedReviews()
       }
-      .navigationTitle("Feed")
+      .navigationTitle("Follower Feed")
     }
     .alert(errorMessage, isPresented: $showError) {
       
