@@ -15,7 +15,8 @@ struct User: Codable, Identifiable  {
   let firstName: String
   let lastName: String
   var fullName: String { // a computable property
-    return firstName + " " + lastName
+    if !firstName.isEmpty && !lastName.isEmpty { return firstName + " " + lastName }
+    else { return firstName + lastName } // returns whichever is not empty basically. 
   }
   var userName: String
   let email: String

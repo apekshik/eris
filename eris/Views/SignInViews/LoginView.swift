@@ -10,6 +10,9 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct LoginView: View {
+  // Contains my user info and other related details.
+  @EnvironmentObject var myData: MyData
+  
   // MARK: User Details.
   @State var email: String = ""
   @State var password: String = ""
@@ -193,18 +196,6 @@ struct LoginView: View {
         await setError(error)
       }
     }
-    // MARK: Legacy Login Method
-    //        Auth.auth().signIn(withEmail: email, password: password) { result, err in
-    //            if let err = err {
-    //                // handle error
-    //                print("failed to login user", err.localizedDescription)
-    //                return
-    //            }
-    //
-    //            print("succesffuly logged in user! \(result?.user.uid ?? "")")
-    //            self.loginStatusMessage = "succesffuly logged in user! User ID: \(result?.user.uid ?? "")"
-    //
-    //        }
   }
   
   // MARK: Signup Method

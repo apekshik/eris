@@ -11,19 +11,20 @@ struct HomeView: View {
   @AppStorage("log_status") var logStatus: Bool = false
   @AppStorage("showOnboardingView") var showOnboardingView: Bool = true
   @State var usersIFollow: [User] = []
+  
+  @StateObject var myData: MyData = MyData()
+  
   var body: some View {
     // Redirecting User based on LogStatus
-    if logStatus {
-      mainView
-        .fullScreenCover(isPresented: $showOnboardingView, content: {
-          OnboardingView(showOnboardingView: $showOnboardingView)
-        })
-        
+    VStack {
+      if logStatus {
+        mainView
+      }
+      else {
+        LoginView()
+      }
     }
-    else {
-      LoginView()
-    }
-      
+    .environmentObject(myData)
   }
   
   var mainView: some View {
@@ -49,12 +50,17 @@ struct HomeView: View {
     } // End of TabView
     .tint(.black)
     .task {
-      await fetchUsersIFollow()
+      usersIFollow = await fetchUsersIFollow()
+      myData.usersIFollow = usersIFollow
     }
+    .fullScreenCover(isPresented: $showOnboardingView, content: {
+      OnboardingView(showOnboardingView: $showOnboardingView)
+    })
   }
   
-  private func fetchUsersIFollow() async {
-    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+  private func fetchUsersIFollow() async -> [User] {
+    var usersIFollow: [User] = []
+    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return [] }
     let followingRef = FirebaseManager.shared.firestore.collection("Users").document(userID).collection("Following")
     followingRef.getDocuments { querySnapshot, error in
       guard let documents = querySnapshot?.documents, error == nil else { return }
@@ -64,6 +70,8 @@ struct HomeView: View {
         try? queryDocumentSnapshot.data(as: User.self)
       }
     }
+    
+    return usersIFollow
   } // End of method fetchUsers()
 }
 

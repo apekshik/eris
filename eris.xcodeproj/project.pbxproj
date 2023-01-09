@@ -17,6 +17,8 @@
 		8938E910296A92920083378A /* EmptyFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E90F296A92920083378A /* EmptyFeedView.swift */; };
 		8938E912296A962B0083378A /* EmptySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E911296A962B0083378A /* EmptySearchView.swift */; };
 		8938E914296A97380083378A /* EmptyUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E913296A97380083378A /* EmptyUserProfileView.swift */; };
+		8938E916296B0C530083378A /* MyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E915296B0C530083378A /* MyDataModel.swift */; };
+		8938E918296C74610083378A /* IDETemplateMacros.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8938E917296C74610083378A /* IDETemplateMacros.plist */; };
 		894600EA295F5CE2007D498C /* SearchUserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600E9295F5CE2007D498C /* SearchUserCardView.swift */; };
 		894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600EB295F5EE8007D498C /* UserProfileView.swift */; };
 		894600EE2960B80B007D498C /* ReviewPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600ED2960B80B007D498C /* ReviewPageView.swift */; };
@@ -66,6 +68,8 @@
 		8938E90F296A92920083378A /* EmptyFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyFeedView.swift; sourceTree = "<group>"; };
 		8938E911296A962B0083378A /* EmptySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchView.swift; sourceTree = "<group>"; };
 		8938E913296A97380083378A /* EmptyUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUserProfileView.swift; sourceTree = "<group>"; };
+		8938E915296B0C530083378A /* MyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDataModel.swift; sourceTree = "<group>"; };
+		8938E917296C74610083378A /* IDETemplateMacros.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IDETemplateMacros.plist; sourceTree = "<group>"; };
 		894600E9295F5CE2007D498C /* SearchUserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCardView.swift; sourceTree = "<group>"; };
 		894600EB295F5EE8007D498C /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		894600ED2960B80B007D498C /* ReviewPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPageView.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				890F4A4D29413E71003B020D /* Assets.xcassets */,
 				89E4AE6F29463D32002BE54C /* GoogleService-Info.plist */,
 				890F4A4F29413E71003B020D /* Preview Content */,
+				8938E917296C74610083378A /* IDETemplateMacros.plist */,
 			);
 			path = eris;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 				89B53AF8295BA54B00BAC746 /* ReviewModel.swift */,
 				894600EF2960DB12007D498C /* CommentModel.swift */,
 				89B4DFE329676F4200BE584A /* ReportModel.swift */,
+				8938E915296B0C530083378A /* MyDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -349,6 +355,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8938E918296C74610083378A /* IDETemplateMacros.plist in Resources */,
 				890F4A5129413E71003B020D /* Preview Assets.xcassets in Resources */,
 				89E4AE7029463D32002BE54C /* GoogleService-Info.plist in Resources */,
 				890F4A4E29413E71003B020D /* Assets.xcassets in Resources */,
@@ -381,6 +388,7 @@
 				89B4DFE0296629DC00BE584A /* LikeModel.swift in Sources */,
 				8938E90E296A5A840083378A /* OnboardingView.swift in Sources */,
 				89B53B19295D281C00BAC746 /* ReviewCardView.swift in Sources */,
+				8938E916296B0C530083378A /* MyDataModel.swift in Sources */,
 				894600EE2960B80B007D498C /* ReviewPageView.swift in Sources */,
 				89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */,
 				89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */,
