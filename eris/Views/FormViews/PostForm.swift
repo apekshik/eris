@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 
-struct ReviewForm: View {
+struct PostForm: View {
   
   // Regular variables.
   private let ratings: [Int] = [0, 1, 2, 3, 4, 5]
@@ -124,7 +124,7 @@ struct ReviewForm: View {
         let documentReference = db.collection("Reviews").document()
         
         // create a new Review object with form input.
-        let newReview = Review(uid: user.firestoreID,
+        let newReview = Post(uid: user.firestoreID,
                                authorID: userID,
                                reviewID: documentReference.documentID,
                                createdAt: Date(),
@@ -145,6 +145,6 @@ struct ReviewForm: View {
 
 struct ReviewForm_Previews: PreviewProvider {
   static var previews: some View {
-    ReviewForm(user: exampleUsers[0], show: .constant(true))
+    PostForm(user: exampleUsers[0], show: .constant(true))
   }
 }

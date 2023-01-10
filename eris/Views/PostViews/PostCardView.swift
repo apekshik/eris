@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ReviewCardView: View {
+struct PostCardView: View {
   @State var user: User
-  @State var review: Review
+  @State var review: Post
   @State var showName: Bool
   @State var liked: Bool = false
   var body: some View {
@@ -183,7 +183,7 @@ struct ReviewCardView: View {
 struct ReviewCardView_Previews: PreviewProvider {
   
   static var previews: some View {
-    ReviewCardView(user: exampleUsers[0], review: exampleReviews[0], showName: true)
+    PostCardView(user: exampleUsers[0], review: exampleReviews[0], showName: true)
   }
 }
 

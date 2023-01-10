@@ -13,7 +13,7 @@ struct AddCommentView: View {
   @Binding var comments: [Comment]
   @State var newCommentContent: String = ""
   @State var author: User? = nil
-  let review: Review
+  let review: Post
   
   
   var body: some View {

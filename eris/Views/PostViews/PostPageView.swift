@@ -9,9 +9,9 @@ import SwiftUI
 
 
 // TODO: Make this page refreshable.
-struct ReviewPageView: View {
+struct PostPageView: View {
   @State var user: User
-  @State var review: Review
+  @State var review: Post
   @State var showName: Bool = true
   @State var liked: Bool = false
   @State var comments: [Comment] = []
@@ -232,6 +232,6 @@ struct ReviewPageView: View {
 
 struct ReviewPageView_Previews: PreviewProvider {
   static var previews: some View {
-    ReviewPageView(user: exampleUsers[0], review: exampleReviews[0], showName: true, comments: exampleComments)
+    PostPageView(user: exampleUsers[0], review: exampleReviews[0], showName: true, comments: exampleComments)
   }
 }

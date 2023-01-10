@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseFirestoreSwift
 
 struct FeedView: View {
-  @State var reviews: [Review] = []
+  @State var reviews: [Post] = []
   @State var usersIFollow: [User] = []
   
   // MARK: Error Details.
@@ -81,7 +81,7 @@ struct FeedView: View {
   }
   
   
-  private func fetchReviews(for users: [User]) async -> [Review] {
+  private func fetchReviews(for users: [User]) async -> [Post] {
     do {
       let reviewRef = FirebaseManager.shared.firestore.collection("Reviews")
       
@@ -97,9 +97,9 @@ struct FeedView: View {
   //          try? queryDocumentSnapshot.data(as: Review.self)
   //        })
   //      }
-      var reviews: [Review] = []
+      var reviews: [Post] = []
       for user in users  {
-        var temp: [Review]
+        var temp: [Post]
         let querySnapshot = try await reviewRef
           .whereField("uid", isEqualTo: user.firestoreID)
           .order(by: "createdAt", descending: true)
@@ -107,7 +107,7 @@ struct FeedView: View {
           .getDocuments()
         let documentsRef = querySnapshot.documents
         temp = try documentsRef.compactMap({ QueryDocumentSnapshot in
-          try QueryDocumentSnapshot.data(as: Review.self)
+          try QueryDocumentSnapshot.data(as: Post.self)
         })
         reviews.append(contentsOf: temp)
       }

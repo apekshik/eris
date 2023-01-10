@@ -9,9 +9,9 @@ import SwiftUI
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct LiveBoujeeView: View {
+struct LivePostView: View {
   @State var user: User
-  @State var boujees: [LiveBoujee] = []
+  @State var boujees: [LivePost] = []
   @State var addBoujee: Bool = false
   
   var body: some View {
@@ -58,7 +58,7 @@ struct LiveBoujeeView: View {
     .padding()
     .shadow(radius: 7)
     .overlay {
-      AddLiveBoujeeView(show: $addBoujee, forUser: user)
+      AddLivePostView(show: $addBoujee, forUser: user)
     }
     .onAppear {
       startListeningBoujees()
@@ -72,8 +72,10 @@ struct LiveBoujeeView: View {
   
   private func startListeningBoujees() {
     let db = FirebaseManager.shared.firestore
+    let secondsInADay: Double = 60 * 60 * 24
     listener = db.collection("LiveBoujees")
       .whereField("userID", isEqualTo: user.firestoreID)
+      .whereField("createdAt", isGreaterThanOrEqualTo: Date(timeIntervalSinceNow: -secondsInADay))
       .order(by: "createdAt")
       .addSnapshotListener { querySnapshot, error in
         guard let documents = querySnapshot?.documents else {
@@ -82,7 +84,7 @@ struct LiveBoujeeView: View {
         }
         
         boujees = documents.compactMap({ queryDocumentSnapshot in
-          try? queryDocumentSnapshot.data(as: LiveBoujee.self)
+          try? queryDocumentSnapshot.data(as: LivePost.self)
         })
       }
   }
@@ -94,6 +96,6 @@ struct LiveBoujeeView: View {
 
 struct LiveBoujeeView_Previews: PreviewProvider {
   static var previews: some View {
-    LiveBoujeeView(user: exampleUsers[0])
+    LivePostView(user: exampleUsers[0])
   }
 }

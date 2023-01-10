@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-struct Review: Codable, Identifiable, Hashable {
+struct Post: Codable, Identifiable, Hashable {
   var id = UUID() // To be able to iterate through a list of Review Items.
   let uid: String // associated uid in firestore. Tells which user the review is for.
   let authorID: String // id that tells which user wrote the review.

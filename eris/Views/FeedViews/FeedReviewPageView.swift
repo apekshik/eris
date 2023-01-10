@@ -10,7 +10,7 @@ import SwiftUI
 struct FeedReviewPageView: View {
   @State var user: User?
   @State var userID: String
-  @State var review: Review
+  @State var review: Post
   @State var showName: Bool = true
   @State var liked: Bool = false
   @State var comments: [Comment] = []

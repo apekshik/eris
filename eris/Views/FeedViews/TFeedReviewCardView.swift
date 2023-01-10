@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TFeedReviewCardView: View {
   @State var user: User?
-  @State var review: Review
+  @State var review: Post
   @State var liked: Bool = false
   var body: some View {
     VStack {

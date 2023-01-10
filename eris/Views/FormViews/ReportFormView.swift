@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ReportFormView: View {
   @State var user: User
-  @State var review: Review? = nil
+  @State var review: Post? = nil
   @Binding var show: Bool
   
   

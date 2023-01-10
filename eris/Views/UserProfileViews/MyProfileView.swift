@@ -13,7 +13,7 @@ struct MyProfileView: View {
   @AppStorage("log_status") var logStatus: Bool = false
   
   // Review Data
-  @State var reviews: [Review] = []
+  @State var reviews: [Post] = []
   
   // MARK: Error data
   @State var errorMessage: String = ""
@@ -32,7 +32,7 @@ struct MyProfileView: View {
           if reviews.count > 0 {
             
             // can safely use forced unwrapping since we checked for nil already.
-            LiveBoujeeView(user: myProfile!)
+            LivePostView(user: myProfile!)
             
             reviewSection
           } else {
@@ -120,10 +120,10 @@ struct MyProfileView: View {
       LazyVStack {
         ForEach(reviews, id: \.id) { review in
           NavigationLink {
-            ReviewPageView(user: myProfile!, review: review, showName: false, comments: exampleComments)
+            PostPageView(user: myProfile!, review: review, showName: false, comments: exampleComments)
               .onAppear{ withAnimation(.linear(duration: 0.1)) { self.showAppTitle = false } }
           } label: {
-            ReviewCardView(user: myProfile!, review: review, showName: false)
+            PostCardView(user: myProfile!, review: review, showName: false)
           }
           .onAppear{ withAnimation { self.showAppTitle = true } }
           
@@ -179,7 +179,7 @@ struct MyProfileView: View {
       guard let documents = querySnapshot?.documents, error == nil else { return }
       
       reviews = documents.compactMap({ queryDocumentSnapshot in
-        try? queryDocumentSnapshot.data(as: Review.self)
+        try? queryDocumentSnapshot.data(as: Post.self)
       })
       
       // MARK: Legacy way to do the same as above.

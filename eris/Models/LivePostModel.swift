@@ -9,14 +9,15 @@
 
 import Foundation
 
-struct LiveBoujee: Codable, Identifiable, Hashable {
+struct LivePost: Codable, Identifiable, Hashable {
   var id = UUID() // To be able to iterate through a list of Review Items.
   let userID: String // associated uid in firestore. Tells which user the review is for.
   let authorID: String // id that tells which user wrote the review.
   let selfID: String // stores the it's own firestore id for quick reference.
   let createdAt: Date
   let text: String
-
+  let authorUsername: String
+  let anonymous: Bool
   
   enum CodingKeys: String, CodingKey {
     case userID
@@ -24,5 +25,7 @@ struct LiveBoujee: Codable, Identifiable, Hashable {
     case selfID
     case createdAt
     case text
+    case authorUsername
+    case anonymous
   }
 }

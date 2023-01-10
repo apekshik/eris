@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 struct UserProfileView: View {
   @State var user: User
-  @State var reviews: [Review] = []
+  @State var reviews: [Post] = []
   @State var following: Bool = false
   @State var blocked: Bool = false
   @State var youAreBlockedStatus: Bool = false
@@ -34,7 +34,7 @@ struct UserProfileView: View {
       }
     }
     .sheet(isPresented: $showReviewForm, content: {
-      ReviewForm(user: user, show: $showReviewForm)
+      PostForm(user: user, show: $showReviewForm)
         .presentationDetents([.fraction(0.9)])
     })
     .sheet(isPresented: $showReportForm, content: {
@@ -67,7 +67,7 @@ struct UserProfileView: View {
       }
       
       //      LiveBoujeeView()
-      LiveBoujeeView(user: user)
+      LivePostView(user: user)
       
       // Set of Reviews start here (with Title of course).
       // HStack is Reviews Section Header
@@ -141,9 +141,9 @@ struct UserProfileView: View {
     LazyVStack {
       ForEach(reviews, id: \.id) { review in
         NavigationLink {
-          ReviewPageView(user: user, review: review, showName: true)
+          PostPageView(user: user, review: review, showName: true)
         } label: {
-          ReviewCardView(user: user, review: review, showName: true)
+          PostCardView(user: user, review: review, showName: true)
         }
       }
     } // End of LazyVStack
@@ -278,7 +278,7 @@ struct UserProfileView: View {
       
       // compactMap() -> Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
       reviews = documents.compactMap { queryDocumentSnapshot in
-        try? queryDocumentSnapshot.data(as: Review.self)
+        try? queryDocumentSnapshot.data(as: Post.self)
       }
     }
   }

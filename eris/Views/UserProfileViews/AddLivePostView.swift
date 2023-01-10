@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct AddLiveBoujeeView: View {
+struct AddLivePostView: View {
   @Binding var show: Bool
   @State var newContent: String = ""
   @State var forUser: User? = nil
   @State var author: User? = nil
+  @State var anonymous: Bool = false
   
   var body: some View {
     ZStack {
@@ -56,6 +57,7 @@ struct AddLiveBoujeeView: View {
               // spacer to push out the character count and post button to the far ends of the view.
               Spacer()
               
+              Toggle("Anonymous", isOn: $anonymous)
               // Button to submit post.
               Button {
                 // Post comment to firestore and update
@@ -100,7 +102,7 @@ struct AddLiveBoujeeView: View {
         let db = FirebaseManager.shared.firestore
         let newBoujeeRef = db.collection("LiveBoujees").document()
         // We can use the bang (!) operator on the author var becauase we know we fetched the data and then tried to create a new Comment Instance.
-        let newBoujee = LiveBoujee(userID: forUser!.firestoreID, authorID: author!.firestoreID, selfID: newBoujeeRef.documentID, createdAt: Date(), text: newContent)
+        let newBoujee = LivePost(userID: forUser!.firestoreID, authorID: author!.firestoreID, selfID: newBoujeeRef.documentID, createdAt: Date(), text: newContent, authorUsername: author!.userName, anonymous: anonymous)
         
         
         try db.collection("LiveBoujees").document(newBoujeeRef.documentID).setData(from: newBoujee)
@@ -123,6 +125,6 @@ struct AddLiveBoujeeView: View {
 
 struct AddLiveBoujeeView_Previews: PreviewProvider {
     static var previews: some View {
-      AddLiveBoujeeView(show: .constant(true))
+      AddLivePostView(show: .constant(true))
     }
 }

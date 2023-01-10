@@ -45,7 +45,7 @@ struct UserCardView: View {
       }
     }
     .sheet(isPresented: $showReviewForm, content: {
-      ReviewForm(user: user, show: $showReviewForm)
+      PostForm(user: user, show: $showReviewForm)
     })
     .padding()
   }
