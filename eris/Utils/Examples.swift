@@ -53,3 +53,13 @@ let exampleComments: [Comment] = [
     Comment(authorID: "", authorUserName: "guitarNerd420", reviewID: "", content: "Have you ever sat in a room with someone who vapes? Breathe AIR"),
     Comment(authorID: "", authorUserName: "guitarNerd420", reviewID: "", content: "Never seen someone who doesn't start eating gluten as soon as you slap the shit outta them a few times."),
 ]
+
+
+let exampleLivePosts: [LivePost] = [
+  LivePost(userID: "", authorID: "", selfID: "", createdAt: Date(), text: "test live post 1 gonna flood these with text to see the limits of the scroll view", authorUsername: "epicShit", anonymous: false),
+  LivePost(userID: "", authorID: "", selfID: "", createdAt: Date(), text: "test live post 2 more flooding of text. Hmmm... What more could I write to make this longer? How about some more? Maybe even more?", authorUsername: "Ananya", anonymous: false),
+  LivePost(userID: "", authorID: "", selfID: "", createdAt: Date(), text: "test live post 3", authorUsername: "Aniket", anonymous: false),
+  LivePost(userID: "", authorID: "", selfID: "", createdAt: Date(), text: "test live post 4", authorUsername: "Dips", anonymous: true),
+  LivePost(userID: "", authorID: "", selfID: "", createdAt: Date(), text: "test live post 5", authorUsername: "Dips", anonymous: false),
+  LivePost(userID: "", authorID: "", selfID: "", createdAt: Date(), text: "test live post 6", authorUsername: "epicShit", anonymous: false)
+]

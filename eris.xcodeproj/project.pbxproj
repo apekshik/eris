@@ -199,8 +199,6 @@
 				8938E913296A97380083378A /* EmptyUserProfileView.swift */,
 				894600EB295F5EE8007D498C /* UserProfileView.swift */,
 				89B4DFD52963741200BE584A /* UserCardView.swift */,
-				8979E4BB295DDAF800B0DEEA /* LivePostView.swift */,
-				8938E91D296CF5E70083378A /* AddLivePostView.swift */,
 			);
 			path = UserProfileViews;
 			sourceTree = "<group>";
@@ -251,6 +249,15 @@
 			path = OnboardingViews;
 			sourceTree = "<group>";
 		};
+		8938E91F296DB8F70083378A /* LivePostViews */ = {
+			isa = PBXGroup;
+			children = (
+				8979E4BB295DDAF800B0DEEA /* LivePostView.swift */,
+				8938E91D296CF5E70083378A /* AddLivePostView.swift */,
+			);
+			path = LivePostViews;
+			sourceTree = "<group>";
+		};
 		89B53AFC295BBDF000BAC746 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +281,7 @@
 				8938E908296A499B0083378A /* SearchPageViews */,
 				8938E904296A482B0083378A /* FeedViews */,
 				8938E907296A49680083378A /* UserProfileViews */,
+				8938E91F296DB8F70083378A /* LivePostViews */,
 				8938E906296A48CF0083378A /* PostViews */,
 				8938E905296A48570083378A /* CommentViews */,
 				8938E90A296A4A0B0083378A /* SignInViews */,

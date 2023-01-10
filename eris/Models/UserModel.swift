@@ -23,7 +23,12 @@ struct User: Codable, Identifiable  {
   // MARK: Computable property to store all keywords for search functionality.
   var keywordsForLookup: [String] {
     // flatMap() -> Returns an array containing the concatenated results of calling the given transformation with each element of this sequence.
-    [self.userName.generateStringSequence(), self.fullName.generateStringSequence(), self.firstName.generateStringSequence(), self.lastName.generateStringSequence()].flatMap { $0 }
+    [
+      self.userName.generateStringSequence(), self.userName.lowercased().generateStringSequence(),
+      self.fullName.generateStringSequence(), self.fullName.lowercased().generateStringSequence(),
+      self.firstName.generateStringSequence(), self.firstName.lowercased().generateStringSequence(),
+      self.lastName.generateStringSequence(), self.lastName.lowercased().generateStringSequence(),
+    ].flatMap { $0 }
   }
   var blockedUsers: [String] // An array of users that you have blocked.
   

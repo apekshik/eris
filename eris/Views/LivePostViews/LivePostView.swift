@@ -16,25 +16,41 @@ struct LivePostView: View {
   
   var body: some View {
     VStack {
-      Text("Live Boujees".uppercased())
-        .font(.headline)
-        .fontWeight(.heavy)
-        .foregroundColor(.secondary)
+      HStack {
+        Text("Live Boujees".uppercased())
+          .font(.headline)
+          .fontWeight(.heavy)
+          .foregroundColor(.secondary)
+        Spacer()
+        Image(systemName: "questionmark.circle.fill")
+          .shadow(radius: 4)
+      }
       
-      VStack {
-        LazyVStack {
-          ForEach(boujees) { boujee in
-            Text(boujee.text)
+      ScrollView(.vertical, showsIndicators: false) {
+        ScrollViewReader { scrollProxy in
+          LazyVStack(alignment: .leading, spacing: 4) {
+            ForEach(boujees) { boujee in
+              VStack(alignment: .leading) {
+                Text("**\(boujee.anonymous ? "anon".uppercased() : boujee.authorUsername.lowercased())** \(boujee.text)")
+                  .font(.caption)
+              }
+            } // End of ForEach
+            .onAppear {
+              // Used to scroll to end of list when a new boujee is added. 
+              scrollProxy.scrollTo(boujees.last?.id)
+            }
           }
         }
       }
+      .padding(8)
       .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 250)
       .background(Color(hex: "#f5f5f2"))
-      .cornerRadius(10)
+      .cornerRadius(5)
       .shadow(radius: 5)
       
       Text("*for those who aren't already bougie, it's pronounced [boo-jee].")
         .foregroundColor(.secondary)
+        .font(.caption2)
       
       HStack {
         Spacer()
@@ -96,6 +112,6 @@ struct LivePostView: View {
 
 struct LiveBoujeeView_Previews: PreviewProvider {
   static var previews: some View {
-    LivePostView(user: exampleUsers[0])
+    LivePostView(user: exampleUsers[0], boujees: exampleLivePosts)
   }
 }

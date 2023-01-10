@@ -110,7 +110,9 @@ struct AddCommentView: View {
         let db = FirebaseManager.shared.firestore
         try db.collection("Comments").document().setData(from: newComment)
         
-        
+        await MainActor.run {
+          newCommentContent = ""
+        }
       } catch {
         // do something about the errors.
       }

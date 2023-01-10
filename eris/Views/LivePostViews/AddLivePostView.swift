@@ -89,7 +89,7 @@ struct AddLivePostView: View {
   }
   
   
-  // post comment to firestore
+  // post comment to firestore and empties textfield string.
   private func postBoujee() async {
     Task {
       do {
@@ -106,6 +106,10 @@ struct AddLivePostView: View {
         
         
         try db.collection("LiveBoujees").document(newBoujeeRef.documentID).setData(from: newBoujee)
+        
+        await MainActor.run {
+          newContent = ""
+        }
       } catch {
         // do something about the errors.
       }
