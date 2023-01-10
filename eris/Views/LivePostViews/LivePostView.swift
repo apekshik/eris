@@ -13,6 +13,8 @@ struct LivePostView: View {
   @State var user: User
   @State var boujees: [LivePost] = []
   @State var addBoujee: Bool = false
+  @State private var listener: ListenerRegistration?
+  @State private var scrollProxy: ScrollViewProxy? = nil
   
   var body: some View {
     VStack {
@@ -26,46 +28,37 @@ struct LivePostView: View {
           .shadow(radius: 4)
       }
       
-      ScrollView(.vertical, showsIndicators: false) {
-        ScrollViewReader { scrollProxy in
-          LazyVStack(alignment: .leading, spacing: 4) {
-            ForEach(boujees) { boujee in
-              VStack(alignment: .leading) {
+      // VStack for Body of LivePostView and PostField Footer.
+      VStack {
+        // ScrollView for all LivePosts.
+        ScrollView(.vertical, showsIndicators: false) {
+          ScrollViewReader { proxy in
+            LazyVStack(alignment: .leading, spacing: 4) {
+              ForEach(boujees, id: \.self) { boujee in
                 Text("**\(boujee.anonymous ? "anon".uppercased() : boujee.authorUsername.lowercased())** \(boujee.text)")
                   .font(.caption)
+                  .id(boujee.id) // this is crucial for the scrollViewReader Proxy to function properly.
+              } // End of ForEach
+              .onAppear {
+                scrollProxy = proxy
+                // In the beginning scroll to bottom without animation.
+                scrollProxy?.scrollTo(boujees.last?.id)
               }
-            } // End of ForEach
-            .onAppear {
-              // Used to scroll to end of list when a new boujee is added. 
-              scrollProxy.scrollTo(boujees.last?.id)
             }
           }
         }
+        .padding(8)
+        .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 270)
+        .onChange(of: boujees) { _ in
+          scrollToBottom()
+        }
+      
+        // Footer for Adding LivePosts.
+        AddLivePostView(forUser: user)
       }
-      .padding(8)
-      .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 250)
       .background(Color(hex: "#f5f5f2"))
       .cornerRadius(5)
       .shadow(radius: 5)
-      
-      Text("*for those who aren't already bougie, it's pronounced [boo-jee].")
-        .foregroundColor(.secondary)
-        .font(.caption2)
-      
-      HStack {
-        Spacer()
-        Button {
-          // Handle button pressing
-          addBoujee = true 
-        } label: {
-          Text("Add Boujee")
-            .padding([.horizontal])
-            .padding([.vertical], 8)
-            .foregroundColor(.white)
-            .background(.black)
-            .cornerRadius(5)
-        }
-      }
     }
     .padding()
     .frame(maxWidth: .infinity)
@@ -73,18 +66,18 @@ struct LivePostView: View {
     .cornerRadius(10)
     .padding()
     .shadow(radius: 7)
-    .overlay {
-      AddLivePostView(show: $addBoujee, forUser: user)
-    }
     .onAppear {
       startListeningBoujees()
     }
     .onDisappear {
       stopListeningBoujees()
     }
+    .onTapGesture {
+      hideKeyboardOnTap()
+    }
   }
   
-  @State private var listener: ListenerRegistration?
+  
   
   private func startListeningBoujees() {
     let db = FirebaseManager.shared.firestore
@@ -107,6 +100,12 @@ struct LivePostView: View {
   
   private func stopListeningBoujees() {
     listener?.remove()
+  }
+  
+  private func scrollToBottom() {
+      withAnimation {
+          scrollProxy?.scrollTo(boujees.last?.id, anchor: .bottom)
+      }
   }
 }
 

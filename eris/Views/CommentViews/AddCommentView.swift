@@ -30,7 +30,7 @@ struct AddCommentView: View {
             
             //Add Comment Header
             HStack {
-              Text("Post a comment".uppercased())
+              Text("Post a Comment".uppercased())
                 .fontWeight(.bold)
               Spacer()
               // Close Button

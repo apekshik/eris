@@ -8,84 +8,50 @@
 import SwiftUI
 
 struct AddLivePostView: View {
-  @Binding var show: Bool
   @State var newContent: String = ""
   @State var forUser: User? = nil
   @State var author: User? = nil
   @State var anonymous: Bool = false
   
   var body: some View {
-    ZStack {
-      if show {
-        Group {
-          // Just a blur background.
-          Rectangle()
-            .fill(.black.opacity(0.25))
-            .ignoresSafeArea()
+        VStack(alignment: .leading) {
+          // axis: paramater makes a text field grow (vertically) dynamically with the content as long as there is enough space.
+          TextField("Type here...", text: $newContent, axis: .vertical)
+            .textFieldStyle(.roundedBorder)
+            .lineLimit(2, reservesSpace: true)
           
-          // VStack for adding a comment.
-          VStack(alignment: .leading, spacing: 8) {
+          // Footer
+          HStack {
             
-            //Add Comment Header
-            HStack {
-              Text("Post a comment".uppercased())
-                .fontWeight(.bold)
-              Spacer()
-              // Close Button
-              Button {
-                show = false
-              } label: {
-                Image(systemName: "xmark.square.fill")
-                  .resizable()
-                  .frame(width: 20, height: 20)
-                  .tint(.black)
-              }
+            Toggle(isOn: $anonymous) {
+              Text("Post Anonymously")
             }
+            .tint(.black)
+            .frame(maxWidth: 200)
             
-            // Body
-            // axis: paramater makes a text field grow (vertically) dynamically with the content as long as there is enough space.
-            TextField("Type here...", text: $newContent, axis: .vertical)
-              .textFieldStyle(.roundedBorder)
-              .lineLimit(4, reservesSpace: true)
+            Spacer()
             
-            // Footer
-            HStack {
-              // To show the character count
-              Text("\(newContent.count) Characters")
-                .foregroundColor(.secondary)
-              
-              // spacer to push out the character count and post button to the far ends of the view.
-              Spacer()
-              
-              Toggle("Anonymous", isOn: $anonymous)
-              // Button to submit post.
-              Button {
-                // Post comment to firestore and update
-                Task {
-                  await postBoujee()
-                }
-                show = false // close the add comment view.
-              } label : {
-                Text("Post")
-                  .padding([.horizontal])
-                  .padding([.vertical], 4)
-                  .foregroundColor(.white)
-                  .background(.black)
-                  .cornerRadius(5)
+            // Button to submit post.
+            Button {
+              // Post comment to firestore and update
+              Task {
+                await postBoujee()
               }
+            } label : {
+              Text("Post")
+                .padding([.horizontal])
+                .padding([.vertical], 4)
+                .foregroundColor(.white)
+                .background(.black)
+                .cornerRadius(5)
             }
-            .frame(maxWidth: .infinity)
           }
-          .padding()
-          .frame(maxWidth: .infinity, minHeight: 150)
-          .background(.white)
-          .cornerRadius(10)
-          .shadow(radius: 10)
-          .padding()
-        }
-      }
-    } // End of VStack
-    .animation(.easeInOut(duration: 0.25), value: show)
+          .frame(maxWidth: .infinity)
+        } // End of VStack
+        .padding(.horizontal)
+        .frame(maxWidth: .infinity, minHeight: 150)
+        .background(.white)
+//        .shadow(radius: 5)
   }
   
   
@@ -129,6 +95,6 @@ struct AddLivePostView: View {
 
 struct AddLiveBoujeeView_Previews: PreviewProvider {
     static var previews: some View {
-      AddLivePostView(show: .constant(true))
+      AddLivePostView()
     }
 }

@@ -30,6 +30,7 @@
 		894600F62961D99A007D498C /* AddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600F52961D99A007D498C /* AddCommentView.swift */; };
 		8979E4BC295DDAF800B0DEEA /* LivePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8979E4BB295DDAF800B0DEEA /* LivePostView.swift */; };
 		8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8979E4BD295E405C00B0DEEA /* SearchPageView.swift */; };
+		89870067296DE8D700042CA8 /* Test2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89870066296DE8D700042CA8 /* Test2View.swift */; };
 		89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4BF8029466C8C005910FF /* FirebaseManager.swift */; };
 		89B4DFD62963741200BE584A /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFD52963741200BE584A /* UserCardView.swift */; };
 		89B4DFD829640C1E00BE584A /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFD729640C1E00BE584A /* FeedView.swift */; };
@@ -83,6 +84,7 @@
 		894600F52961D99A007D498C /* AddCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentView.swift; sourceTree = "<group>"; };
 		8979E4BB295DDAF800B0DEEA /* LivePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePostView.swift; sourceTree = "<group>"; };
 		8979E4BD295E405C00B0DEEA /* SearchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageView.swift; sourceTree = "<group>"; };
+		89870066296DE8D700042CA8 /* Test2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2View.swift; sourceTree = "<group>"; };
 		89A4BF8029466C8C005910FF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		89B4DFD52963741200BE584A /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
 		89B4DFD729640C1E00BE584A /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				89B53B10295CB41D00BAC746 /* LoadingView.swift */,
 				89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */,
 				894600F12960ED64007D498C /* TestView.swift */,
+				89870066296DE8D700042CA8 /* Test2View.swift */,
 			);
 			path = MiscViews;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				89E4AE6E29463985002BE54C /* LoginView.swift in Sources */,
 				8979E4BC295DDAF800B0DEEA /* LivePostView.swift in Sources */,
 				8938E91E296CF5E70083378A /* AddLivePostView.swift in Sources */,
+				89870067296DE8D700042CA8 /* Test2View.swift in Sources */,
 				8938E9012969F5FB0083378A /* AuthError.swift in Sources */,
 				8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */,
 				894600F02960DB12007D498C /* CommentModel.swift in Sources */,
