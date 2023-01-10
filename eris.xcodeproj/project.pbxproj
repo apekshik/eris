@@ -19,6 +19,8 @@
 		8938E914296A97380083378A /* EmptyUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E913296A97380083378A /* EmptyUserProfileView.swift */; };
 		8938E916296B0C530083378A /* MyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E915296B0C530083378A /* MyDataModel.swift */; };
 		8938E918296C74610083378A /* IDETemplateMacros.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8938E917296C74610083378A /* IDETemplateMacros.plist */; };
+		8938E91C296CC1980083378A /* LiveBoujeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E91B296CC1980083378A /* LiveBoujeeModel.swift */; };
+		8938E91E296CF5E70083378A /* AddLiveBoujeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E91D296CF5E70083378A /* AddLiveBoujeeView.swift */; };
 		894600EA295F5CE2007D498C /* SearchUserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600E9295F5CE2007D498C /* SearchUserCardView.swift */; };
 		894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600EB295F5EE8007D498C /* UserProfileView.swift */; };
 		894600EE2960B80B007D498C /* ReviewPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600ED2960B80B007D498C /* ReviewPageView.swift */; };
@@ -70,6 +72,8 @@
 		8938E913296A97380083378A /* EmptyUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUserProfileView.swift; sourceTree = "<group>"; };
 		8938E915296B0C530083378A /* MyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDataModel.swift; sourceTree = "<group>"; };
 		8938E917296C74610083378A /* IDETemplateMacros.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IDETemplateMacros.plist; sourceTree = "<group>"; };
+		8938E91B296CC1980083378A /* LiveBoujeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveBoujeeModel.swift; sourceTree = "<group>"; };
+		8938E91D296CF5E70083378A /* AddLiveBoujeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLiveBoujeeView.swift; sourceTree = "<group>"; };
 		894600E9295F5CE2007D498C /* SearchUserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCardView.swift; sourceTree = "<group>"; };
 		894600EB295F5EE8007D498C /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		894600ED2960B80B007D498C /* ReviewPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPageView.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 				894600EB295F5EE8007D498C /* UserProfileView.swift */,
 				89B4DFD52963741200BE584A /* UserCardView.swift */,
 				8979E4BB295DDAF800B0DEEA /* LiveBoujeeView.swift */,
+				8938E91D296CF5E70083378A /* AddLiveBoujeeView.swift */,
 			);
 			path = UserProfileViews;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 				894600EF2960DB12007D498C /* CommentModel.swift */,
 				89B4DFE329676F4200BE584A /* ReportModel.swift */,
 				8938E915296B0C530083378A /* MyDataModel.swift */,
+				8938E91B296CC1980083378A /* LiveBoujeeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -397,9 +403,11 @@
 				894600EA295F5CE2007D498C /* SearchUserCardView.swift in Sources */,
 				894600F4296100B7007D498C /* CommentSectionBodyView.swift in Sources */,
 				8938E910296A92920083378A /* EmptyFeedView.swift in Sources */,
+				8938E91C296CC1980083378A /* LiveBoujeeModel.swift in Sources */,
 				89B4DFDC296545FC00BE584A /* FeedReviewCardView.swift in Sources */,
 				89E4AE6E29463985002BE54C /* LoginView.swift in Sources */,
 				8979E4BC295DDAF800B0DEEA /* LiveBoujeeView.swift in Sources */,
+				8938E91E296CF5E70083378A /* AddLiveBoujeeView.swift in Sources */,
 				8938E9012969F5FB0083378A /* AuthError.swift in Sources */,
 				8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */,
 				894600F02960DB12007D498C /* CommentModel.swift in Sources */,

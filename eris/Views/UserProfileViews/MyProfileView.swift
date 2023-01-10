@@ -30,9 +30,9 @@ struct MyProfileView: View {
       ScrollView(.vertical, showsIndicators: false) {
         if myProfile != nil {
           if reviews.count > 0 {
-            // This view is defined below.
-            // TODO: Implement this in next update!
-//            LiveBoujeeView()
+            
+            // can safely use forced unwrapping since we checked for nil already.
+            LiveBoujeeView(user: myProfile!)
             
             reviewSection
           } else {

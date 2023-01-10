@@ -6,40 +6,94 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 struct LiveBoujeeView: View {
-    var body: some View {
-        VStack {
-            Text("Live Boujees".uppercased())
-                .font(.headline)
-                .fontWeight(.heavy)
-                .foregroundColor(.secondary)
-            
-            VStack {
-                Text("Coming Soon... ".uppercased())
-                    .font(.title)
-                    .fontWeight(.black)
-            }
-//            .frame(width: 200, height: 200)
-            .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 250)
-            .background(Color(hex: "#f5f5f2"))
-            .cornerRadius(10)
-            .shadow(radius: 5)
-            
-            Text("*for unaware peasants, it's pronounced [boo-jee]")
-                .foregroundColor(.secondary)
+  @State var user: User
+  @State var boujees: [LiveBoujee] = []
+  @State var addBoujee: Bool = false
+  
+  var body: some View {
+    VStack {
+      Text("Live Boujees".uppercased())
+        .font(.headline)
+        .fontWeight(.heavy)
+        .foregroundColor(.secondary)
+      
+      VStack {
+        LazyVStack {
+          ForEach(boujees) { boujee in
+            Text(boujee.text)
+          }
         }
-        .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color(hex: "#dededc"))
-        .cornerRadius(10)
-        .padding()
-        .shadow(radius: 7)
+      }
+      .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 250)
+      .background(Color(hex: "#f5f5f2"))
+      .cornerRadius(10)
+      .shadow(radius: 5)
+      
+      Text("*for those who aren't already bougie, it's pronounced [boo-jee].")
+        .foregroundColor(.secondary)
+      
+      HStack {
+        Spacer()
+        Button {
+          // Handle button pressing
+          addBoujee = true 
+        } label: {
+          Text("Add Boujee")
+            .padding([.horizontal])
+            .padding([.vertical], 8)
+            .foregroundColor(.white)
+            .background(.black)
+            .cornerRadius(5)
+        }
+      }
     }
+    .padding()
+    .frame(maxWidth: .infinity)
+    .background(Color(hex: "#dededc"))
+    .cornerRadius(10)
+    .padding()
+    .shadow(radius: 7)
+    .overlay {
+      AddLiveBoujeeView(show: $addBoujee, forUser: user)
+    }
+    .onAppear {
+      startListeningBoujees()
+    }
+    .onDisappear {
+      stopListeningBoujees()
+    }
+  }
+  
+  @State private var listener: ListenerRegistration?
+  
+  private func startListeningBoujees() {
+    let db = FirebaseManager.shared.firestore
+    listener = db.collection("LiveBoujees")
+      .whereField("userID", isEqualTo: user.firestoreID)
+      .order(by: "createdAt")
+      .addSnapshotListener { querySnapshot, error in
+        guard let documents = querySnapshot?.documents else {
+          print("Error fetching documents from LiveBoujees")
+          return
+        }
+        
+        boujees = documents.compactMap({ queryDocumentSnapshot in
+          try? queryDocumentSnapshot.data(as: LiveBoujee.self)
+        })
+      }
+  }
+  
+  private func stopListeningBoujees() {
+    listener?.remove()
+  }
 }
 
 struct LiveBoujeeView_Previews: PreviewProvider {
-    static var previews: some View {
-        LiveBoujeeView()
-    }
+  static var previews: some View {
+    LiveBoujeeView(user: exampleUsers[0])
+  }
 }

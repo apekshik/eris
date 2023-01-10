@@ -67,6 +67,7 @@ struct UserProfileView: View {
       }
       
       //      LiveBoujeeView()
+      LiveBoujeeView(user: user)
       
       // Set of Reviews start here (with Title of course).
       // HStack is Reviews Section Header
