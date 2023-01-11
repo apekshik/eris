@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-
+import SDWebImageSwiftUI
 
 // TODO: Make this page refreshable.
 struct PostPageView: View {
   @State var user: User
-  @State var review: Post
+  @State var post: Post
   @State var showName: Bool = true
   @State var liked: Bool = false
   @State var comments: [Comment] = []
@@ -49,7 +49,7 @@ struct PostPageView: View {
       .navigationTitle("Review".uppercased())
     }
     .overlay {
-      AddCommentView(show: $showAddCommentView, comments: $comments, review: review)
+      AddCommentView(show: $showAddCommentView, comments: $comments, review: post)
     }
     .task {
       // call a comments fetch method.
@@ -66,21 +66,34 @@ struct PostPageView: View {
         Text(showName ? user.fullName : "")
           .font(.headline)
           .foregroundColor(.secondary)
-        Text("\(review.rating) Star Rating")
+        Text("\(post.rating) Star Rating")
           .font(.headline)
           .foregroundColor(.secondary)
           .frame(maxWidth: .infinity, alignment: .trailing)
       }
       
+      // Image if it exists.
+      if let postImageUrl = post.imageURL {
+        GeometryReader { proxy in
+          let size = proxy.size
+          WebImage(url: postImageUrl)
+            .resizable()
+            .scaledToFill()
+            .frame(width: size.width, height: size.height)
+        }
+        .clipped()
+        .frame(height: 400)
+      }
+      
       // written review
-      Text(review.comment)
+      Text(post.comment)
         .font(.title)
         .fontWeight(.black)
         .foregroundColor(.primary)
       
       // HStack under the written review.
       HStack {
-        Text("Written by a \(review.relation)".uppercased())
+        Text("Written by a \(post.relation)".uppercased())
           .font(.caption)
           .foregroundColor(.secondary)
         HStack(spacing: 20) {
@@ -132,7 +145,7 @@ struct PostPageView: View {
   // MARK: Method to fetch comments for the specific review being viewed.
   private func fetchComments() async {
     let db = FirebaseManager.shared.firestore
-    db.collection("Comments").whereField("reviewID", isEqualTo: review.reviewID).getDocuments { querySnapshot, error in
+    db.collection("Comments").whereField("reviewID", isEqualTo: post.reviewID).getDocuments { querySnapshot, error in
       guard let documents = querySnapshot?.documents, error == nil else { return }
       
       // compactMap() -> Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
@@ -164,7 +177,7 @@ struct PostPageView: View {
       do {
         // delete the like that is associated with you and this specific review.
         let querySnapshot = try await likesRef
-          .whereField("reviewID", isEqualTo: review.reviewID)
+          .whereField("reviewID", isEqualTo: post.reviewID)
           .whereField("authorID", isEqualTo: uid)
           .getDocuments()
         
@@ -195,7 +208,7 @@ struct PostPageView: View {
       
       // First get the "Likes" subcollection reference of the user whose review is being liked by you.
       let likeDocRef = FirebaseManager.shared.firestore.collection("Users").document(user.firestoreID).collection("Likes").document()
-      let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: review.reviewID, authorID: uid)
+      let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: post.reviewID, authorID: uid)
       
       try likeDocRef.setData(from: newLike)
     } catch {
@@ -212,7 +225,7 @@ struct PostPageView: View {
       do {
         // delete the like that is associated with you and this specific review.
         let querySnapshot = try await likesRef
-          .whereField("reviewID", isEqualTo: review.reviewID)
+          .whereField("reviewID", isEqualTo: post.reviewID)
           .whereField("authorID", isEqualTo: uid)
           .getDocuments()
         
@@ -232,6 +245,6 @@ struct PostPageView: View {
 
 struct ReviewPageView_Previews: PreviewProvider {
   static var previews: some View {
-    PostPageView(user: exampleUsers[0], review: exampleReviews[0], showName: true, comments: exampleComments)
+    PostPageView(user: exampleUsers[0], post: exampleReviews[0], showName: true, comments: exampleComments)
   }
 }

@@ -44,7 +44,7 @@ struct FeedView: View {
       ForEach(reviews, id: \.self) { review in
         NavigationLink {
           // Destination
-          FeedPostPageView(userID: review.uid, review: review)
+          FeedPostPageView(userID: review.uid, post: review)
         } label: {
           FeedPostCardView(post: review)
         }

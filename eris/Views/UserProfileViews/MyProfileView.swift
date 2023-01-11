@@ -121,7 +121,7 @@ struct MyProfileView: View {
       LazyVStack {
         ForEach(reviews, id: \.id) { review in
           NavigationLink {
-            PostPageView(user: myProfile!, review: review, showName: false, comments: exampleComments)
+            PostPageView(user: myProfile!, post: review, showName: false, comments: exampleComments)
               .onAppear{ withAnimation(.linear(duration: 0.1)) { self.showAppTitle = false } }
           } label: {
             PostCardView(user: myProfile!, post: review, showName: false)

@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct FeedPostPageView: View {
   @State var user: User?
   @State var userID: String
-  @State var review: Post
+  @State var post: Post
   @State var showName: Bool = true
   @State var liked: Bool = false
   @State var comments: [Comment] = []
@@ -48,7 +49,7 @@ struct FeedPostPageView: View {
       .navigationTitle("Review".uppercased())
     }
     .overlay {
-      AddCommentView(show: $showAddCommentView, comments: $comments, review: review)
+      AddCommentView(show: $showAddCommentView, comments: $comments, review: post)
     }
     .task {
       fetchAllData()
@@ -64,21 +65,34 @@ struct FeedPostPageView: View {
         Text(showName ? (user?.fullName ?? "") : "")
           .font(.headline)
           .foregroundColor(.secondary)
-        Text("\(review.rating) Star Rating")
+        Text("\(post.rating) Star Rating")
           .font(.headline)
           .foregroundColor(.secondary)
           .frame(maxWidth: .infinity, alignment: .trailing)
       }
       
+      // Image if it exists.
+      if let postImageUrl = post.imageURL {
+        GeometryReader { proxy in
+          let size = proxy.size
+          WebImage(url: postImageUrl)
+            .resizable()
+            .scaledToFill()
+            .frame(width: size.width, height: size.height)
+        }
+        .clipped()
+        .frame(height: 400)
+      }
+      
       // written review
-      Text(review.comment)
+      Text(post.comment)
         .font(.title)
         .fontWeight(.black)
         .foregroundColor(.primary)
       
       // HStack under the written review.
       HStack {
-        Text("Written by a \(review.relation)".uppercased())
+        Text("Written by a \(post.relation)".uppercased())
           .font(.caption)
           .foregroundColor(.secondary)
         HStack(spacing: 20) {
@@ -146,7 +160,7 @@ struct FeedPostPageView: View {
   private func fetchComments() async -> [Comment] {
     do {
       let db = FirebaseManager.shared.firestore
-      let querySnapshot = try await db.collection("Comments").whereField("reviewID", isEqualTo: review.reviewID).getDocuments()
+      let querySnapshot = try await db.collection("Comments").whereField("reviewID", isEqualTo: post.reviewID).getDocuments()
       let comments: [Comment] = querySnapshot.documents.compactMap { QueryDocumentSnapshot in
         try? QueryDocumentSnapshot.data(as: Comment.self)
       }
@@ -172,6 +186,6 @@ struct FeedPostPageView: View {
 
 struct FeedPostPageView_Previews: PreviewProvider {
   static var previews: some View {
-    FeedPostPageView(user: exampleUsers[0], userID: "", review: exampleReviews[0])
+    FeedPostPageView(user: exampleUsers[0], userID: "", post: exampleReviews[0])
   }
 }

@@ -141,7 +141,7 @@ struct UserProfileView: View {
     LazyVStack {
       ForEach(reviews, id: \.id) { review in
         NavigationLink {
-          PostPageView(user: user, review: review, showName: true)
+          PostPageView(user: user, post: review, showName: true)
         } label: {
           PostCardView(user: user, post: review, showName: true)
         }

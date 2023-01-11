@@ -40,7 +40,8 @@ struct PostCardView: View {
                 .scaledToFill()
                 .frame(width: size.width, height: size.height)
             }
-            .frame(height: 200)
+            .clipped()
+            .frame(height: 400)
           }
           
           // written review
