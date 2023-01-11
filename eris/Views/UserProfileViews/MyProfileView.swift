@@ -124,7 +124,7 @@ struct MyProfileView: View {
             PostPageView(user: myProfile!, review: review, showName: false, comments: exampleComments)
               .onAppear{ withAnimation(.linear(duration: 0.1)) { self.showAppTitle = false } }
           } label: {
-            PostCardView(user: myProfile!, review: review, showName: false)
+            PostCardView(user: myProfile!, post: review, showName: false)
           }
           .onAppear{ withAnimation { self.showAppTitle = true } }
           

@@ -1,4 +1,6 @@
 //
+//  Copyright © 2023, Apekshik Panigrahi. All rights reserved.
+//
 //  ReviewView.swift
 //  eris
 //
@@ -6,10 +8,11 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PostCardView: View {
   @State var user: User
-  @State var review: Post
+  @State var post: Post
   @State var showName: Bool
   @State var liked: Bool = false
   var body: some View {
@@ -17,19 +20,31 @@ struct PostCardView: View {
       HStack {
         VStack(alignment: .leading, spacing: 10) {
           
-          
+          // Header
           HStack {
-            Text(showName ? user.fullName : "")
+            Text("To \(showName ? user.fullName : "")")
               .font(.headline)
               .foregroundColor(.secondary)
-            Text("\(review.rating) Star Rating")
+            Text("\(post.rating) Star Rating")
               .font(.headline)
               .foregroundColor(.secondary)
               .frame(maxWidth: .infinity, alignment: .trailing)
           }
           
+          // Image if it exists.
+          if let postImageUrl = post.imageURL {
+            GeometryReader { proxy in
+              let size = proxy.size
+              WebImage(url: postImageUrl)
+                .resizable()
+                .scaledToFill()
+                .frame(width: size.width, height: size.height)
+            }
+            .frame(height: 200)
+          }
+          
           // written review
-          Text(review.comment)
+          Text(post.comment)
             .font(.title)
             .fontWeight(.black)
             .foregroundColor(.primary)
@@ -37,7 +52,7 @@ struct PostCardView: View {
           
           // HStack under the written review.
           HStack {
-            Text("Written by a \(review.relation)".uppercased())
+            Text("Written by a \(post.relation)".uppercased())
               .font(.caption)
               .foregroundColor(.secondary)
             HStack(spacing: 20) {
@@ -83,17 +98,6 @@ struct PostCardView: View {
   }
   
   private func checkLike() {
-//    let docRef = FirebaseManager.shared.firestore.collection("Users").document("SF")
-//
-//    docRef.getDocument { (document, error) in
-//        if let document = document, document.exists {
-//            let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//            print("Document data: \(dataDescription)")
-//        } else {
-//            print("Document does not exist")
-//        }
-//    }
-    
     // Fetch your own uid
     guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
     // First get the "Likes" subcollection reference of the user whose review is being liked by you.
@@ -102,7 +106,7 @@ struct PostCardView: View {
       do {
         // delete the like that is associated with you and this specific review.
         let querySnapshot = try await likesRef
-          .whereField("reviewID", isEqualTo: review.reviewID)
+          .whereField("reviewID", isEqualTo: post.reviewID)
           .whereField("authorID", isEqualTo: uid)
           .getDocuments()
         
@@ -133,7 +137,7 @@ struct PostCardView: View {
       
       // First get the "Likes" subcollection reference of the user whose review is being liked by you.
       let likeDocRef = FirebaseManager.shared.firestore.collection("Users").document(user.firestoreID).collection("Likes").document()
-      let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: review.reviewID, authorID: uid)
+      let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: post.reviewID, authorID: uid)
       
       try likeDocRef.setData(from: newLike)
     } catch {
@@ -150,7 +154,7 @@ struct PostCardView: View {
       do {
         // delete the like that is associated with you and this specific review.
         let querySnapshot = try await likesRef
-          .whereField("reviewID", isEqualTo: review.reviewID)
+          .whereField("reviewID", isEqualTo: post.reviewID)
           .whereField("authorID", isEqualTo: uid)
           .getDocuments()
         
@@ -183,7 +187,7 @@ struct PostCardView: View {
 struct ReviewCardView_Previews: PreviewProvider {
   
   static var previews: some View {
-    PostCardView(user: exampleUsers[0], review: exampleReviews[0], showName: true)
+    PostCardView(user: exampleUsers[0], post: exampleReviews[0], showName: true)
   }
 }
 

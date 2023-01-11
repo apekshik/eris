@@ -44,9 +44,9 @@ struct FeedView: View {
       ForEach(reviews, id: \.self) { review in
         NavigationLink {
           // Destination
-          FeedReviewPageView(userID: review.uid, review: review)
+          FeedPostPageView(userID: review.uid, review: review)
         } label: {
-          FeedReviewCardView(review: review)
+          FeedPostCardView(post: review)
         }
       }
     } // End of LazyVStack

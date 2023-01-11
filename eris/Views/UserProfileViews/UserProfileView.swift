@@ -143,7 +143,7 @@ struct UserProfileView: View {
         NavigationLink {
           PostPageView(user: user, review: review, showName: true)
         } label: {
-          PostCardView(user: user, review: review, showName: true)
+          PostCardView(user: user, post: review, showName: true)
         }
       }
     } // End of LazyVStack

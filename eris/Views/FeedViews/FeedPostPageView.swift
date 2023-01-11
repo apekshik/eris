@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FeedReviewPageView: View {
+struct FeedPostPageView: View {
   @State var user: User?
   @State var userID: String
   @State var review: Post
@@ -170,8 +170,8 @@ struct FeedReviewPageView: View {
   }
 }
 
-struct FeedReviewPageView_Previews: PreviewProvider {
+struct FeedPostPageView_Previews: PreviewProvider {
   static var previews: some View {
-    FeedReviewPageView(user: exampleUsers[0], userID: "", review: exampleReviews[0])
+    FeedPostPageView(user: exampleUsers[0], userID: "", review: exampleReviews[0])
   }
 }

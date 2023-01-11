@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
-struct FeedReviewCardView: View {
+struct FeedPostCardView: View {
   @State var user: User?
-  @State var review: Post
+  @State var post: Post
   @State var liked: Bool = false
   var body: some View {
     VStack {
@@ -18,32 +19,41 @@ struct FeedReviewCardView: View {
           
           // Header Section
           HStack {
-            Text(user?.fullName ?? "")
+            Text("To \(user?.fullName ?? "")")
               .font(.headline)
               .fontWeight(.heavy)
-//              .foregroundColor(.secondary)
-            Text("\(review.rating) Star Rating")
+            Text("\(post.rating) Star Rating")
               .font(.headline)
-//              .foregroundColor(.secondary)
               .frame(maxWidth: .infinity, alignment: .trailing)
           }
           .foregroundColor(.black)
           .padding([.horizontal, .top])
-//          .opacity(0.6)
+          
+          // Image if it exists.
+          if let postImageUrl = post.imageURL {
+            GeometryReader { proxy in
+              let size = proxy.size
+              WebImage(url: postImageUrl)
+                .resizable()
+                .scaledToFill()
+                .frame(width: size.width, height: size.height)
+            }
+            .clipped()
+            .frame(height: 400)
+          }
           
           // Review Body
-          Text(review.comment)
+          Text(post.comment)
             .font(.title)
             .frame(maxWidth: .infinity, alignment: .leading)
             .fontWeight(.black)
             .foregroundColor(.black)
-//            .foregroundColor(.black)
             .lineLimit(3)
             .padding([.horizontal])
           
           // HStack Footer
           HStack {
-            Text("Written by a \(review.relation)".uppercased())
+            Text("Written by a \(post.relation)".uppercased())
               .font(.caption)
               .foregroundColor(.black)
             HStack(spacing: 20) {
@@ -98,7 +108,7 @@ struct FeedReviewCardView: View {
   
   private func fetchUser() async {
     let db = FirebaseManager.shared.firestore
-    guard let temp = try? await db.collection("Users").document(review.uid).getDocument(as: User.self) else { return }
+    guard let temp = try? await db.collection("Users").document(post.uid).getDocument(as: User.self) else { return }
     
     await MainActor.run(body: {
       self.user = temp
@@ -122,12 +132,12 @@ struct FeedReviewCardView: View {
     // Fetch your own uid
     guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
     // First get the "Likes" subcollection reference of the user whose review is being liked by you.
-    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(review.uid).collection("Likes")
+    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(post.uid).collection("Likes")
     Task {
       do {
         // delete the like that is associated with you and this specific review.
         let querySnapshot = try await likesRef
-          .whereField("reviewID", isEqualTo: review.reviewID)
+          .whereField("reviewID", isEqualTo: post.reviewID)
           .whereField("authorID", isEqualTo: uid)
           .getDocuments()
         
@@ -157,8 +167,8 @@ struct FeedReviewCardView: View {
       guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
       
       // First get the "Likes" subcollection reference of the user whose review is being liked by you.
-      let likeDocRef = FirebaseManager.shared.firestore.collection("Users").document(review.uid).collection("Likes").document()
-      let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: review.reviewID, authorID: uid)
+      let likeDocRef = FirebaseManager.shared.firestore.collection("Users").document(post.uid).collection("Likes").document()
+      let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: post.reviewID, authorID: uid)
       
       try likeDocRef.setData(from: newLike)
     } catch {
@@ -170,12 +180,12 @@ struct FeedReviewCardView: View {
     // Fetch your own uid
     guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
     // First get the "Likes" subcollection reference of the user whose review is being liked by you.
-    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(review.uid).collection("Likes")
+    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(post.uid).collection("Likes")
     Task {
       do {
         // delete the like that is associated with you and this specific review.
         let querySnapshot = try await likesRef
-          .whereField("reviewID", isEqualTo: review.reviewID)
+          .whereField("reviewID", isEqualTo: post.reviewID)
           .whereField("authorID", isEqualTo: uid)
           .getDocuments()
         
@@ -193,8 +203,8 @@ struct FeedReviewCardView: View {
  
 }
 
-struct FeedReviewCardView_Previews: PreviewProvider {
+struct FeedPostCardView_Previews: PreviewProvider {
   static var previews: some View {
-    FeedReviewCardView(user: exampleUsers[0], review: exampleReviews[0])
+    FeedPostCardView(user: exampleUsers[0], post: exampleReviews[0])
   }
 }
