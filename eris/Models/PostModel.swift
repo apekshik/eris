@@ -17,7 +17,8 @@ struct Post: Codable, Identifiable, Hashable {
   let relation: String // type of relationship to the person who wrote the review.
   let comment: String
   let rating: Int
-  let experienceWithThem: String
+  let experienceWithThem: String?
+  let imageURL: URL?
   
   enum CodingKeys: String, CodingKey {
     case uid
@@ -28,5 +29,6 @@ struct Post: Codable, Identifiable, Hashable {
     case comment
     case rating
     case experienceWithThem
+    case imageURL
   }
 }

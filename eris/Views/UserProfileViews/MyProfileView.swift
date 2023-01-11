@@ -24,6 +24,7 @@ struct MyProfileView: View {
   @State var showAppTitle: Bool = true
   @State var showAboutSheet: Bool = false
   
+  
   // MARK: Main View Body
   var body: some View {
     NavigationStack {
@@ -181,25 +182,7 @@ struct MyProfileView: View {
       reviews = documents.compactMap({ queryDocumentSnapshot in
         try? queryDocumentSnapshot.data(as: Post.self)
       })
-      
-      // MARK: Legacy way to do the same as above.
-      //            if error == nil {
-      //                if let snapshot = snapshot {
-      //                    // documents is an array of document items. Each Document item is a dictionary
-      //                    // that contains the fields as keys and their values are then extracted as shown below.
-      //                    self.reviews = snapshot.documents.map { d in // d for document
-      //                        // return a Review object. The map then returns an array of these Review objects which
-      //                        // is then stored in the reviews state var.
-      //                        return Review(uid: d["uid"] as? String ?? "",
-      //                                      relation: d["relation"] as? String ?? "",
-      //                                      comment: d["comment"] as? String ?? "",
-      //                                      rating: d["rating"] as? Int ?? -1,
-      //                                      experienceWithThem: d["experienceWithThem"] as? String ?? "")
-      //                    }
-      //                }
-      //            } else {
-      //                // Handle error
-      //            }
+
     }
   }
   
@@ -212,6 +195,7 @@ struct MyProfileView: View {
       isLoading = false
     })
   }
+
 }
 
 struct MyProfileView_Previews: PreviewProvider {
