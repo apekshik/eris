@@ -198,7 +198,6 @@ struct UserProfileView: View {
   // MARK: helper function invoked upon clicking the follow button that sets new documents in the followings and followers subcollections in your and the user's document, respectively.
   private func follow() async -> User? {
     // TODO: Check if the user passed in is the current user and then terminate the function call (You don't want to be following yourself).
-    // Task lets you run an asynchronous chunk of code in a synchronous environment, i.e, a function that isn't declared async.
     do {
       // get data for yourself as well as the user you're trying to follow.
       guard let myID = FirebaseManager.shared.auth.currentUser?.uid else { throw AuthError.noUIDFound }

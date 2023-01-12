@@ -28,7 +28,6 @@ struct LoginView: View {
   // MARK: UserDefaults
   @AppStorage("log_status") var logStatus: Bool = false
   @AppStorage("user_name") var userNameStored: String = ""
-  @AppStorage("user_UID") var userUID: String = ""
   @AppStorage("first_name") var firstNameStored: String = ""
   @AppStorage("last_name") var lastNameStored: String = ""
   
@@ -206,31 +205,37 @@ struct LoginView: View {
         // Step 1. Create Firebase Account
         try await FirebaseManager.shared.auth.createUser(withEmail: email, password: password)
         // Step 2. Create a User object to store in Firestore using the currentUser's UID.
-        guard let userUID = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        let newUser = User(firestoreID: userUID,
+        guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        let newUser = User(firestoreID: userID,
                            firstName: firstName,
                            lastName: lastName,
                            userName: userName,
                            email: email,
                            blockedUsers: [])
         
-        // Step 3. Save new User Doc in Firestore
+        // Step 3. Save new User data in myData EnvironmentObject
+        myData.myUserProfile = newUser
+        
+        // Step 4. Save new User Doc in Firestore
         let db = FirebaseManager.shared.firestore
-        let document = db.collection("Users").document(userUID)
+        let document = db.collection("Users").document(userID)
         try document.setData(from: newUser) { error in
           if error == nil {
             print("Saved new User Document in Firestore Successfully!")
             // store user data in UserDefaults
-            userNameStored = userName
-            firstNameStored = firstName
-            lastNameStored = lastName
-            self.userUID = userUID
             logStatus = true
           }
         }
         
-        // also update the computed property "keywordsForLookup" manually since they aren't directly decodable through the firestore SDK.
+        // Step 5. also update the computed property "keywordsForLookup" manually since they aren't directly decodable through the firestore SDK.
         try await document.updateData(["keywordsForLookup": newUser.keywordsForLookup])
+        
+        // Step 6. Finally update FCM Token for new user created.
+        // Dangerously unwrapping fcmToken from myData. Come back to check this isn't lethal.
+        let newToken: FCMToken = FCMToken(userID: userID, token: myData.fcmToken!.token, createdAt: myData.fcmToken!.createdAt)
+        
+        let fcmTokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
+        let _ = try fcmTokensRef.addDocument(from: newToken) 
         
       } catch {
         // catch any errors thrown during the account creation and firestore doc saving process.
@@ -278,7 +283,6 @@ struct LoginView: View {
     // UI Updating must run on main thread.
     await MainActor.run(body: {
       // Setting UserDefaults and changing App's LogStatus.
-      userUID = userID
       firstNameStored = user.firstName
       lastNameStored = user.lastName
       userNameStored = user.userName

@@ -12,12 +12,11 @@ import FirebaseMessaging
 
 @main
 struct erisApp: App {
+  
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-  
-  
   var body: some Scene {
     WindowGroup {
-      HomeView()
+      HomeView(fcmTokenData: delegate.tokenData)
     }
   }
 }
@@ -26,6 +25,7 @@ struct erisApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   let gcmMessageIDKey = "gcm.message_id"
+  var tokenData: [String : Any] = [:]
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     
@@ -105,11 +105,14 @@ extension AppDelegate: MessagingDelegate {
 //    // TODO: If necessary send token to application server.
 //    // Note: This callback is fired at each app startup and whenever a new token is generated.
     
-    let dataDict: [String: String] = ["token": fcmToken ?? ""]
+    tokenData = [
+      "token": fcmToken ?? "",
+      "createdAt": Date()
+    ]
     
     // Store token in firestore for sending notifications from server in future...
     
-    print(dataDict)
+    print("dataDict: \(tokenData)")
   }
 }
 
@@ -143,6 +146,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     // Messaging.messaging().appDidReceiveMessage(userInfo)
 
     // Print full message.
-    print(userInfo)
+    print("userInfo: \(userInfo)")
   }
 }

@@ -11,7 +11,7 @@ struct HomeView: View {
   @AppStorage("log_status") var logStatus: Bool = false
   @AppStorage("showOnboardingView") var showOnboardingView: Bool = true
   @State var usersIFollow: [User] = []
-  
+  @State var fcmTokenData: [String : Any]
   @StateObject var myData: MyData = MyData()
   
   var body: some View {
@@ -22,6 +22,13 @@ struct HomeView: View {
       }
       else {
         LoginView()
+      }
+    }
+    .onAppear {
+      Task {
+        await MainActor.run(body: {
+          myData.addFCMToken(from: fcmTokenData)
+        })
       }
     }
     .environmentObject(myData)
@@ -77,6 +84,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
-    HomeView()
+    HomeView(fcmTokenData: [:])
   }
 }

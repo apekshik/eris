@@ -16,10 +16,10 @@ class ScrollViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-//      // Do any additional setup after loading the view.
-//    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//
-//    NotificationCenter.default.addObserver(self, selector: #selector(ViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    // Do any additional setup after loading the view.
+    NotificationCenter.default.addObserver(self, selector: #selector(ScrollViewController.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(ScrollViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
   }
   
   @objc func keyboardWillShow(notification: NSNotification) {
