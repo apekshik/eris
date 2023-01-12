@@ -25,11 +25,11 @@ struct HomeView: View {
       }
     }
     .onAppear {
-      Task {
-        await MainActor.run(body: {
-          myData.addFCMToken(from: fcmTokenData)
-        })
-      }
+      print("Token Data: \(fcmTokenData["token"])")
+      myData.addFCMToken(from: fcmTokenData)
+//      Task {
+//        await refreshFCMToken()
+//      }
     }
     .environmentObject(myData)
   }
@@ -63,6 +63,35 @@ struct HomeView: View {
     .fullScreenCover(isPresented: $showOnboardingView, content: {
       OnboardingView(showOnboardingView: $showOnboardingView)
     })
+  }
+  
+  private func refreshFCMToken() async {
+    do {
+      // If logStatus is true, user profile data does exist. So fetch it and store it in myData.
+      // TODO: Then check if current FCM token is fresh. If not, then update it.
+      if logStatus == true {
+        myData.myUserProfile = try await fetchCurrentUser()
+        let tokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
+        /// TODO: Dangerously unwrapped. Come back and verify if this is safe later
+        let newToken = FCMToken(userID: myData.myUserProfile!.firestoreID,
+                                token: fcmTokenData["token"] as! String,
+                                createdAt: Date())
+        
+        let _ = try tokensRef.document(myData.myUserProfile!.firestoreID).setData(from: newToken)
+      }
+    } catch {
+      
+    }
+  }
+  
+  // MARK: Fetch Current User Data
+  func fetchCurrentUser() async throws -> User? {
+    // Fetch the current logged in user ID if user is logged in.
+    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return nil }
+    // Fetch user data from Firestore using the userID.
+    let user = try await FirebaseManager.shared.firestore.collection("Users").document(userID).getDocument(as: User.self)
+    
+    return user
   }
   
   private func fetchUsersIFollow() async -> [User] {

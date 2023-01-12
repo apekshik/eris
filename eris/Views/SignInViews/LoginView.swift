@@ -80,6 +80,7 @@ struct LoginView: View {
     }
     // Alert popup everytime there's an error.
     .alert(errorMessage, isPresented: $showError) {}
+    .environmentObject(myData)
   }
   
   
@@ -191,10 +192,37 @@ struct LoginView: View {
         try await FirebaseManager.shared.auth.signIn(withEmail: email, password: password)
         print("User Signed in successfully")
         logStatus = true
+        myData.myUserProfile = try await fetchCurrentUser()
+        
+        // store fresh FCM token in firestore.
+        // Dangerously unwrapping fcmToken from myData. Come back to check this isn't lethal.
+//        let newToken: FCMToken = FCMToken(userID: myData.myUserProfile!.firestoreID, token: myData.fcmToken!.token, createdAt: myData.fcmToken!.createdAt)
+//
+//        let fcmTokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
+//        let _ = try fcmTokensRef.addDocument(from: newToken)
+        
       } catch {
         await setError(error)
       }
     }
+  }
+  
+  // MARK: Fetch Current User Data
+  func fetchCurrentUser() async throws -> User? {
+    // Fetch the current logged in user ID if user is logged in.
+    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return nil }
+    // Fetch user data from Firestore using the userID.
+    let user = try await FirebaseManager.shared.firestore.collection("Users").document(userID).getDocument(as: User.self)
+    
+    return user
+//    // UI Updating must run on main thread.
+//    await MainActor.run(body: {
+//      // Setting UserDefaults and changing App's LogStatus.
+//      firstNameStored = user.firstName
+//      lastNameStored = user.lastName
+//      userNameStored = user.userName
+//      logStatus = true
+//    })
   }
   
   // MARK: Signup Method
@@ -232,10 +260,10 @@ struct LoginView: View {
         
         // Step 6. Finally update FCM Token for new user created.
         // Dangerously unwrapping fcmToken from myData. Come back to check this isn't lethal.
-        let newToken: FCMToken = FCMToken(userID: userID, token: myData.fcmToken!.token, createdAt: myData.fcmToken!.createdAt)
-        
-        let fcmTokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
-        let _ = try fcmTokensRef.addDocument(from: newToken) 
+//        let newToken: FCMToken = FCMToken(userID: userID, token: myData.fcmToken!.token, createdAt: myData.fcmToken!.createdAt)
+//        
+//        let fcmTokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
+//        let _ = try fcmTokensRef.addDocument(from: newToken) 
         
       } catch {
         // catch any errors thrown during the account creation and firestore doc saving process.
@@ -273,23 +301,7 @@ struct LoginView: View {
     //        }
   }
   
-  // MARK: Fetch Current User Data
-  func fetchCurrentUser() async throws {
-    // Fetch the current logged in user ID if user is logged in.
-    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
-    // Fetch user data from Firestore using the userID.
-    let user = try await FirebaseManager.shared.firestore.collection("Users").document(userID).getDocument(as: User.self)
-    
-    // UI Updating must run on main thread.
-    await MainActor.run(body: {
-      // Setting UserDefaults and changing App's LogStatus.
-      firstNameStored = user.firstName
-      lastNameStored = user.lastName
-      userNameStored = user.userName
-      logStatus = true
-    })
-    
-  }
+ 
   
   // MARK: Display Errors Via ALERT
   func setError(_ error: Error) async {
