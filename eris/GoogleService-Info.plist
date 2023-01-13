@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>949923474229-cl4t2q7624flqosni5gdh2i5t127u7ut.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.949923474229-cl4t2q7624flqosni5gdh2i5t127u7ut</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDfoziGR5s7Z9EEqL34P9eMnEdtOo_sNA8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>949923474229</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.apekshik.eris</string>
+	<key>PROJECT_ID</key>
+	<string>fir-eris</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fir-eris.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:949923474229:ios:1dc1e8ea019d57829aba7c</string>
+</dict>
+</plist>
