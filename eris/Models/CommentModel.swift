@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 struct Comment: Identifiable, Codable {
-  var id = UUID()
+  @DocumentID var id: String? = UUID().uuidString
   let authorID: String
   let authorUserName: String
   let reviewID: String?
