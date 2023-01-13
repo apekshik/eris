@@ -15,9 +15,14 @@ struct CommentSectionBodyView: View {
       ForEach(comments, id: \.id) { comment in
         HStack {
           VStack(alignment: .leading, spacing: 5) {
-            Text("**@\(comment.authorUserName)**")
-              .font(.caption)
-              .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+              Text("**@\(comment.authorUserName)**")
+                .font(.caption)
+              Text(comment.createdAt?.time(since: Date()) ?? "")
+                .font(.caption2)
+                .foregroundColor(.secondary)
+              Spacer()
+            }
             Text(comment.content)
               .font(.caption)
               .lineLimit(2)
@@ -30,13 +35,16 @@ struct CommentSectionBodyView: View {
 //            .opacity(0.7)
           }
 //          Button {
-//            
+//
 //          } label: {
 //            Image(systemName: "heart")
 //              .frame(alignment: .trailing)
 //          }
         }
       }
+    }
+    .onAppear {
+      comments = comments.sorted(by: { com1, com2 in  (com1.createdAt ?? Date()).compare(com2.createdAt ?? Date()) == .orderedDescending })
     }
     .padding([.bottom, .horizontal])
   }

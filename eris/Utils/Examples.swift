@@ -47,11 +47,26 @@ let exampleReviews: [Post] = [
 ]
 
 let exampleComments: [Comment] = [
-    Comment(authorID: "", authorUserName: "cobraTate", reviewID: "", content: "Lmao what the hell happened?"),
-    Comment(authorID: "", authorUserName: "chuckNorris", reviewID: "", content: "Lorem Ipsum lmao what the hell happened?"),
-    Comment(authorID: "", authorUserName: "ladiesMan2698", reviewID: "", content: "No way bro. Eat KFC. Real Chicken!!!"),
-    Comment(authorID: "", authorUserName: "guitarNerd420", reviewID: "", content: "Have you ever sat in a room with someone who vapes? Breathe AIR"),
-    Comment(authorID: "", authorUserName: "guitarNerd420", reviewID: "", content: "Never seen someone who doesn't start eating gluten as soon as you slap the shit outta them a few times."),
+    Comment(authorID: "", authorUserName: "cobraTate",
+            reviewID: "",
+            content: "Lmao what the hell happened?",
+            createdAt: Date()),
+    Comment(authorID: "", authorUserName: "chuckNorris",
+            reviewID: "",
+            content: "Lorem Ipsum lmao what the hell happened?",
+            createdAt: Date()),
+    Comment(authorID: "", authorUserName: "ladiesMan2698",
+            reviewID: "",
+            content: "No way bro. Eat KFC. Real Chicken!!!",
+            createdAt: Date()),
+    Comment(authorID: "", authorUserName: "guitarNerd420",
+            reviewID: "",
+            content: "Have you ever sat in a room with someone who vapes? Breathe AIR",
+            createdAt: Date()),
+    Comment(authorID: "", authorUserName: "guitarNerd420",
+            reviewID: "",
+            content: "Never seen someone who doesn't start eating gluten as soon as you slap the shit outta them a few times.",
+            createdAt: Date()),
 ]
 
 

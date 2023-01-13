@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  
+//
 //
 //  Created by Apekshik Panigrahi on 5/31/22.
 //
@@ -71,5 +71,40 @@ extension Color {
       blue:  Double(b) / 255,
       opacity: Double(a) / 255
     )
+  }
+}
+
+// Got this from https://gist.github.com/kunikullaya/6474fc6537ed616b1c617646d263555d
+// But also changed descending components to KeyValuePairs (since regular dicts in swift aren't ordered).
+extension Date {
+  func time(since fromDate: Date) -> String {
+    let earliest = self < fromDate ? self : fromDate
+    let latest = (earliest == self) ? fromDate : self
+    
+    let allComponents: Set<Calendar.Component> = [.minute, .hour, .day, .weekOfYear, .month, .year, .second]
+    let components:DateComponents = Calendar.current.dateComponents(allComponents, from: earliest, to: latest)
+    let year = components.year  ?? 0
+    let month = components.month  ?? 0
+    let week = components.weekOfYear  ?? 0
+    let day = components.day ?? 0
+    let hour = components.hour ?? 0
+    let minute = components.minute ?? 0
+    let second = components.second ?? 0
+    
+    let descendingComponents: KeyValuePairs = ["year": year, "mth": month, "week": week, "day": day, "hour": hour, "min": minute, "second": second]
+    for (period, timeAgo) in descendingComponents {
+      if timeAgo > 0 {
+        return "\(timeAgo.of(period)) ago"
+      }
+    }
+    
+    return "Just now"
+  }
+}
+
+extension Int {
+  func of(_ name: String) -> String {
+    guard self != 1 else { return "\(self) \(name)" }
+    return "\(self) \(name)s"
   }
 }
