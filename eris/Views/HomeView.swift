@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import FirebaseMessaging
 
 struct HomeView: View {
   @AppStorage("log_status") var logStatus: Bool = false
   @AppStorage("showOnboardingView") var showOnboardingView: Bool = true
   @State var usersIFollow: [User] = []
-  @State var fcmTokenData: [String : Any]
+  @State var fcmTokenData: [String : Any] = [:]
   @StateObject var myData: MyData = MyData()
   
   var body: some View {
@@ -25,11 +26,7 @@ struct HomeView: View {
       }
     }
     .onAppear {
-      print("Token Data: \(fcmTokenData["token"])")
-      myData.addFCMToken(from: fcmTokenData)
-//      Task {
-//        await refreshFCMToken()
-//      }
+      Task { await refreshFCMToken() } 
     }
     .environmentObject(myData)
   }
@@ -71,13 +68,16 @@ struct HomeView: View {
       // TODO: Then check if current FCM token is fresh. If not, then update it.
       if logStatus == true {
         myData.myUserProfile = try await fetchCurrentUser()
+        
+        let token = try await Messaging.messaging().token()
+        
         let tokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
-        /// TODO: Dangerously unwrapped. Come back and verify if this is safe later
         let newToken = FCMToken(userID: myData.myUserProfile!.firestoreID,
-                                token: fcmTokenData["token"] as! String,
+                                token: token,
                                 createdAt: Date())
         
         let _ = try tokensRef.document(myData.myUserProfile!.firestoreID).setData(from: newToken)
+        myData.fcmToken = newToken 
       }
     } catch {
       
