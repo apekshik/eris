@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseMessaging
 
 struct LoginView: View {
   // Contains my user info and other related details.
@@ -28,7 +29,6 @@ struct LoginView: View {
   // MARK: UserDefaults
   @AppStorage("log_status") var logStatus: Bool = false
   @AppStorage("user_name") var userNameStored: String = ""
-  @AppStorage("user_UID") var userUID: String = ""
   @AppStorage("first_name") var firstNameStored: String = ""
   @AppStorage("last_name") var lastNameStored: String = ""
   
@@ -81,6 +81,7 @@ struct LoginView: View {
     }
     // Alert popup everytime there's an error.
     .alert(errorMessage, isPresented: $showError) {}
+    .environmentObject(myData)
   }
   
   
@@ -192,10 +193,41 @@ struct LoginView: View {
         try await FirebaseManager.shared.auth.signIn(withEmail: email, password: password)
         print("User Signed in successfully")
         logStatus = true
+        myData.myUserProfile = try await fetchCurrentUser()
+        
+        // store fresh FCM token in firestore.
+        let token = try await Messaging.messaging().token()
+        
+        let tokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
+        let newToken = FCMToken(userID: myData.myUserProfile!.firestoreID,
+                                token: token,
+                                createdAt: Date())
+        
+        let _ = try tokensRef.document(myData.myUserProfile!.firestoreID).setData(from: newToken)
+        myData.fcmToken = newToken
+        
       } catch {
         await setError(error)
       }
     }
+  }
+  
+  // MARK: Fetch Current User Data
+  func fetchCurrentUser() async throws -> User? {
+    // Fetch the current logged in user ID if user is logged in.
+    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return nil }
+    // Fetch user data from Firestore using the userID.
+    let user = try await FirebaseManager.shared.firestore.collection("Users").document(userID).getDocument(as: User.self)
+    
+    return user
+//    // UI Updating must run on main thread.
+//    await MainActor.run(body: {
+//      // Setting UserDefaults and changing App's LogStatus.
+//      firstNameStored = user.firstName
+//      lastNameStored = user.lastName
+//      userNameStored = user.userName
+//      logStatus = true
+//    })
   }
   
   // MARK: Signup Method
@@ -206,32 +238,41 @@ struct LoginView: View {
         // Step 1. Create Firebase Account
         try await FirebaseManager.shared.auth.createUser(withEmail: email, password: password)
         // Step 2. Create a User object to store in Firestore using the currentUser's UID.
-        guard let userUID = FirebaseManager.shared.auth.currentUser?.uid else { return }
-        let newUser = User(firestoreID: userUID,
+        guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+        let newUser = User(firestoreID: userID,
                            firstName: firstName,
                            lastName: lastName,
                            userName: userName,
                            email: email,
                            blockedUsers: [])
         
-        // Step 3. Save new User Doc in Firestore
+        // Step 3. Save new User data in myData EnvironmentObject
+        myData.myUserProfile = newUser
+        
+        // Step 4. Save new User Doc in Firestore
         let db = FirebaseManager.shared.firestore
-        let document = db.collection("Users").document(userUID)
+        let document = db.collection("Users").document(userID)
         try document.setData(from: newUser) { error in
           if error == nil {
             print("Saved new User Document in Firestore Successfully!")
             // store user data in UserDefaults
-            userNameStored = userName
-            firstNameStored = firstName
-            lastNameStored = lastName
-            self.userUID = userUID
             logStatus = true
           }
         }
         
-        // also update the computed property "keywordsForLookup" manually since they aren't directly decodable through the firestore SDK.
+        // Step 5. also update the computed property "keywordsForLookup" manually since they aren't directly decodable through the firestore SDK.
         try await document.updateData(["keywordsForLookup": newUser.keywordsForLookup])
         
+        // Step 6. Finally update FCM Token for new user created.
+        let token = try await Messaging.messaging().token()
+        
+        let tokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
+        let newToken = FCMToken(userID: myData.myUserProfile!.firestoreID,
+                                token: token,
+                                createdAt: Date())
+        
+        let _ = try tokensRef.document(myData.myUserProfile!.firestoreID).setData(from: newToken)
+        myData.fcmToken = newToken
       } catch {
         // catch any errors thrown during the account creation and firestore doc saving process.
         await setError(error)
@@ -268,24 +309,7 @@ struct LoginView: View {
     //        }
   }
   
-  // MARK: Fetch Current User Data
-  func fetchCurrentUser() async throws {
-    // Fetch the current logged in user ID if user is logged in.
-    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
-    // Fetch user data from Firestore using the userID.
-    let user = try await FirebaseManager.shared.firestore.collection("Users").document(userID).getDocument(as: User.self)
-    
-    // UI Updating must run on main thread.
-    await MainActor.run(body: {
-      // Setting UserDefaults and changing App's LogStatus.
-      userUID = userID
-      firstNameStored = user.firstName
-      lastNameStored = user.lastName
-      userNameStored = user.userName
-      logStatus = true
-    })
-    
-  }
+ 
   
   // MARK: Display Errors Via ALERT
   func setError(_ error: Error) async {
