@@ -71,6 +71,7 @@ struct PostPageView: View {
           .foregroundColor(.secondary)
           .frame(maxWidth: .infinity, alignment: .trailing)
       }
+      .padding([.top, .horizontal])
       
       // Image if it exists.
       if let postImageUrl = post.imageURL {
@@ -90,7 +91,7 @@ struct PostPageView: View {
         .font(.title)
         .fontWeight(.black)
         .foregroundColor(.primary)
-      
+        .padding(.horizontal)
       // HStack under the written review.
       HStack {
         Text("Written by a \(post.relation)".uppercased())
@@ -111,8 +112,8 @@ struct PostPageView: View {
         .foregroundColor(.secondary)
         .frame(maxWidth: .infinity, alignment: .trailing)
       }
+      .padding([.horizontal, .bottom])
     }
-    .padding()
     .onAppear {
       checkLike()
     }

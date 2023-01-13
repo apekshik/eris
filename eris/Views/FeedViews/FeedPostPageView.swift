@@ -70,6 +70,7 @@ struct FeedPostPageView: View {
           .foregroundColor(.secondary)
           .frame(maxWidth: .infinity, alignment: .trailing)
       }
+      .padding([.top, .horizontal])
       
       // Image if it exists.
       if let postImageUrl = post.imageURL {
@@ -89,6 +90,7 @@ struct FeedPostPageView: View {
         .font(.title)
         .fontWeight(.black)
         .foregroundColor(.primary)
+        .padding(.horizontal)
       
       // HStack under the written review.
       HStack {
@@ -110,8 +112,9 @@ struct FeedPostPageView: View {
         .foregroundColor(.secondary)
         .frame(maxWidth: .infinity, alignment: .trailing)
       }
+      .padding([.horizontal, .bottom])
     }
-    .padding()
+    
   }
   
   var commentSectionHeader: some View {

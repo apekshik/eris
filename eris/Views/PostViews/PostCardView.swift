@@ -30,6 +30,7 @@ struct PostCardView: View {
               .foregroundColor(.secondary)
               .frame(maxWidth: .infinity, alignment: .trailing)
           }
+          .padding([.top, .horizontal])
           
           // Image if it exists.
           if let postImageUrl = post.imageURL {
@@ -50,6 +51,7 @@ struct PostCardView: View {
             .fontWeight(.black)
             .foregroundColor(.primary)
             .lineLimit(3)
+            .padding(.horizontal)
           
           // HStack under the written review.
           HStack {
@@ -78,9 +80,9 @@ struct PostCardView: View {
             .foregroundColor(.secondary)
             .frame(maxWidth: .infinity, alignment: .trailing)
           }
+          .padding([.horizontal, .bottom])
         }
       }
-      .padding()
     }
     .background(Color(hex: "#e6e5e1"))
     .cornerRadius(10)
