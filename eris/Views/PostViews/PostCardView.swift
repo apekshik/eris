@@ -138,7 +138,7 @@ struct PostCardView: View {
       
       // First get the "Likes" subcollection reference of the user whose review is being liked by you.
       let likeDocRef = FirebaseManager.shared.firestore.collection("Users").document(user.firestoreID).collection("Likes").document()
-      let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: post.reviewID, authorID: uid)
+      let newLike: Like = Like(likeID: likeDocRef.documentID, postID: post.reviewID, authorID: uid)
       
       try likeDocRef.setData(from: newLike)
     } catch {

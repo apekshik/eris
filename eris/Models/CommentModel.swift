@@ -20,6 +20,6 @@ struct Comment: Identifiable, Codable {
     case authorUserName
     case reviewID
     case content
-    case createdAt
+    case createdAt 
   }
 }

@@ -9,14 +9,14 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct Like: Codable, Identifiable {
-  let id = UUID()
+  @DocumentID var id: String? = UUID().uuidString // id that points to itself (firestore documentID). 
   let likeID: String
-  let reviewID: String // the ID for the review that the like is associated to.
+  let postID: String // the ID for the review that the like is associated to.
   let authorID: String // ID associated with the user who created the like, i.e, tapped the like button.
   
   enum CodingKeys: String, CodingKey {
     case likeID
-    case reviewID
+    case postID
     case authorID
   }
 }

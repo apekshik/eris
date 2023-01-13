@@ -16,6 +16,9 @@ struct FeedView: View {
   @State var errorMessage: String = ""
   @State var showError: Bool = false
   
+  @State var showAppTitle: Bool = true
+  @State var isLoading: Bool = false
+  
   var body: some View {
     NavigationStack {
       ScrollView {
@@ -34,6 +37,15 @@ struct FeedView: View {
       }
       .navigationTitle("Follower Feed")
     }
+    .overlay {
+      LoadingView(show: $isLoading)
+      Text(showAppTitle ? "BOUJÈ" : "")
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .font(.system(.title))
+        .fontWeight(.black)
+        .fontDesign(.serif)
+        .padding([.horizontal], 20)
+    }
     .alert(errorMessage, isPresented: $showError) {
       
     }
@@ -45,18 +57,26 @@ struct FeedView: View {
         NavigationLink {
           // Destination
           FeedPostPageView(userID: review.uid, post: review)
+            .onAppear {
+              showAppTitle = false
+            }
         } label: {
           FeedPostCardView(post: review)
+        }
+        .onAppear {
+          withAnimation { showAppTitle = true }
         }
       }
     } // End of LazyVStack
   }
   
   private func fetchFeedReviews() {
+    isLoading = true
     Task {
       usersIFollow = await fetchUsersIFollow()
       reviews = await fetchReviews(for: usersIFollow)
       // Handle Reviews here.
+      isLoading = false 
     }
   }
   

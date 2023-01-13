@@ -91,9 +91,10 @@ struct MyProfileView: View {
     .overlay {
       LoadingView(show: $isLoading)
       
+      // This is the title on the top left corner that dissappears in the navigation stack and reappears on return to home profile page. 
       Text(showAppTitle ? "BOUJÈ" : "")
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .font(.system(.largeTitle))
+        .font(.system(.title))
         .fontWeight(.black)
         .fontDesign(.serif)
         .padding([.horizontal], 20)

@@ -13,7 +13,7 @@ struct Post: Codable, Identifiable, Hashable {
   let uid: String // associated uid in firestore. Tells which user the review is for.
   let authorID: String // id that tells which user wrote the review.
   let reviewID: String // stores the it's own firestore id for quick reference.
-  let createdAt: Date
+  let createdAt: Date?
   let relation: String // type of relationship to the person who wrote the review.
   let comment: String
   let rating: Int

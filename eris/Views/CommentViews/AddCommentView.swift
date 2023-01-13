@@ -103,7 +103,8 @@ struct AddCommentView: View {
         let newComment = Comment(authorID: author!.firestoreID,
                                  authorUserName: author!.userName,
                                  reviewID: review.reviewID,
-                                 content: newCommentContent)
+                                 content: newCommentContent,
+                                 createdAt: Date())
         
         // TODO: THis is again a temporary fix. Because in the case we want to order the comments a particular way from the server side, this won't work.
         comments.insert(newComment, at: 0)
@@ -137,12 +138,12 @@ struct AddCommentView: View {
   
   // Fetch my User Data.
   private func fetchMyData() async {
-      guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
-      guard let user = try? await FirebaseManager.shared.firestore.collection("Users").document(userID).getDocument(as: User.self) else { return }
-      
+    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+    guard let user = try? await FirebaseManager.shared.firestore.collection("Users").document(userID).getDocument(as: User.self) else { return }
+    
     await MainActor.run(body: {
-        self.author = user
-      })
+      self.author = user
+    })
   }
 }
 
