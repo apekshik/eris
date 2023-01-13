@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseMessaging
 
 struct LoginView: View {
   // Contains my user info and other related details.
@@ -195,11 +196,15 @@ struct LoginView: View {
         myData.myUserProfile = try await fetchCurrentUser()
         
         // store fresh FCM token in firestore.
-        // Dangerously unwrapping fcmToken from myData. Come back to check this isn't lethal.
-//        let newToken: FCMToken = FCMToken(userID: myData.myUserProfile!.firestoreID, token: myData.fcmToken!.token, createdAt: myData.fcmToken!.createdAt)
-//
-//        let fcmTokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
-//        let _ = try fcmTokensRef.addDocument(from: newToken)
+        let token = try await Messaging.messaging().token()
+        
+        let tokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
+        let newToken = FCMToken(userID: myData.myUserProfile!.firestoreID,
+                                token: token,
+                                createdAt: Date())
+        
+        let _ = try tokensRef.document(myData.myUserProfile!.firestoreID).setData(from: newToken)
+        myData.fcmToken = newToken
         
       } catch {
         await setError(error)
@@ -259,12 +264,15 @@ struct LoginView: View {
         try await document.updateData(["keywordsForLookup": newUser.keywordsForLookup])
         
         // Step 6. Finally update FCM Token for new user created.
-        // Dangerously unwrapping fcmToken from myData. Come back to check this isn't lethal.
-//        let newToken: FCMToken = FCMToken(userID: userID, token: myData.fcmToken!.token, createdAt: myData.fcmToken!.createdAt)
-//        
-//        let fcmTokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
-//        let _ = try fcmTokensRef.addDocument(from: newToken) 
+        let token = try await Messaging.messaging().token()
         
+        let tokensRef = FirebaseManager.shared.firestore.collection("FCMTokens")
+        let newToken = FCMToken(userID: myData.myUserProfile!.firestoreID,
+                                token: token,
+                                createdAt: Date())
+        
+        let _ = try tokensRef.document(myData.myUserProfile!.firestoreID).setData(from: newToken)
+        myData.fcmToken = newToken
       } catch {
         // catch any errors thrown during the account creation and firestore doc saving process.
         await setError(error)

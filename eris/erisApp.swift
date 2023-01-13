@@ -10,16 +10,19 @@ import Firebase
 import FirebaseCore
 import FirebaseMessaging
 
+
+
 @main
 struct erisApp: App {
-  
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+  
   var body: some Scene {
     WindowGroup {
-      HomeView(fcmTokenData: delegate.tokenData)
+      HomeView()
     }
   }
 }
+
 
 // Configuring Firebase and Cloud Messaging for push notifications
 
