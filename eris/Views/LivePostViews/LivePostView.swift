@@ -15,17 +15,23 @@ struct LivePostView: View {
   @State var addBoujee: Bool = false
   @State private var listener: ListenerRegistration?
   @State private var scrollProxy: ScrollViewProxy? = nil
+  @State var showLivePostTutorialCard: Bool = false
   
   var body: some View {
     VStack {
       HStack {
-        Text("Live Boujees".uppercased())
+        Text("BillBoard".uppercased())
           .font(.headline)
           .fontWeight(.heavy)
           .foregroundColor(.secondary)
         Spacer()
-        Image(systemName: "questionmark.circle.fill")
-          .shadow(radius: 4)
+        Button {
+          showLivePostTutorialCard = true
+        } label: {
+          Image(systemName: "questionmark.circle.fill")
+            .shadow(radius: 4)
+            .tint(.black)
+        }
       }
       
       // VStack for Body of LivePostView and PostField Footer.
@@ -74,6 +80,9 @@ struct LivePostView: View {
     }
     .onTapGesture {
       hideKeyboardOnTap()
+    }
+    .overlay {
+      LivePostTutorialView(show: $showLivePostTutorialCard)
     }
   }
   

@@ -22,7 +22,7 @@ struct PostCardView: View {
           
           // Header
           HStack {
-            Text("To \(showName ? user.fullName : "")")
+            Text(showName ? ("To \(user.fullName)") : "")
               .font(.headline)
               .foregroundColor(.secondary)
             Text("\(post.rating) Star Rating")
