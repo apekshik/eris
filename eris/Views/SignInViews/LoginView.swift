@@ -37,6 +37,13 @@ struct LoginView: View {
   
   // MARK: Main View body
   var body: some View {
+    ZStack {
+      BackgroundView()
+      foreground
+    }
+  }
+  
+  var foreground: some View {
     VStack {
       titleSection
       
@@ -73,9 +80,10 @@ struct LoginView: View {
         Text("All Rights Reserved.")
           .font(.footnote)
       }
-      .foregroundColor(.black)
+//      .foregroundColor(.black)
     } // End of VStack
-    .background(Color(hex: "F5F5F4"))
+//    .background(Color(hex: "F5F5F4"))
+    .background(.ultraThinMaterial)
     .overlay {
       LoadingView(show: $isLoading)
     }
@@ -83,7 +91,6 @@ struct LoginView: View {
     .alert(errorMessage, isPresented: $showError) {}
     .environmentObject(myData)
   }
-  
   
   /// UI Components of the view start here.
   
@@ -108,7 +115,7 @@ struct LoginView: View {
       }
       
     }
-    .foregroundColor(.black)
+//    .foregroundColor(.black)
     .padding()
   }
   
@@ -125,7 +132,8 @@ struct LoginView: View {
         
     }
     .padding()
-    .background(Color(hex: "E1E1DF")) // 1F1F1F
+//    .background(Color(hex: "E1E1DF")) // 1F1F1F
+    .background(.ultraThinMaterial)
     .cornerRadius(5)
     .shadow(radius: 8)
   }
@@ -150,8 +158,9 @@ struct LoginView: View {
       SecureField("Password", text: $password)
     }
     .padding()
-    .background(Color(hex: "E1E1DF")) // 1F1F1F
+//    .background(Color(hex: "E1E1DF")) // 1F1F1F
 //    .foregroundColor(.white)
+    .background(.ultraThinMaterial)
     .cornerRadius(5)
     .shadow(radius: 8)
   }
@@ -164,8 +173,8 @@ struct LoginView: View {
       Text(isLoginMode ? "Login" : "Create Account")
         .frame(maxWidth: .infinity)
         .padding()
-        .foregroundColor(.white)
-        .background(.black)
+        .foregroundColor(.black)
+        .background(.white)
         .cornerRadius(5)
         
     }

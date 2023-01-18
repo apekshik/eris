@@ -12,98 +12,148 @@ struct FeedPostCardView: View {
   @State var user: User?
   @State var post: Post
   @State var liked: Bool = false
-  var body: some View {
-    VStack {
-      HStack {
-        VStack(alignment: .leading, spacing: 10) {
-          
-          // Header Section
-          HStack {
-            Text("To \(user?.fullName ?? "")")
-              .font(.headline)
-              .fontWeight(.heavy)
-            Text("\(post.rating) Star Rating")
-              .font(.headline)
-              .frame(maxWidth: .infinity, alignment: .trailing)
-          }
-          .foregroundColor(.black)
-          .padding([.horizontal, .top])
-          
-          // Image if it exists.
-          if let postImageUrl = post.imageURL {
-            GeometryReader { proxy in
-              let size = proxy.size
-              WebImage(url: postImageUrl)
-                .resizable()
-                .scaledToFill()
-                .frame(width: size.width, height: size.height)
-            }
-            .clipped()
-            .frame(height: 400)
-          }
-          
-          // Review Body
-          Text(post.comment)
-            .font(.title)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .fontWeight(.black)
-            .foregroundColor(.black)
-            .lineLimit(3)
-            .padding([.horizontal])
-          
-          // HStack Footer
-          HStack {
-            Text("Written by a \(post.relation)".uppercased())
-              .font(.caption)
-              .foregroundColor(.black)
-            HStack(spacing: 20) {
-              // Button for comments section.
-              Button {
-                // Action trigger when comments section button is pressed.
-              } label: {
-                Image(systemName: "bubble.right")
-              }
-              // Button for Like/Unlike
-              Button {
-                likeButtonPress()
-                let impactLight = UIImpactFeedbackGenerator(style: .light)
-                impactLight.impactOccurred()
-              } label: {
-                Image(systemName: liked ? "heart.fill" : "heart")
-                  .scaleEffect(1.0)
-              }
-            }
-            .font(.headline)
-            .foregroundColor(.black)
-            .frame(maxWidth: .infinity, alignment: .trailing)
-          }
-          .opacity(0.6)
-          .padding()
-          .background(Color(hex: "F5F5F4"))
-//          .shadow(radius: 4)
-        }
-        
-      }
-//      .padding()
-    }
-//    .background(Color("Mellow Apricot"))
-    .background(Color(hex: "E1E1DF"))
-    .cornerRadius(5)
-    .padding()
-    .shadow(radius: 5)
-    
-    .onTapGesture(count: 2) {
-            likeButtonPress()
-      let impactMed = UIImpactFeedbackGenerator(style: .medium)
-      impactMed.impactOccurred()
-    }
   
-    .task {
-      await fetchUser()
+  @State var gradientColors = [Color.purple, Color.black, Color(hex: "ff004c")]
+  @State var startPoint = UnitPoint(x: 0, y: 0)
+  @State var endPoint = UnitPoint(x: 0, y: 2)
+  
+  
+  var body: some View {
+    ZStack {
+      background
+      VStack {
+        HStack {
+          VStack(alignment: .leading, spacing: 10) {
+            
+            // Header Section
+            HStack {
+              Text("To \(user?.fullName ?? "")")
+                .font(.headline)
+                .fontWeight(.heavy)
+              Spacer()
+              Text("\(post.rating) Star Rating")
+                .font(.headline)
+  //              .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            .foregroundColor(.white)
+            .padding([.top, .horizontal], 16)
+            .padding(.bottom, 12)
+            .background(.thinMaterial)
+  //          .padding([.horizontal, .top])
+            
+            // Image if it exists.
+            if let postImageUrl = post.imageURL {
+              GeometryReader { proxy in
+                let size = proxy.size
+                WebImage(url: postImageUrl)
+                  .resizable()
+                  .scaledToFill()
+                  .frame(width: size.width, height: size.height)
+              }
+              .clipped()
+              .frame(height: 400)
+            }
+            
+            // Review Body
+            Text(post.comment)
+              .font(.title)
+              .fontWeight(.black)
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .lineLimit(3)
+              .padding(.horizontal)
+              .foregroundColor(.white)
+  //            .font(.title)
+  //            .frame(maxWidth: .infinity, alignment: .leading)
+  //            .fontWeight(.black)
+  //            .foregroundColor(.black)
+  //            .lineLimit(3)
+  //            .padding([.horizontal])
+            
+            // HStack Footer
+            HStack {
+              Text("Written by a \(post.relation)".uppercased())
+                .font(.caption)
+                .foregroundColor(.white)
+              HStack(spacing: 20) {
+                // Button for comments section.
+                Button {
+                  // Action trigger when comments section button is pressed.
+                } label: {
+                  Image(systemName: "bubble.right")
+                }
+                // Button for Like/Unlike
+                Button {
+                  likeButtonPress()
+                  let impactLight = UIImpactFeedbackGenerator(style: .light)
+                  impactLight.impactOccurred()
+                } label: {
+                  Image(systemName: liked ? "heart.fill" : "heart")
+                    .scaleEffect(1.0)
+                    .foregroundColor(liked ? .pink : .white)
+                }
+              }
+              .font(.headline)
+              .tint(.white)
+              .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            .padding()
+            .background(.thickMaterial)
+            .opacity(0.6)
+  //          .background(Color(hex: "F5F5F4"))
+  //          .shadow(radius: 4)
+          }
+          
+        }
+  //      .padding()
+      }
+  //    .background(Color("Mellow Apricot"))
+  //    .background(Color(hex: "E1E1DF"))
+      .cornerRadius(5)
+  //    .shadow(radius: 5)
+      .overlay {
+        CardGradient()
+      }
+      .padding()
+      .onTapGesture(count: 2) {
+              likeButtonPress()
+        let impactMed = UIImpactFeedbackGenerator(style: .medium)
+        impactMed.impactOccurred()
+      }
+      .task {
+        await fetchUser()
+      }
+      .onAppear {
+        checkLike()
+      }
     }
-    .onAppear {
-      checkLike()
+  }
+  
+  struct CardGradient: View {
+    var body: some View {
+      RoundedRectangle(cornerRadius: 10)
+        .stroke(
+          LinearGradient(
+            gradient: Gradient(colors: [.white.opacity(0.8), .white.opacity(0.2)]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+          ),
+          lineWidth: 0.4
+        )
     }
+  }
+  
+  var background: some View {
+    LinearGradient(gradient: Gradient(colors: self.gradientColors), startPoint: self.startPoint, endPoint: self.endPoint)
+      .ignoresSafeArea()
+      .blur(radius: 50)
+      .opacity(0.4)
+      .onAppear {
+        withAnimation (.easeInOut(duration: 10)
+          .repeatForever(autoreverses: true).speed(0.25)){
+            self.startPoint = UnitPoint(x: 1, y: -1)
+            self.endPoint = UnitPoint(x: 0, y: 1)
+          }
+      }
   }
   
   private func fetchUser() async {

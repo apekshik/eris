@@ -26,7 +26,6 @@ struct UserCardView: View {
           .fontWeight(.bold)
         Text("@\(user.userName)")
           .foregroundColor(.secondary)
-        
       }
       
       HStack {

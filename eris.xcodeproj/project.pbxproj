@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89099F9529786DCB00107977 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89099F9429786DCB00107977 /* BackgroundView.swift */; };
 		890F4A4A29413E70003B020D /* erisApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F4A4929413E70003B020D /* erisApp.swift */; };
 		890F4A4E29413E71003B020D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 890F4A4D29413E71003B020D /* Assets.xcassets */; };
 		890F4A5129413E71003B020D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 890F4A5029413E71003B020D /* Preview Assets.xcassets */; };
@@ -69,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		89099F9429786DCB00107977 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		890F4A4629413E70003B020D /* eris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		890F4A4929413E70003B020D /* erisApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = erisApp.swift; sourceTree = "<group>"; };
 		890F4A4D29413E71003B020D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				89B53B0E295CA99F00BAC746 /* HomeView.swift */,
+				89099F9429786DCB00107977 /* BackgroundView.swift */,
 				895EEAC9297271B40047FBE1 /* TutorialViews */,
 				8938E90C296A5A690083378A /* OnboardingViews */,
 				8938E909296A49CB0083378A /* FormViews */,
@@ -434,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89099F9529786DCB00107977 /* BackgroundView.swift in Sources */,
 				8938E912296A962B0083378A /* EmptySearchView.swift in Sources */,
 				894600F22960ED64007D498C /* TestView.swift in Sources */,
 				894600F62961D99A007D498C /* AddCommentView.swift in Sources */,
@@ -618,7 +622,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -652,7 +656,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
