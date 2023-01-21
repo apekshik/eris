@@ -62,8 +62,7 @@ struct UserCardView: View {
       }
       .padding([.horizontal], 12)
       .padding([.vertical], 8)
-      .foregroundColor(.white)
-      .background(.black)
+      .background(.ultraThinMaterial)
       .cornerRadius(4)
     }
   }

@@ -31,11 +31,10 @@ struct MyProfileView: View {
       ScrollView(.vertical, showsIndicators: false) {
         if myProfile != nil {
           if reviews.count > 0 {
-            
-            // can safely use forced unwrapping since we checked for nil already.
-            LivePostView(user: myProfile!)
-            
-            reviewSection
+            ZStack {
+              BackgroundView()
+              foreground
+            }
           } else {
             EmptyMyProfileView()
           }
@@ -107,6 +106,16 @@ struct MyProfileView: View {
       // MARK: Initial fetch of data for profile view.
       await fetchUserData()
       await fetchReviews()
+    }
+  }
+  
+  var foreground: some View {
+    VStack {
+      // can safely use forced unwrapping since we checked for nil already.
+      LivePostView(user: myProfile!)
+      
+      // Regular section follows Live Post section
+      reviewSection
     }
   }
   

@@ -50,7 +50,8 @@ struct AddLivePostView: View {
         } // End of VStack
         .padding(.horizontal)
         .frame(maxWidth: .infinity, minHeight: 150)
-        .background(.white)
+        .background(.thickMaterial)
+//        .background(.white)
 //        .shadow(radius: 5)
   }
   

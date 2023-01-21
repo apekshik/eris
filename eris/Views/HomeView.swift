@@ -52,7 +52,7 @@ struct HomeView: View {
           Text("Search")
         }
     } // End of TabView
-    .tint(.black)
+    .tint(.white)
     .task {
       usersIFollow = await fetchUsersIFollow()
       myData.usersIFollow = usersIFollow

@@ -23,7 +23,7 @@ struct LivePostView: View {
         Text("BillBoard".uppercased())
           .font(.headline)
           .fontWeight(.heavy)
-          .foregroundColor(.secondary)
+          .foregroundColor(.primary)
         Spacer()
         Button {
           showLivePostTutorialCard = true
@@ -62,14 +62,18 @@ struct LivePostView: View {
         // Footer for Adding LivePosts.
         AddLivePostView(forUser: user)
       }
-      .background(Color(hex: "#f5f5f2"))
+//      .background(Color(hex: "#f5f5f2"))
+      .background(.ultraThinMaterial)
       .cornerRadius(5)
       .shadow(radius: 5)
     }
     .padding()
     .frame(maxWidth: .infinity)
-    .background(Color(hex: "#dededc"))
+//    .background(Color(hex: "#dededc"))
     .cornerRadius(10)
+    .overlay {
+      CardGradient()
+    }
     .padding()
     .shadow(radius: 7)
     .onAppear {

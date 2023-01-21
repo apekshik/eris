@@ -20,33 +20,10 @@ struct FeedPostPageView: View {
   var body: some View {
     NavigationStack {
       ScrollView(.vertical, showsIndicators: false){
-        VStack {
-          reviewSection
-          
-          // Comment section of the page.
-          VStack {
-            commentSectionHeader
-            // checks if comments exist or have been fetched yet.
-            if comments.count > 0 {
-              CommentSectionBodyView(comments: $comments)
-            } else {
-              Text("No Comments Yet".uppercased())
-                .foregroundColor(.secondary)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding([.bottom], 24)
-            }
-          }
-//          .background(.white)
-          .background(.thinMaterial)
-          
+        ZStack {
+          BackgroundView()
+          foreground
         }
-//        .background(Color(hex: "#e6e5e1"))
-        .cornerRadius(10)
-        .shadow(radius: 5)
-        .overlay {
-          CardGradient()
-        }
-        .padding([.top, .horizontal])
       }
       .refreshable {
         fetchAllData()
@@ -60,6 +37,36 @@ struct FeedPostPageView: View {
       fetchAllData()
     }
     
+  }
+  
+  var foreground: some View {
+    VStack {
+      reviewSection
+      
+      // Comment section of the page.
+      VStack {
+        commentSectionHeader
+        // checks if comments exist or have been fetched yet.
+        if comments.count > 0 {
+          CommentSectionBodyView(comments: $comments)
+        } else {
+          Text("No Comments Yet".uppercased())
+            .foregroundColor(.secondary)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding([.bottom], 24)
+        }
+      }
+//          .background(.white)
+      .background(.thinMaterial)
+      
+    }
+//        .background(Color(hex: "#e6e5e1"))
+    .cornerRadius(10)
+    .shadow(radius: 5)
+    .overlay {
+      CardGradient()
+    }
+    .padding([.top, .horizontal])
   }
   
   var reviewSection: some View {

@@ -27,6 +27,7 @@ struct SearchPageView: View {
     // MARK: Navigation Stack for search Page
     NavigationStack {
       ZStack {
+        BackgroundView()
         if userQueries.count > 0 {
           searchBarResults
         }
@@ -87,8 +88,11 @@ struct SearchPageView: View {
           UserCardView(user: user, usersIFollow: $usersIFollow)
         }
       }
-      .background(Color(hex: "#FAF9F6"))
+//      .background(Color(hex: "#FAF9F6"))
       .cornerRadius(10)
+      .overlay {
+        CardGradient()
+      }
       .padding([.horizontal])
     }
   }

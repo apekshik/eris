@@ -164,7 +164,7 @@ struct UserProfileView: View {
         Text(following ? "Unfollow" : "Follow")
           .padding(8)
           .foregroundColor(.white)
-          .background(.black)
+          .background(.ultraThinMaterial)
           .cornerRadius(8)
       }
     }

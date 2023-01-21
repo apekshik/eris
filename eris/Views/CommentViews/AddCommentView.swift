@@ -40,7 +40,7 @@ struct AddCommentView: View {
                 Image(systemName: "xmark.square.fill")
                   .resizable()
                   .frame(width: 20, height: 20)
-                  .tint(.black)
+                  .tint(.white)
               }
             }
             
@@ -70,8 +70,8 @@ struct AddCommentView: View {
                 Text("Post")
                   .padding([.horizontal])
                   .padding([.vertical], 4)
-                  .foregroundColor(.white)
-                  .background(.black)
+                  .foregroundColor(.black)
+                  .background(.white)
                   .cornerRadius(5)
               }
             }
@@ -79,7 +79,7 @@ struct AddCommentView: View {
           }
           .padding()
           .frame(maxWidth: .infinity, minHeight: 150)
-          .background(.white)
+          .background(.ultraThinMaterial)
           .cornerRadius(10)
           .shadow(radius: 10)
           .padding()
