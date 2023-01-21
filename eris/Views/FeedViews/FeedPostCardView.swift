@@ -128,19 +128,7 @@ struct FeedPostCardView: View {
     }
   }
   
-  struct CardGradient: View {
-    var body: some View {
-      RoundedRectangle(cornerRadius: 10)
-        .stroke(
-          LinearGradient(
-            gradient: Gradient(colors: [.white.opacity(0.8), .white.opacity(0.2)]),
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-          ),
-          lineWidth: 0.4
-        )
-    }
-  }
+  
   
   var background: some View {
     LinearGradient(gradient: Gradient(colors: self.gradientColors), startPoint: self.startPoint, endPoint: self.endPoint)

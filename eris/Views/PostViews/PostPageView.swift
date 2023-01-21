@@ -20,7 +20,7 @@ struct PostPageView: View {
   var body: some View {
     NavigationStack {
       ScrollView(.vertical, showsIndicators: false){
-        VStack {
+        VStack { // Start of Boujee Card
           reviewSection
           
           VStack {
@@ -35,12 +35,13 @@ struct PostPageView: View {
                 .padding([.bottom], 24)
             }
           }
-          .background(.white)
+          .background(.thinMaterial)
           
-        }
-        .background(Color(hex: "#e6e5e1"))
+        } // End of Boujee Card.
         .cornerRadius(10)
-        .shadow(radius: 5)
+        .overlay {
+          CardGradient()
+        }
         .padding([.top, .horizontal])
       }
       .refreshable {
@@ -131,7 +132,7 @@ struct PostPageView: View {
           showAddCommentView = true
         } label: {
           Image(systemName: "plus.circle")
-            .tint(.black)
+            .tint(.white)
             .opacity(0.8)
         }
         .frame(maxWidth: .infinity, alignment: .trailing)

@@ -79,14 +79,18 @@ struct PostCardView: View {
             .font(.headline)
             .foregroundColor(.secondary)
             .frame(maxWidth: .infinity, alignment: .trailing)
-          }
-          .padding([.horizontal, .bottom])
+          } // End of Boujee Footer
+          .padding()
+          .background(.thinMaterial)
         }
       }
     }
-    .background(Color(hex: "#e6e5e1"))
+//    .background(Color(hex: "#e6e5e1"))
     .cornerRadius(10)
     .shadow(radius: 5)
+    .overlay {
+      CardGradient()
+    }
     .padding([.top, .horizontal])
     .onTapGesture(count: 2) {
       likeButtonPress()

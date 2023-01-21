@@ -1,14 +1,13 @@
 //
-//  FeedReviewPageView.swift
+//  TFeedPostPageView.swift
 //  eris
 //
-//  Created by Apekshik Panigrahi on 1/4/23.
+//  Created by Apekshik Panigrahi on 1/18/23.
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
-struct FeedPostPageView: View {
+struct TFeedPostPageView: View {
   @State var user: User?
   @State var userID: String
   @State var post: Post
@@ -18,6 +17,13 @@ struct FeedPostPageView: View {
   @State var showAddCommentView: Bool = false
   
   var body: some View {
+    ZStack {
+      BackgroundView()
+      foreground
+    }
+  }
+  
+  var foreground: some View {
     NavigationStack {
       ScrollView(.vertical, showsIndicators: false){
         VStack {
@@ -35,12 +41,14 @@ struct FeedPostPageView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .padding([.bottom], 24)
             }
-          }
-//          .background(.white)
+          } // end of the comment section VStack.
           .background(.thinMaterial)
+//          .background(.white)
+          
           
         }
 //        .background(Color(hex: "#e6e5e1"))
+//        .background(.ultraThinMaterial)
         .cornerRadius(10)
         .shadow(radius: 5)
         .overlay {
@@ -49,7 +57,7 @@ struct FeedPostPageView: View {
         .padding([.top, .horizontal])
       }
       .refreshable {
-        fetchAllData()
+//        fetchAllData()
       }
       .navigationTitle("Review".uppercased())
     }
@@ -57,7 +65,7 @@ struct FeedPostPageView: View {
       AddCommentView(show: $showAddCommentView, comments: $comments, review: post)
     }
     .task {
-      fetchAllData()
+//      fetchAllData()
     }
     
   }
@@ -78,17 +86,17 @@ struct FeedPostPageView: View {
       .padding([.top, .horizontal])
       
       // Image if it exists.
-      if let postImageUrl = post.imageURL {
-        GeometryReader { proxy in
-          let size = proxy.size
-          WebImage(url: postImageUrl)
-            .resizable()
-            .scaledToFill()
-            .frame(width: size.width, height: size.height)
-        }
-        .clipped()
-        .frame(height: 400)
-      }
+//      if let postImageUrl = post.imageURL {
+//        GeometryReader { proxy in
+//          let size = proxy.size
+//          WebImage(url: postImageUrl)
+//            .resizable()
+//            .scaledToFill()
+//            .frame(width: size.width, height: size.height)
+//        }
+//        .clipped()
+//        .frame(height: 400)
+//      }
       
       // written review
       Text(post.comment)
@@ -145,55 +153,10 @@ struct FeedPostPageView: View {
     }
     .padding([.top, .horizontal])
   }
-  
-  private func fetchAllData() {
-    Task {
-      user = await fetchUser(for: userID)
-      comments = await fetchComments()
-    }
-  }
-  
-  private func fetchUser(for userID: String) async -> User? {
-    do {
-      let userRef = FirebaseManager.shared.firestore.collection("Users").document(userID)
-      let user: User = try await userRef.getDocument(as: User.self)
-      return user
-    } catch {
-      // TODO: handle errors thrown.
-    }
-    return nil
-  }
-  
-  // MARK: Method to fetch comments for the specific review being viewed.
-  private func fetchComments() async -> [Comment] {
-    do {
-      let db = FirebaseManager.shared.firestore
-      let querySnapshot = try await db.collection("Comments").whereField("reviewID", isEqualTo: post.reviewID).getDocuments()
-      let comments: [Comment] = querySnapshot.documents.compactMap { QueryDocumentSnapshot in
-        try? QueryDocumentSnapshot.data(as: Comment.self)
-      }
-      return comments
-    } catch {
-      // TODO: handle errors
-    }
-    
-    return []
-    
-    /// Legacy way of fetching data using closures.
-    //    let db = FirebaseManager.shared.firestore
-    //    db.collection("Comments").whereField("reviewID", isEqualTo: review.reviewID).getDocuments { querySnapshot, error in
-    //      guard let documents = querySnapshot?.documents, error == nil else { return }
-    //
-    //      // compactMap() -> Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
-    //      comments = documents.compactMap({ documentSnapshot in
-    //        try? documentSnapshot.data(as: Comment.self)
-    //      })
-    //    }
-  }
 }
 
-struct FeedPostPageView_Previews: PreviewProvider {
-  static var previews: some View {
-    FeedPostPageView(user: exampleUsers[0], userID: "", post: exampleReviews[0])
-  }
+struct TFeedPostPageView_Previews: PreviewProvider {
+    static var previews: some View {
+        TFeedPostPageView(user: exampleUsers[0], userID: "", post: exampleReviews[0])
+    }
 }
