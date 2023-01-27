@@ -22,16 +22,54 @@ struct PostCardView: View {
           
           // Header
           HStack {
-            Text(showName ? ("To \(user.fullName)") : "")
-              .font(.headline)
-              .foregroundColor(.secondary)
-            Text("\(post.rating) Star Rating")
-              .font(.headline)
-              .foregroundColor(.secondary)
-              .frame(maxWidth: .infinity, alignment: .trailing)
+            VStack(alignment: .leading) {
+              Text("\(user.fullName)")
+                .font(.headline)
+                .fontWeight(.heavy)
+//                .foregroundColor(.secondary)
+              Text("@\(user.userName)")
+                .font(.caption)
+                .foregroundColor(.secondary)
+            }
+            .shadow(color: .white, radius: 5)
+//            Text("\(post.rating) Star Rating")
+//              .font(.headline)
+//              .foregroundColor(.secondary)
+//              .frame(maxWidth: .infinity, alignment: .trailing)
+            VStack(alignment: .trailing, spacing: 4) {
+              Button {
+                
+              } label: {
+                Text("Boujee Back".uppercased())
+                  .fontWeight(.bold)
+                  .font(.headline)
+                  .foregroundColor(.white)
+                  .padding(8)
+                  .background(.ultraThinMaterial)
+                  .cornerRadius(10)
+                
+              }
+              .shadow(color: .purple, radius: 5)
+              .overlay {
+                RoundedRectangle(cornerRadius: 10)
+                  .stroke(
+                    LinearGradient(
+                      gradient: Gradient(colors: [.white.opacity(0.8), .white.opacity(0.2)]),
+                      startPoint: .topLeading,
+                      endPoint: .bottomTrailing
+                    ),
+                    lineWidth: 0.4
+                  )
+              }
+              
+              Text("6 hrs Left")
+                .fontWeight(.bold)
+                .font(.caption)
+                .foregroundColor(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
           }
           .padding([.top, .horizontal])
-          
           // Image if it exists.
           if let postImageUrl = post.imageURL {
             GeometryReader { proxy in
@@ -55,7 +93,7 @@ struct PostCardView: View {
           
           // HStack under the written review.
           HStack {
-            Text("Written by a \(post.relation)".uppercased())
+            Text("Posted by a \(post.relation)".uppercased())
               .font(.caption)
               .foregroundColor(.secondary)
             HStack(spacing: 20) {
@@ -85,9 +123,9 @@ struct PostCardView: View {
         }
       }
     }
+    
 //    .background(Color(hex: "#e6e5e1"))
     .cornerRadius(10)
-    .shadow(radius: 5)
     .overlay {
       CardGradient()
     }
@@ -101,6 +139,7 @@ struct PostCardView: View {
       // check if this post is liked or not.
       checkLike()
     }
+    
     
   }
   
