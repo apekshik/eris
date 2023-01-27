@@ -76,7 +76,7 @@ struct MyProfileView: View {
             }
           } label: { // Label for Menu
             Image(systemName: "line.3.horizontal")
-              .tint(.black)
+              .tint(.white)
               .scaleEffect(1.7)
             
           }
@@ -140,6 +140,8 @@ struct MyProfileView: View {
           
         }
       } // End of LazyVStack
+      
+      DeveloperMastFooter()
     }
   }
   

@@ -49,6 +49,7 @@
 		89870081296F158500042CA8 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 89870080296F158500042CA8 /* FirebaseStorage */; };
 		89870084296F167600042CA8 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 89870083296F167600042CA8 /* FirebaseAnalytics */; };
 		89870086296F167600042CA8 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 89870085296F167600042CA8 /* FirebaseAnalyticsSwift */; };
+		89A005B9297E513000243973 /* DeveloperMastFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A005B8297E513000243973 /* DeveloperMastFooter.swift */; };
 		89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4BF8029466C8C005910FF /* FirebaseManager.swift */; };
 		89B4DFD62963741200BE584A /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFD52963741200BE584A /* UserCardView.swift */; };
 		89B4DFD829640C1E00BE584A /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFD729640C1E00BE584A /* FeedView.swift */; };
@@ -107,6 +108,7 @@
 		89870068296E051000042CA8 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
 		89870087296F16AF00042CA8 /* eris.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eris.entitlements; sourceTree = "<group>"; };
 		89870088296F16CA00042CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		89A005B8297E513000243973 /* DeveloperMastFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperMastFooter.swift; sourceTree = "<group>"; };
 		89A4BF8029466C8C005910FF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		89B4DFD52963741200BE584A /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
 		89B4DFD729640C1E00BE584A /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				894600F12960ED64007D498C /* TestView.swift */,
 				89870066296DE8D700042CA8 /* ScrollViewTest.swift */,
 				89099FAD2978CED000107977 /* Test2View.swift */,
+				89A005B8297E513000243973 /* DeveloperMastFooter.swift */,
 			);
 			path = MiscViews;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				89B4DFD829640C1E00BE584A /* FeedView.swift in Sources */,
 				89B4DFE0296629DC00BE584A /* LikeModel.swift in Sources */,
 				8938E90E296A5A840083378A /* OnboardingView.swift in Sources */,
+				89A005B9297E513000243973 /* DeveloperMastFooter.swift in Sources */,
 				89099FB0297C9D2D00107977 /* CardGradient.swift in Sources */,
 				89B53B19295D281C00BAC746 /* PostCardView.swift in Sources */,
 				8938E916296B0C530083378A /* MyDataModel.swift in Sources */,
@@ -621,7 +625,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = eris/eris.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"eris/Preview Content\"";
 				DEVELOPMENT_TEAM = L4M75K683P;
 				ENABLE_PREVIEWS = YES;
@@ -635,11 +639,12 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apekshik.eris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -655,7 +660,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = eris/eris.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"eris/Preview Content\"";
 				DEVELOPMENT_TEAM = L4M75K683P;
 				ENABLE_PREVIEWS = YES;
@@ -669,11 +674,12 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.apekshik.eris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

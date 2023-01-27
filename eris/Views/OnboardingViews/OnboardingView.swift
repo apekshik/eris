@@ -54,6 +54,8 @@ struct OnboardingView: View {
       Image("onb1")
         .resizable()
         .scaledToFit()
+        .cornerRadius(10)
+        .padding()
       
       HStack {
         Text("Swipe".uppercased())
@@ -111,8 +113,8 @@ struct OnboardingView: View {
       Image("onb2")
         .resizable()
         .scaledToFit()
-      
- 
+        .cornerRadius(10)
+        .padding()
       
       VStack {
         Text("Developed by".uppercased())
@@ -167,8 +169,8 @@ struct OnboardingView: View {
         Text("Enter BOUJÈ".uppercased())
           .padding([.horizontal])
           .padding([.vertical], 8)
-          .foregroundColor(.white)
-          .background(.black)
+          .foregroundColor(.black)
+          .background(.white)
           .cornerRadius(5)
       }
       

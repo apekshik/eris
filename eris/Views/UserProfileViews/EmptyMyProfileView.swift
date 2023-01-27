@@ -14,6 +14,8 @@ struct EmptyMyProfileView: View {
         Image("ProfileEmpty")
           .resizable()
           .scaledToFit()
+          .cornerRadius(10)
+          .padding()
         
         Text("Looks Like you don't have any Boujees right now! This means none of your followers (yet) have posted a Boujee for you. So go ahead, start following friends (if you haven't already) and start Boujee-ing them!")
           .multilineTextAlignment(.center)
@@ -24,17 +26,7 @@ struct EmptyMyProfileView: View {
         
         Spacer()
         
-        VStack {
-          Text("Developed by".uppercased())
-            .font(.caption2)
-            .fontWeight(.semibold)
-            .fontDesign(.rounded)
-            .foregroundColor(.secondary)
-          Text("Apekshik Panigrahi".uppercased())
-            .font(.caption)
-            .fontWeight(.semibold)
-            .fontDesign(.rounded)
-        }
+        DeveloperMastFooter()
       }
     }
 }

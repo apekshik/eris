@@ -30,7 +30,7 @@ struct AboutSheetView: View {
             }
             
             Text("apekshik.bouje@gmail.com")
-              .tint(.black)
+              .tint(.white)
               .opacity(0.7)
           }
           .foregroundColor(.secondary)

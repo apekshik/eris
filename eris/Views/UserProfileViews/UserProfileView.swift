@@ -28,7 +28,10 @@ struct UserProfileView: View {
   var body: some View {
     NavigationStack {
       if youAreBlockedStatus == false {
-        fullBody
+        ZStack {
+          BackgroundView()
+          fullBody
+        }
       } else {
         Text("You've been blocked by this person")
       }
@@ -88,13 +91,14 @@ struct UserProfileView: View {
           Image(systemName: "plus.square.fill")
             .resizable()
             .frame(width: 30, height: 30)
-            .tint(.black)
+            .tint(.white)
         }
       }
       .padding([.horizontal, .top], 20)
       
       if reviews.count > 0 {
         reviewSection
+        
       } else {
         EmptyUserProfileView()
       }
@@ -130,7 +134,7 @@ struct UserProfileView: View {
         } label: { // Label for Menu
           HStack {
             Image(systemName: "shield.lefthalf.fill")
-              .tint(blocked ? .red : .black)
+              .tint(blocked ? .red : .white)
           }
         }
       }
@@ -138,15 +142,19 @@ struct UserProfileView: View {
   }
   
   var reviewSection: some View {
-    LazyVStack {
-      ForEach(reviews, id: \.id) { review in
-        NavigationLink {
-          PostPageView(user: user, post: review, showName: true)
-        } label: {
-          PostCardView(user: user, post: review, showName: true)
+    VStack {
+      LazyVStack {
+        ForEach(reviews, id: \.id) { review in
+          NavigationLink {
+            PostPageView(user: user, post: review, showName: true)
+          } label: {
+            PostCardView(user: user, post: review, showName: true)
+          }
         }
-      }
-    } // End of LazyVStack
+      } // End of LazyVStack
+      
+      DeveloperMastFooter()
+    }
   }
   
   var followerSection: some View {

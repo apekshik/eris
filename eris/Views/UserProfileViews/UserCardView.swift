@@ -10,43 +10,20 @@ import SwiftUI
 struct UserCardView: View {
   @State var user: User
   @State var showReviewForm: Bool = false
-  @Binding var usersIFollow: [User]
-  var body: some View {
-    NavigationLink {
-      UserProfileView(user: user, usersIFollow: $usersIFollow)
-    } label: {
-      fullBody
-    }
-  }
   
-  var fullBody: some View {
-    VStack(alignment: .leading) {
-      VStack(alignment: .leading) {
-        Text(user.fullName)
-          .fontWeight(.bold)
-        Text("@\(user.userName)")
-          .foregroundColor(.secondary)
-      }
-      
+  var body: some View {
       HStack {
-        reviewButton
+        VStack(alignment: .leading) {
+            Text(user.fullName)
+                .font(.headline)
+                .fontWeight(.bold)
+            Text("@\(user.userName)")
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
         Spacer()
-  //        NavigationLink {
-  //          UserProfileView(user: user)
-  //        } label: {
-  //          Image(systemName: "rectangle.portrait.and.arrow.forward") // chevron.forward.circle
-  //            .resizable()
-  //            .frame(width: 25, height: 25)
-  //        }
-        Image(systemName: "rectangle.portrait.and.arrow.forward") // chevron.forward.circle
-          .resizable()
-          .frame(width: 25, height: 25)
+        Image(systemName: "chevron.right")
       }
-    }
-    .sheet(isPresented: $showReviewForm, content: {
-      PostForm(user: user, show: $showReviewForm)
-    })
-    .padding()
   }
   
   var reviewButton: some View {
@@ -70,6 +47,6 @@ struct UserCardView: View {
 
 struct UserCardView_Previews: PreviewProvider {
   static var previews: some View {
-    UserCardView(user: exampleUsers[0], usersIFollow: .constant([]))
+    UserCardView(user: exampleUsers[0])
   }
 }

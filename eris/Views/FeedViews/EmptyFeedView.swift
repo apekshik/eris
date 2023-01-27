@@ -14,6 +14,8 @@ struct EmptyFeedView: View {
         Image("FeedEmpty")
           .resizable()
           .scaledToFit()
+          .cornerRadius(10)
+          .padding()
         
         HStack {
           Text("Looks Like you don't have anything on your feed! Note that your feed is populated by boujees your friends and followers post. Start finding your friends by navigating to the search page. Once you begin following people your feed will automatically be populated with boujees.")

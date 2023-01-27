@@ -29,8 +29,10 @@ struct LivePostView: View {
           showLivePostTutorialCard = true
         } label: {
           Image(systemName: "questionmark.circle.fill")
+            .resizable()
+            .frame(width: 20, height: 20)
             .shadow(radius: 4)
-            .tint(.black)
+            .tint(.white)
         }
       }
       

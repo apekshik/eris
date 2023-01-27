@@ -11,6 +11,8 @@ struct SearchPageView: View {
   @State private var keyword = ""
   @State var userQueries: [User] = []
   @State var usersIFollow: [User] = exampleUsers
+  @State var usersThatFollowMe: [User] = exampleUsers
+  @State var showFollowers: Bool = true
   var body: some View {
     // creating a binding so that fetchUser(containing) is called whenever the keyword changes.
     // TODO: Read more on this. It's kinda confusing how this works right now.
@@ -78,23 +80,47 @@ struct SearchPageView: View {
   // Body of the Search Page
   var searchPageBody: some View {
     ScrollView(.vertical, showsIndicators: false){
+//      Picker("Connections", selection: $showFollowers) {
+//        Text("Following")
+//          .tag(true)
+//        Text("Followers")
+//          .tag(false)
+//      }
+//      .pickerStyle(SegmentedPickerStyle())
+//      .padding()
+//      .shadow(radius: 4)
+//
       Text("Following".uppercased())
         .fontWeight(.bold)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding([.horizontal], 20)
         .opacity(0.6)
-      LazyVStack {
-        ForEach(usersIFollow) { user in
-          UserCardView(user: user, usersIFollow: $usersIFollow)
+      
+      followingBody
+      
+      DeveloperMastFooter()
+    }
+  }
+  
+  var followingBody: some View {
+    LazyVStack(spacing: 12) {
+      ForEach(usersIFollow, id: \.id) { user in
+        NavigationLink {
+          UserProfileView(user: user, usersIFollow: $usersIFollow)
+        } label: {
+          UserCardView(user: user)
         }
       }
-//      .background(Color(hex: "#FAF9F6"))
-      .cornerRadius(10)
-      .overlay {
-        CardGradient()
-      }
-      .padding([.horizontal])
     }
+    .padding()
+    .onAppear {
+      fetchUsersIFollow()
+    }
+    .cornerRadius(10)
+    .overlay {
+      CardGradient()
+    }
+    .padding()
   }
   
   // Fetches all users I follow and stores it in the usersIFollow var.
@@ -108,6 +134,19 @@ struct SearchPageView: View {
       usersIFollow = documents.compactMap { queryDocumentSnapshot in
         try? queryDocumentSnapshot.data(as: User.self)
       }
+    }
+  }
+  
+  private func fetchUsersThatFollowMe() {
+    // fetch the "followers" subcollection within the current user's document.
+    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return }
+    let db = FirebaseManager.shared.firestore
+    db.collection("Users").document(userID).collection("Followers").getDocuments { QuerySnapshot, error in
+      guard let documents = QuerySnapshot?.documents, error == nil else { return }
+      
+      usersThatFollowMe = documents.compactMap({ QueryDocumentSnapshot in
+        try? QueryDocumentSnapshot.data(as: User.self)
+      })
     }
   }
   

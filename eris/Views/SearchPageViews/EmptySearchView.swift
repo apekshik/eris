@@ -14,6 +14,8 @@ struct EmptySearchView: View {
         Image("SearchEmpty")
           .resizable()
           .scaledToFit()
+          .cornerRadius(10)
+          .padding()
         
         Text("Looks Like you don't have any Followers right now! Start following friends by searching them up on the Search Bar and start Boujee-ing!")
           .multilineTextAlignment(.center)

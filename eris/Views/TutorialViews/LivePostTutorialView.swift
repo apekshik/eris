@@ -23,7 +23,7 @@ struct LivePostTutorialView: View {
         Image(systemName: "xmark.circle.fill")
           .resizable()
           .frame(width: 26, height: 26)
-          .tint(.black)
+          .tint(.white)
       }
       
       Text("Introducing Live Boujees on this Update!")
@@ -45,7 +45,7 @@ struct LivePostTutorialView: View {
       
       
       VStack {
-        Text("Developed By".uppercased())
+        Text("By".uppercased())
           .font(.caption2)
           .fontWeight(.semibold)
           .fontDesign(.rounded)
@@ -57,9 +57,12 @@ struct LivePostTutorialView: View {
       }
     }
     .padding()
-    .background(Color(hex: "edeff2"))
+    .background(.ultraThinMaterial)
     .cornerRadius(10)
     .shadow(radius: 10)
+    .overlay {
+      CardGradient()
+    }
     .padding()
   }
 }
