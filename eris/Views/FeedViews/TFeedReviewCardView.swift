@@ -32,7 +32,7 @@ struct TFeedReviewCardView: View {
 //          .opacity(0.6)
           
           // Review Body
-          Text(review.comment)
+          Text(review.caption)
             .font(.title)
             .frame(maxWidth: .infinity, alignment: .leading)
             .fontWeight(.black)

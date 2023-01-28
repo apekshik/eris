@@ -193,10 +193,11 @@ struct PostForm: View {
                                reviewID: documentReference.documentID,
                                createdAt: Date(),
                                relation: relation,
-                               comment: comment,
+                               caption: comment,
                                rating: rating,
                                experienceWithThem: experienceWithThem,
-                               imageURL: downloadURL)
+                               imageURL: downloadURL,
+                               username: user.userName)
           /// After uploading image to storage, upload document for new review to firestore.
           try documentReference.setData(from: newReview)
         } else {
@@ -207,10 +208,11 @@ struct PostForm: View {
                                reviewID: documentReference.documentID,
                                createdAt: Date(),
                                relation: relation,
-                               comment: comment,
+                               caption: comment,
                                rating: rating,
                                experienceWithThem: experienceWithThem,
-                               imageURL: nil)
+                               imageURL: nil,
+                               username: user.userName)
           
           // finally post the data for the review to firestore.
           try documentReference.setData(from: newReview)

@@ -55,7 +55,7 @@ struct FeedPostCardView: View {
             }
             
             // Review Body
-            Text(post.comment)
+            Text(post.caption)
               .font(.title)
               .fontWeight(.black)
               .frame(maxWidth: .infinity, alignment: .leading)

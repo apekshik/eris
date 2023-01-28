@@ -99,7 +99,7 @@ struct TFeedPostPageView: View {
 //      }
       
       // written review
-      Text(post.comment)
+      Text(post.caption)
         .font(.title)
         .fontWeight(.black)
         .foregroundColor(.primary)

@@ -104,7 +104,8 @@ struct AddCommentView: View {
                                  authorUserName: author!.userName,
                                  reviewID: review.reviewID,
                                  content: newCommentContent,
-                                 createdAt: Date())
+                                 createdAt: Date(),
+                                 chainPostID: nil)
         
         // TODO: THis is again a temporary fix. Because in the case we want to order the comments a particular way from the server side, this won't work.
         comments.insert(newComment, at: 0)

@@ -15,6 +15,7 @@ struct Comment: Identifiable, Codable {
   let reviewID: String?
   let content: String
   let createdAt: Date?
+  let chainPostID: String?
   
   enum CodingKeys: String, CodingKey {
     case authorID
@@ -22,5 +23,6 @@ struct Comment: Identifiable, Codable {
     case reviewID
     case content
     case createdAt
+    case chainPostID
   }
 }
