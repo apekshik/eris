@@ -13,37 +13,31 @@ struct DoublePostCardView: View {
   @State var authorFront: Bool = true
     var body: some View {
       VStack(spacing: 0) {
+        Text("epicshit x madhansolo")
+          .font(.caption)
+          .fontWeight(.bold)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .padding(8)
         ZStack {
           LocalImage(url: authorFront ? $recipientUrl : $authorUrl, authorFront: $authorFront)
             .offset(x: -20, y: -30)
           LocalImage(url: authorFront ? $authorUrl : $recipientUrl, authorFront: $authorFront, front: true)
             .offset(x: 20, y: 30)
-            
         }
         .padding(.horizontal, 8)
 //        .background(.blue)
-      }
-//      .background(.ultraThinMaterial)
-      .cornerRadius(10)
-      .overlay {
-        CardGradient()
-      }
-//      .shadow(color: .purple, radius: 5)
-      .padding(.horizontal, 8)
-    }
-    
-  
-}
-
-struct LocalImage: View {
-  @Binding var url: String
-  @Binding var authorFront: Bool
-  @State var front: Bool = false
-  var body: some View {
-    GeometryReader { proxy in
-      let size = proxy.size
-      Image(url)
-        .resizable()
+        Button { // button to continue boujee chain.
+          
+        } label: {
+          Image(systemName: "plus.app.fill")
+            .resizable()
+            .background(LinearGradient(gradient: Gradient(colors: [.white.opacity(0.7), .pink.opacity(0.7)]), startPoint: .topLeading, endPoint: .bottomTrailing))
+//            .cornerRadius(14)
+            .frame(width: 40, height: 40)
+            .tint(.black)
+            
+        }
+        .cornerRadius(8)
         .overlay { // overlay for gradient border
           RoundedRectangle(cornerRadius: 10)
             .stroke(
@@ -52,37 +46,29 @@ struct LocalImage: View {
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
               ),
-              lineWidth: 2
+              lineWidth: 1
             )
         }
-        .overlay { // overlay for Button to reverse order of photos.
-          if front {
-            Button {
-              authorFront.toggle()
-              print(authorFront)
-            } label: {
-              Image(systemName: "arrow.counterclockwise.circle.fill")
-                .resizable()
-                .frame(width: 20, height: 20)
-                .tint(.white)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-            .padding(8)
-          }
-        }
-        .cornerRadius(10)
-        .scaledToFit()
-        .frame(width: size.width, height: size.height)
-        .onTapGesture {
-          authorFront.toggle()
-        }
-        
+        .shadow(color: Color("Princeton Orange"), radius: 5)
+        .offset(y: -20)
+      }
+//      .background(.ultraThinMaterial)
+      .cornerRadius(10)
+      .overlay {
+        RoundedRectangle(cornerRadius: 10)
+          .stroke(
+            LinearGradient(
+              gradient: Gradient(colors: [.white.opacity(0.8), .black]),
+              startPoint: .top,
+              endPoint: .bottom
+            ),
+            lineWidth: 1
+          )
+      }
+      .padding(.horizontal, 8)
     }
-    .clipped()
-    .shadow(color: .white, radius: 5)
-    .frame(height: 570)
-    .padding(.horizontal, 20)
-  }
+    
+  
 }
 
 struct DoublePostCardView_Previews: PreviewProvider {
