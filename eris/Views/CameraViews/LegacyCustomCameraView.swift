@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomCameraView: View {
+struct LegacyCustomCameraView: View {
   
   let cameraService = LegacyCameraService()
   
@@ -16,7 +16,7 @@ struct CustomCameraView: View {
   
   var body: some View {
     ZStack {
-      CameraView(cameraService: cameraService) { result in
+      LegacyCameraView(cameraService: cameraService) { result in
         switch result {
           
         case .success(let photo):

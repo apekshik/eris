@@ -36,7 +36,7 @@ struct CameraTestView: View {
           }
           .padding(.bottom)
           .fullScreenCover(isPresented: $isCustomCameraViewPresented) {
-            CustomCameraView(capturedImage: $capturedImage)
+            LegacyCustomCameraView(capturedImage: $capturedImage)
           }
         }
       }

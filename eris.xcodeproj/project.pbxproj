@@ -26,8 +26,8 @@
 		8938E91C296CC1980083378A /* LivePostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E91B296CC1980083378A /* LivePostModel.swift */; };
 		8938E91E296CF5E70083378A /* AddLivePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E91D296CF5E70083378A /* AddLivePostView.swift */; };
 		893DF87A2985CE2200EBCCCE /* LegacyCameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8792985CE2200EBCCCE /* LegacyCameraService.swift */; };
-		893DF87D298626FB00EBCCCE /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF87C298626FB00EBCCCE /* CameraView.swift */; };
-		893DF87F29862A4400EBCCCE /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF87E29862A4400EBCCCE /* CustomCameraView.swift */; };
+		893DF87D298626FB00EBCCCE /* LegacyCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF87C298626FB00EBCCCE /* LegacyCameraView.swift */; };
+		893DF87F29862A4400EBCCCE /* LegacyCustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF87E29862A4400EBCCCE /* LegacyCustomCameraView.swift */; };
 		893DF88129862C7C00EBCCCE /* CameraTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF88029862C7C00EBCCCE /* CameraTestView.swift */; };
 		893DF8892986BA2B00EBCCCE /* CameraService+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8832986BA2B00EBCCCE /* CameraService+Enums.swift */; };
 		893DF88A2986BA2B00EBCCCE /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8842986BA2B00EBCCCE /* ImageResizer.swift */; };
@@ -35,6 +35,8 @@
 		893DF88C2986BA2B00EBCCCE /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8862986BA2B00EBCCCE /* CameraPreview.swift */; };
 		893DF88D2986BA2B00EBCCCE /* CameraService+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8872986BA2B00EBCCCE /* CameraService+Extensions.swift */; };
 		893DF88E2986BA2B00EBCCCE /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8882986BA2B00EBCCCE /* PhotoCaptureProcessor.swift */; };
+		893DF8902986C23C00EBCCCE /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF88F2986C23C00EBCCCE /* CameraView.swift */; };
+		893DF8922986C27F00EBCCCE /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8912986C27F00EBCCCE /* CameraViewModel.swift */; };
 		894600EA295F5CE2007D498C /* SearchUserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600E9295F5CE2007D498C /* SearchUserCardView.swift */; };
 		894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600EB295F5EE8007D498C /* UserProfileView.swift */; };
 		894600EE2960B80B007D498C /* PostPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600ED2960B80B007D498C /* PostPageView.swift */; };
@@ -108,8 +110,8 @@
 		8938E91B296CC1980083378A /* LivePostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePostModel.swift; sourceTree = "<group>"; };
 		8938E91D296CF5E70083378A /* AddLivePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLivePostView.swift; sourceTree = "<group>"; };
 		893DF8792985CE2200EBCCCE /* LegacyCameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyCameraService.swift; sourceTree = "<group>"; };
-		893DF87C298626FB00EBCCCE /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		893DF87E29862A4400EBCCCE /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
+		893DF87C298626FB00EBCCCE /* LegacyCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyCameraView.swift; sourceTree = "<group>"; };
+		893DF87E29862A4400EBCCCE /* LegacyCustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegacyCustomCameraView.swift; sourceTree = "<group>"; };
 		893DF88029862C7C00EBCCCE /* CameraTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraTestView.swift; sourceTree = "<group>"; };
 		893DF8832986BA2B00EBCCCE /* CameraService+Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Enums.swift"; sourceTree = "<group>"; };
 		893DF8842986BA2B00EBCCCE /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
@@ -117,6 +119,8 @@
 		893DF8862986BA2B00EBCCCE /* CameraPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
 		893DF8872986BA2B00EBCCCE /* CameraService+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Extensions.swift"; sourceTree = "<group>"; };
 		893DF8882986BA2B00EBCCCE /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
+		893DF88F2986C23C00EBCCCE /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		893DF8912986C27F00EBCCCE /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		894600E9295F5CE2007D498C /* SearchUserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCardView.swift; sourceTree = "<group>"; };
 		894600EB295F5EE8007D498C /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		894600ED2960B80B007D498C /* PostPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPageView.swift; sourceTree = "<group>"; };
@@ -333,8 +337,10 @@
 		893DF87B298626EE00EBCCCE /* CameraViews */ = {
 			isa = PBXGroup;
 			children = (
-				893DF87C298626FB00EBCCCE /* CameraView.swift */,
-				893DF87E29862A4400EBCCCE /* CustomCameraView.swift */,
+				893DF87C298626FB00EBCCCE /* LegacyCameraView.swift */,
+				893DF87E29862A4400EBCCCE /* LegacyCustomCameraView.swift */,
+				893DF88F2986C23C00EBCCCE /* CameraView.swift */,
+				893DF8912986C27F00EBCCCE /* CameraViewModel.swift */,
 			);
 			path = CameraViews;
 			sourceTree = "<group>";
@@ -522,6 +528,7 @@
 				890F4A58294154BA003B020D /* PostForm.swift in Sources */,
 				895EEAC82971EAEE0047FBE1 /* FCMTokenModel.swift in Sources */,
 				89A005BD2984949100243973 /* LocalImage.swift in Sources */,
+				893DF8902986C23C00EBCCCE /* CameraView.swift in Sources */,
 				89B53B0D295BD40400BAC746 /* Extensions.swift in Sources */,
 				89D3ADAC2967AC22005B89FE /* AboutSheetView.swift in Sources */,
 				89B4DFDE2965FAC400BE584A /* FeedPostPageView.swift in Sources */,
@@ -529,7 +536,7 @@
 				89B53AFB295BBCB900BAC746 /* UserModel.swift in Sources */,
 				89B53B11295CB41D00BAC746 /* LoadingView.swift in Sources */,
 				893DF88B2986BA2B00EBCCCE /* CameraService.swift in Sources */,
-				893DF87D298626FB00EBCCCE /* CameraView.swift in Sources */,
+				893DF87D298626FB00EBCCCE /* LegacyCameraView.swift in Sources */,
 				89B53B15295CDB5A00BAC746 /* MyProfileView.swift in Sources */,
 				89B4DFD62963741200BE584A /* UserCardView.swift in Sources */,
 				89B4DFD829640C1E00BE584A /* FeedView.swift in Sources */,
@@ -544,6 +551,7 @@
 				89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */,
 				89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */,
 				89B4DFE22967682800BE584A /* ReportFormView.swift in Sources */,
+				893DF8922986C27F00EBCCCE /* CameraViewModel.swift in Sources */,
 				89099FAC2978827D00107977 /* TFeedPostPageView.swift in Sources */,
 				89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */,
 				894600EA295F5CE2007D498C /* SearchUserCardView.swift in Sources */,
@@ -561,7 +569,7 @@
 				893DF87A2985CE2200EBCCCE /* LegacyCameraService.swift in Sources */,
 				8938E9012969F5FB0083378A /* AuthError.swift in Sources */,
 				8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */,
-				893DF87F29862A4400EBCCCE /* CustomCameraView.swift in Sources */,
+				893DF87F29862A4400EBCCCE /* LegacyCustomCameraView.swift in Sources */,
 				89A005BB298424EC00243973 /* DoublePostCardView.swift in Sources */,
 				895EEACB297271CD0047FBE1 /* LivePostTutorialView.swift in Sources */,
 				894600F02960DB12007D498C /* CommentModel.swift in Sources */,
