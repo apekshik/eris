@@ -22,6 +22,7 @@ struct CustomCameraView: View {
         case .success(let photo):
           if let data = photo.fileDataRepresentation() {
             capturedImage = UIImage(data: data)
+            presentationMode.wrappedValue.dismiss()
           } else {
             print("Error: No Image data found")
           }
@@ -40,8 +41,9 @@ struct CustomCameraView: View {
             .font(.system(size: 72))
             .foregroundColor(.white)
         }
-        .padding(.bottom)
+        .padding(.bottom, 36)
       }
     }
+    .ignoresSafeArea()
   }
 }

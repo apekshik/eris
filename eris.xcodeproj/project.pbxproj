@@ -28,6 +28,7 @@
 		893DF87A2985CE2200EBCCCE /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8792985CE2200EBCCCE /* CameraService.swift */; };
 		893DF87D298626FB00EBCCCE /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF87C298626FB00EBCCCE /* CameraView.swift */; };
 		893DF87F29862A4400EBCCCE /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF87E29862A4400EBCCCE /* CustomCameraView.swift */; };
+		893DF88129862C7C00EBCCCE /* CameraTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF88029862C7C00EBCCCE /* CameraTestView.swift */; };
 		894600EA295F5CE2007D498C /* SearchUserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600E9295F5CE2007D498C /* SearchUserCardView.swift */; };
 		894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600EB295F5EE8007D498C /* UserProfileView.swift */; };
 		894600EE2960B80B007D498C /* PostPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600ED2960B80B007D498C /* PostPageView.swift */; };
@@ -103,6 +104,7 @@
 		893DF8792985CE2200EBCCCE /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
 		893DF87C298626FB00EBCCCE /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		893DF87E29862A4400EBCCCE /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
+		893DF88029862C7C00EBCCCE /* CameraTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraTestView.swift; sourceTree = "<group>"; };
 		894600E9295F5CE2007D498C /* SearchUserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCardView.swift; sourceTree = "<group>"; };
 		894600EB295F5EE8007D498C /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		894600ED2960B80B007D498C /* PostPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPageView.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				89870066296DE8D700042CA8 /* ScrollViewTest.swift */,
 				89099FAD2978CED000107977 /* Test2View.swift */,
 				89A005B8297E513000243973 /* DeveloperMastFooter.swift */,
+				893DF88029862C7C00EBCCCE /* CameraTestView.swift */,
 			);
 			path = MiscViews;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 				890F4A4A29413E70003B020D /* erisApp.swift in Sources */,
 				8938E903296A48110083378A /* EmptyMyProfileView.swift in Sources */,
 				89B53AF9295BA54B00BAC746 /* PostModel.swift in Sources */,
+				893DF88129862C7C00EBCCCE /* CameraTestView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
