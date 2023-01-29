@@ -13,7 +13,7 @@ struct CameraView: UIViewControllerRepresentable {
   
   typealias UIViewControllerType = UIViewController
   
-  let cameraService: CameraService
+  let cameraService: LegacyCameraService
   let didFinishProcessingPhoto: (Result<AVCapturePhoto, Error>) -> ()
   
   

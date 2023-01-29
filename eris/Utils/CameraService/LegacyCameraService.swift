@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class CameraService {
+class LegacyCameraService {
 
   var session: AVCaptureSession?
   var delegate: AVCapturePhotoCaptureDelegate?

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomCameraView: View {
   
-  let cameraService = CameraService()
+  let cameraService = LegacyCameraService()
   
   @Binding var capturedImage: UIImage?
   @Environment(\.presentationMode) private var presentationMode
