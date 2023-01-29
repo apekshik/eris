@@ -25,6 +25,8 @@
 		8938E918296C74610083378A /* IDETemplateMacros.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8938E917296C74610083378A /* IDETemplateMacros.plist */; };
 		8938E91C296CC1980083378A /* LivePostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E91B296CC1980083378A /* LivePostModel.swift */; };
 		8938E91E296CF5E70083378A /* AddLivePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8938E91D296CF5E70083378A /* AddLivePostView.swift */; };
+		893DF87A2985CE2200EBCCCE /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8792985CE2200EBCCCE /* CameraService.swift */; };
+		893DF87D298626FB00EBCCCE /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF87C298626FB00EBCCCE /* CameraView.swift */; };
 		894600EA295F5CE2007D498C /* SearchUserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600E9295F5CE2007D498C /* SearchUserCardView.swift */; };
 		894600EC295F5EE8007D498C /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600EB295F5EE8007D498C /* UserProfileView.swift */; };
 		894600EE2960B80B007D498C /* PostPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894600ED2960B80B007D498C /* PostPageView.swift */; };
@@ -97,6 +99,8 @@
 		8938E917296C74610083378A /* IDETemplateMacros.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IDETemplateMacros.plist; sourceTree = "<group>"; };
 		8938E91B296CC1980083378A /* LivePostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePostModel.swift; sourceTree = "<group>"; };
 		8938E91D296CF5E70083378A /* AddLivePostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLivePostView.swift; sourceTree = "<group>"; };
+		893DF8792985CE2200EBCCCE /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		893DF87C298626FB00EBCCCE /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		894600E9295F5CE2007D498C /* SearchUserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCardView.swift; sourceTree = "<group>"; };
 		894600EB295F5EE8007D498C /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		894600ED2960B80B007D498C /* PostPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPageView.swift; sourceTree = "<group>"; };
@@ -309,6 +313,14 @@
 			path = LivePostViews;
 			sourceTree = "<group>";
 		};
+		893DF87B298626EE00EBCCCE /* CameraViews */ = {
+			isa = PBXGroup;
+			children = (
+				893DF87C298626FB00EBCCCE /* CameraView.swift */,
+			);
+			path = CameraViews;
+			sourceTree = "<group>";
+		};
 		895EEAC9297271B40047FBE1 /* TutorialViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +355,7 @@
 		89B53AFD295BBDFB00BAC746 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				893DF87B298626EE00EBCCCE /* CameraViews */,
 				89B53B0E295CA99F00BAC746 /* HomeView.swift */,
 				89099F9429786DCB00107977 /* BackgroundView.swift */,
 				89099FAF297C9D2D00107977 /* CardGradient.swift */,
@@ -368,6 +381,7 @@
 				89B53B0C295BD40400BAC746 /* Extensions.swift */,
 				89B53B1A295D393E00BAC746 /* Examples.swift */,
 				8938E9002969F5FB0083378A /* AuthError.swift */,
+				893DF8792985CE2200EBCCCE /* CameraService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -479,6 +493,7 @@
 				8938E914296A97380083378A /* EmptyUserProfileView.swift in Sources */,
 				89B53AFB295BBCB900BAC746 /* UserModel.swift in Sources */,
 				89B53B11295CB41D00BAC746 /* LoadingView.swift in Sources */,
+				893DF87D298626FB00EBCCCE /* CameraView.swift in Sources */,
 				89B53B15295CDB5A00BAC746 /* MyProfileView.swift in Sources */,
 				89B4DFD62963741200BE584A /* UserCardView.swift in Sources */,
 				89B4DFD829640C1E00BE584A /* FeedView.swift in Sources */,
@@ -505,6 +520,7 @@
 				89A005C12985B4E700243973 /* CustomWebImage.swift in Sources */,
 				8938E91E296CF5E70083378A /* AddLivePostView.swift in Sources */,
 				89870067296DE8D700042CA8 /* ScrollViewTest.swift in Sources */,
+				893DF87A2985CE2200EBCCCE /* CameraService.swift in Sources */,
 				8938E9012969F5FB0083378A /* AuthError.swift in Sources */,
 				8979E4BE295E405C00B0DEEA /* SearchPageView.swift in Sources */,
 				89A005BB298424EC00243973 /* DoublePostCardView.swift in Sources */,
@@ -649,6 +665,7 @@
 				INFOPLIST_FILE = eris/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Boujè";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -684,6 +701,7 @@
 				INFOPLIST_FILE = eris/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Boujè";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
