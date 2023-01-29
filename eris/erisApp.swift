@@ -3,7 +3,9 @@
 //  eris
 //
 //  Created by Apekshik Panigrahi on 12/7/22.
- c
+//  Copyright © 2022 Apekshik Panigrahi (apekshik@gmail.com). All rights reserved.
+//  Proprietary Software License
+//
 
 import SwiftUI
 import Firebase
