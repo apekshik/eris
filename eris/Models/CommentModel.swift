@@ -3,6 +3,8 @@
 //  eris
 //
 //  Created by Apekshik Panigrahi on 12/31/22.
+//  Copyright © 2022 Apekshik Panigrahi (apekshik@gmail.com)
+//  Proprietary Software License
 //
 
 import Foundation

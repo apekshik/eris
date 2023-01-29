@@ -337,10 +337,10 @@
 		893DF87B298626EE00EBCCCE /* CameraViews */ = {
 			isa = PBXGroup;
 			children = (
-				893DF87C298626FB00EBCCCE /* LegacyCameraView.swift */,
-				893DF87E29862A4400EBCCCE /* LegacyCustomCameraView.swift */,
 				893DF88F2986C23C00EBCCCE /* CameraView.swift */,
 				893DF8912986C27F00EBCCCE /* CameraViewModel.swift */,
+				893DF87C298626FB00EBCCCE /* LegacyCameraView.swift */,
+				893DF87E29862A4400EBCCCE /* LegacyCustomCameraView.swift */,
 			);
 			path = CameraViews;
 			sourceTree = "<group>";
@@ -357,6 +357,15 @@
 				893DF8792985CE2200EBCCCE /* LegacyCameraService.swift */,
 			);
 			path = CameraService;
+			sourceTree = "<group>";
+		};
+		893DF8932986CF1700EBCCCE /* StylingViews */ = {
+			isa = PBXGroup;
+			children = (
+				89099F9429786DCB00107977 /* BackgroundView.swift */,
+				89099FAF297C9D2D00107977 /* CardGradient.swift */,
+			);
+			path = StylingViews;
 			sourceTree = "<group>";
 		};
 		895EEAC9297271B40047FBE1 /* TutorialViews */ = {
@@ -393,10 +402,8 @@
 		89B53AFD295BBDFB00BAC746 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				893DF87B298626EE00EBCCCE /* CameraViews */,
 				89B53B0E295CA99F00BAC746 /* HomeView.swift */,
-				89099F9429786DCB00107977 /* BackgroundView.swift */,
-				89099FAF297C9D2D00107977 /* CardGradient.swift */,
+				893DF87B298626EE00EBCCCE /* CameraViews */,
 				895EEAC9297271B40047FBE1 /* TutorialViews */,
 				8938E90C296A5A690083378A /* OnboardingViews */,
 				8938E909296A49CB0083378A /* FormViews */,
@@ -407,6 +414,7 @@
 				8938E906296A48CF0083378A /* PostViews */,
 				8938E905296A48570083378A /* CommentViews */,
 				8938E90A296A4A0B0083378A /* SignInViews */,
+				893DF8932986CF1700EBCCCE /* StylingViews */,
 				8938E90B296A4A680083378A /* MiscViews */,
 			);
 			path = Views;
@@ -713,7 +721,8 @@
 				INFOPLIST_FILE = eris/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Boujè";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Uses Camera to Take Pictures. ";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Uses photos to store pictures captured by user.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -749,7 +758,8 @@
 				INFOPLIST_FILE = eris/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Boujè";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Uses Camera to Take Pictures. ";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Uses photos to store pictures captured by user.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

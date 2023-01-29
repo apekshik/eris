@@ -4,7 +4,11 @@
 //
 //  Created by Apekshik Panigrahi on 1/28/23.
 //
-// From Tutorial on YT - https://www.youtube.com/watch?v=ZmPJBiwgZoQ
+//  From Tutorial on YT - https://www.youtube.com/watch?v=ZmPJBiwgZoQ
+//  Modified by Apekshik Panigrahi on 01/29/23.
+//  Copyright © 2023 Apekshik Panigrahi (apekshik@gmail.com). All rights reserved.
+//  Proprietary Software License
+//
 
 import Foundation
 import AVFoundation

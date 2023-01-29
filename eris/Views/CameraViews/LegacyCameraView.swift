@@ -5,6 +5,9 @@
 //  Created by Apekshik Panigrahi on 1/28/23.
 //
 //  Learnt this from YT Tutorial - https://www.youtube.com/watch?v=ZmPJBiwgZoQ
+//  Copyright © 2023 Apekshik Panigrahi (apekshik@gmail.com)
+//  Proprietary Software License
+//
 
 import SwiftUI
 import AVFoundation

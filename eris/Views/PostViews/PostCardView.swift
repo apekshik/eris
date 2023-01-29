@@ -5,6 +5,8 @@
 //  eris
 //
 //  Created by Apekshik Panigrahi on 12/28/22.
+//  Copyright © 2023 Apekshik Panigrahi (apekshik@gmail.com)
+//  Proprietary Software License
 //
 
 import SwiftUI

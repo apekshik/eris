@@ -3,7 +3,7 @@
 //  eris
 //
 //  Created by Apekshik Panigrahi on 12/7/22.
-//
+ c
 
 import SwiftUI
 import Firebase
@@ -17,7 +17,7 @@ struct erisApp: App {
   
   var body: some Scene {
     WindowGroup {
-      CameraTestView()
+      CameraView()
     }
   }
 }

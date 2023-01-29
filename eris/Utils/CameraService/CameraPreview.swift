@@ -7,6 +7,10 @@
 //  Under MIT License
 //  Source: https://github.com/rorodriguez116/SwiftCamera.git
 //
+//  Modified by Apekshik Panigrahi on 01/29/23
+//  Copyright © 2023 Apekshik Panigrahi (apekshik@gmail.com). All rights reserved.
+//  Proprietary Software License
+//
 
 import SwiftUI
 import AVFoundation
