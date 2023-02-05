@@ -32,7 +32,7 @@
 		893DF8892986BA2B00EBCCCE /* CameraService+Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8832986BA2B00EBCCCE /* CameraService+Enums.swift */; };
 		893DF88A2986BA2B00EBCCCE /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8842986BA2B00EBCCCE /* ImageResizer.swift */; };
 		893DF88B2986BA2B00EBCCCE /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8852986BA2B00EBCCCE /* CameraService.swift */; };
-		893DF88C2986BA2B00EBCCCE /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8862986BA2B00EBCCCE /* CameraPreview.swift */; };
+		893DF88C2986BA2B00EBCCCE /* CameraViewfinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8862986BA2B00EBCCCE /* CameraViewfinder.swift */; };
 		893DF88D2986BA2B00EBCCCE /* CameraService+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8872986BA2B00EBCCCE /* CameraService+Extensions.swift */; };
 		893DF88E2986BA2B00EBCCCE /* PhotoCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF8882986BA2B00EBCCCE /* PhotoCaptureProcessor.swift */; };
 		893DF8902986C23C00EBCCCE /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893DF88F2986C23C00EBCCCE /* CameraView.swift */; };
@@ -67,6 +67,7 @@
 		89A005BF2985776000243973 /* ChainPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A005BE2985776000243973 /* ChainPostModel.swift */; };
 		89A005C12985B4E700243973 /* CustomWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A005C02985B4E700243973 /* CustomWebImage.swift */; };
 		89A4BF8129466C8C005910FF /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A4BF8029466C8C005910FF /* FirebaseManager.swift */; };
+		89A61BD0298F664500B63D9D /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61BCF298F664500B63D9D /* NewProfileView.swift */; };
 		89B4DFD62963741200BE584A /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFD52963741200BE584A /* UserCardView.swift */; };
 		89B4DFD829640C1E00BE584A /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFD729640C1E00BE584A /* FeedView.swift */; };
 		89B4DFDC296545FC00BE584A /* FeedPostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFDB296545FC00BE584A /* FeedPostCardView.swift */; };
@@ -116,7 +117,7 @@
 		893DF8832986BA2B00EBCCCE /* CameraService+Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Enums.swift"; sourceTree = "<group>"; };
 		893DF8842986BA2B00EBCCCE /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		893DF8852986BA2B00EBCCCE /* CameraService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
-		893DF8862986BA2B00EBCCCE /* CameraPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		893DF8862986BA2B00EBCCCE /* CameraViewfinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewfinder.swift; sourceTree = "<group>"; };
 		893DF8872986BA2B00EBCCCE /* CameraService+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CameraService+Extensions.swift"; sourceTree = "<group>"; };
 		893DF8882986BA2B00EBCCCE /* PhotoCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCaptureProcessor.swift; sourceTree = "<group>"; };
 		893DF88F2986C23C00EBCCCE /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 		89A005BE2985776000243973 /* ChainPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPostModel.swift; sourceTree = "<group>"; };
 		89A005C02985B4E700243973 /* CustomWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWebImage.swift; sourceTree = "<group>"; };
 		89A4BF8029466C8C005910FF /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		89A61BCF298F664500B63D9D /* NewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileView.swift; sourceTree = "<group>"; };
 		89B4DFD52963741200BE584A /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
 		89B4DFD729640C1E00BE584A /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		89B4DFDB296545FC00BE584A /* FeedPostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostCardView.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				8938E913296A97380083378A /* EmptyUserProfileView.swift */,
 				894600EB295F5EE8007D498C /* UserProfileView.swift */,
 				89B4DFD52963741200BE584A /* UserCardView.swift */,
+				89A61BCF298F664500B63D9D /* NewProfileView.swift */,
 			);
 			path = UserProfileViews;
 			sourceTree = "<group>";
@@ -348,7 +351,7 @@
 		893DF8822986B8FC00EBCCCE /* CameraService */ = {
 			isa = PBXGroup;
 			children = (
-				893DF8862986BA2B00EBCCCE /* CameraPreview.swift */,
+				893DF8862986BA2B00EBCCCE /* CameraViewfinder.swift */,
 				893DF8852986BA2B00EBCCCE /* CameraService.swift */,
 				893DF8832986BA2B00EBCCCE /* CameraService+Enums.swift */,
 				893DF8872986BA2B00EBCCCE /* CameraService+Extensions.swift */,
@@ -523,7 +526,7 @@
 			files = (
 				89099FAE2978CED000107977 /* Test2View.swift in Sources */,
 				89A005BF2985776000243973 /* ChainPostModel.swift in Sources */,
-				893DF88C2986BA2B00EBCCCE /* CameraPreview.swift in Sources */,
+				893DF88C2986BA2B00EBCCCE /* CameraViewfinder.swift in Sources */,
 				89099F9529786DCB00107977 /* BackgroundView.swift in Sources */,
 				8938E912296A962B0083378A /* EmptySearchView.swift in Sources */,
 				894600F22960ED64007D498C /* TestView.swift in Sources */,
@@ -570,6 +573,7 @@
 				89E4AE6E29463985002BE54C /* LoginView.swift in Sources */,
 				89870069296E051000042CA8 /* ScrollViewController.swift in Sources */,
 				8979E4BC295DDAF800B0DEEA /* LivePostView.swift in Sources */,
+				89A61BD0298F664500B63D9D /* NewProfileView.swift in Sources */,
 				89A005C12985B4E700243973 /* CustomWebImage.swift in Sources */,
 				8938E91E296CF5E70083378A /* AddLivePostView.swift in Sources */,
 				893DF88D2986BA2B00EBCCCE /* CameraService+Extensions.swift in Sources */,

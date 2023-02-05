@@ -16,12 +16,16 @@ struct HomeView: View {
   @State var usersIFollow: [User] = []
   @State var fcmTokenData: [String : Any] = [:]
   @StateObject var myData: MyData = MyData()
+  @StateObject var cameraVM: CameraViewModel = CameraViewModel()
+  
+  @State var showCamera: Bool = false
   
   var body: some View {
     // Redirecting User based on LogStatus
     VStack {
       if logStatus {
         mainView
+          .environmentObject(cameraVM)
       }
       else {
         LoginView()
@@ -42,7 +46,7 @@ struct HomeView: View {
           Text("Recent Activities")
         }
       
-      MyProfileView()
+      MyProfileView(showCamera: $showCamera)
         .tabItem {
           Image(systemName: "person.circle.fill")
           Text("Profile Page")
@@ -61,6 +65,9 @@ struct HomeView: View {
     }
     .fullScreenCover(isPresented: $showOnboardingView, content: {
       OnboardingView(showOnboardingView: $showOnboardingView)
+    })
+    .fullScreenCover(isPresented: $showCamera, content: {
+      CameraView(showCameraView: $showCamera)
     })
   }
   

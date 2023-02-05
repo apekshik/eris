@@ -58,13 +58,13 @@ struct LivePostView: View {
           }
         }
         .padding(8)
-        .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 270)
+        .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 400)
         .onChange(of: boujees) { _ in
           scrollToBottom()
         }
       
         // Footer for Adding LivePosts.
-        AddLivePostView(forUser: user)
+//        AddLivePostView(forUser: user)
       }
 //      .background(Color(hex: "#f5f5f2"))
       .background(.ultraThinMaterial)

@@ -25,20 +25,16 @@ struct MyProfileView: View {
   // MARK: View Control data
   @State var showAppTitle: Bool = true
   @State var showAboutSheet: Bool = false
-  
+  @Binding var showCamera: Bool
   
   // MARK: Main View Body
   var body: some View {
     NavigationStack {
       ScrollView(.vertical, showsIndicators: false) {
         if myProfile != nil {
-          if reviews.count > 0 {
-            ZStack {
-              BackgroundView()
-              foreground
-            }
-          } else {
-            EmptyMyProfileView()
+          ZStack {
+            BackgroundView()
+            foreground
           }
         } else {
           Text("")
@@ -99,7 +95,6 @@ struct MyProfileView: View {
         .fontWeight(.black)
         .fontDesign(.serif)
         .padding([.horizontal], 20)
-      
     }
     .alert(errorMessage, isPresented: $showError) {}
     .task {
@@ -113,11 +108,23 @@ struct MyProfileView: View {
   
   var foreground: some View {
     VStack {
+      Button {
+        showCamera.toggle()
+      } label: {
+        Image(systemName: "camera.fill")
+          .resizable()
+          .tint(.white)
+          .frame(width: 50, height: 40)
+      }
       // can safely use forced unwrapping since we checked for nil already.
       LivePostView(user: myProfile!)
       
       // Regular section follows Live Post section
-      reviewSection
+      if reviews.count > 0 {
+        reviewSection
+      } else {
+        EmptyMyProfileView()
+      }
     }
   }
   
@@ -214,6 +221,6 @@ struct MyProfileView: View {
 
 struct MyProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    MyProfileView(myProfile: exampleUsers[0])
+    MyProfileView(myProfile: exampleUsers[0], showCamera: .constant(false))
   }
 }

@@ -15,7 +15,7 @@
 import SwiftUI
 import AVFoundation
 
-struct CameraPreview: UIViewRepresentable {
+struct CameraViewfinder: UIViewRepresentable {
     class VideoPreviewView: UIView {
         override class var layerClass: AnyClass {
              AVCaptureVideoPreviewLayer.self
@@ -39,13 +39,13 @@ struct CameraPreview: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: VideoPreviewView, context: Context) {
-        
+      
     }
 }
 
-struct CameraPreview_Previews: PreviewProvider {
+struct CameraViewfinder_Previews: PreviewProvider {
     static var previews: some View {
-        CameraPreview(session: AVCaptureSession())
+        CameraViewfinder(session: AVCaptureSession())
             .frame(height: 300)
     }
 }

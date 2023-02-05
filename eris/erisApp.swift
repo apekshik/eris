@@ -16,10 +16,37 @@ import FirebaseMessaging
 struct erisApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
   
-  
+  @State var showCamera: Bool = false
   var body: some Scene {
     WindowGroup {
-      CameraView()
+      HomeView()
+//      VStack {
+//        Button {
+//          showCamera.toggle()
+//        } label: {
+//          Image(systemName: "camera.fill")
+//            .resizable()
+//            .frame(width: 50, height: 40)
+//        }
+//
+//
+//      }
+//      .fullScreenCover(isPresented: $showCamera) {
+//        CameraView(showCameraView: $showCamera)
+//      }
+//      VStack {
+//        Button {
+//          showCamera.toggle()
+//        } label: {
+//          Image(systemName: "camera.fill")
+//            .resizable()
+//            .frame(width: 50, height: 40)
+//        }
+//      }
+//      .overlay {
+//        CameraView(showCameraView: $showCamera)
+//          .opacity(showCamera ? 1 : 0)
+//      }
     }
   }
 }
