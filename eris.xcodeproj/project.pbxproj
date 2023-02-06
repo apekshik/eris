@@ -70,6 +70,7 @@
 		89A61BD0298F664500B63D9D /* NewProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61BCF298F664500B63D9D /* NewProfileView.swift */; };
 		89A61BD2299053CC00B63D9D /* GeoReaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61BD1299053CC00B63D9D /* GeoReaderTest.swift */; };
 		89A61BD42990645300B63D9D /* NewGradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61BD32990645300B63D9D /* NewGradientBackground.swift */; };
+		89A61BD62990700600B63D9D /* NavTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A61BD52990700600B63D9D /* NavTest.swift */; };
 		89B4DFD62963741200BE584A /* UserCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFD52963741200BE584A /* UserCardView.swift */; };
 		89B4DFD829640C1E00BE584A /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFD729640C1E00BE584A /* FeedView.swift */; };
 		89B4DFDC296545FC00BE584A /* FeedPostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B4DFDB296545FC00BE584A /* FeedPostCardView.swift */; };
@@ -148,6 +149,7 @@
 		89A61BCF298F664500B63D9D /* NewProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProfileView.swift; sourceTree = "<group>"; };
 		89A61BD1299053CC00B63D9D /* GeoReaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoReaderTest.swift; sourceTree = "<group>"; };
 		89A61BD32990645300B63D9D /* NewGradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGradientBackground.swift; sourceTree = "<group>"; };
+		89A61BD52990700600B63D9D /* NavTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavTest.swift; sourceTree = "<group>"; };
 		89B4DFD52963741200BE584A /* UserCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardView.swift; sourceTree = "<group>"; };
 		89B4DFD729640C1E00BE584A /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		89B4DFDB296545FC00BE584A /* FeedPostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostCardView.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 				89B4DFD52963741200BE584A /* UserCardView.swift */,
 				89A61BCF298F664500B63D9D /* NewProfileView.swift */,
 				89A61BD1299053CC00B63D9D /* GeoReaderTest.swift */,
+				89A61BD52990700600B63D9D /* NavTest.swift */,
 				89A61BD32990645300B63D9D /* NewGradientBackground.swift */,
 			);
 			path = UserProfileViews;
@@ -598,6 +601,7 @@
 				8938E903296A48110083378A /* EmptyMyProfileView.swift in Sources */,
 				89B53AF9295BA54B00BAC746 /* PostModel.swift in Sources */,
 				893DF88129862C7C00EBCCCE /* CameraTestView.swift in Sources */,
+				89A61BD62990700600B63D9D /* NavTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

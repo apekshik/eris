@@ -18,18 +18,21 @@ struct GeoReaderTest: View {
   }
   
   var body: some View {
-    ZStack {
-      NewGradientBackground()
-        .opacity(0.3)
-      VStack {
-        Spacer()
-          .frame(height: profilePictureEnlarge ? 380 : 0)
-        textContent
+    NavigationStack {
+      ZStack {
+        NewGradientBackground()
+          .opacity(0.3)
+        VStack {
+          Spacer()
+            .frame(height: profilePictureEnlarge ? 390 : 0)
+          textContent
+        }
+        
+        header
+        
+        LivePostTutorialView(show: $showLiveTutorial)
       }
-      
-      header
-      
-      LivePostTutorialView(show: $showLiveTutorial)
+      .toolbarBackground(.hidden, for: .tabBar)
     }
   }
   
@@ -46,13 +49,19 @@ struct GeoReaderTest: View {
               Text("Here's some Test code to blur and see how it goes. So let's say I ")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
-                .blur(radius: 30 * (1 - (midY / 160)))
-                .scaleEffect(1)
+                .blur(radius: 30 * (1 - (midY / 150)))
             }
             .padding(.horizontal, 20)
             .opacity(midY / 150 > 1 ? 1 : midY / 150)
           }
           .frame(maxWidth: .infinity, minHeight: 100, maxHeight: 400)
+        }
+      }
+      .onTapGesture {
+        if profilePictureEnlarge {
+          withAnimation(.spring()) {
+            profilePictureEnlarge.toggle()
+          }
         }
       }
     }
