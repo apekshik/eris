@@ -10,6 +10,7 @@ import SwiftUI
 struct GeoReaderTest: View {
   @State var profilePictureEnlarge: Bool = false
   @State var showLiveTutorial: Bool = false
+  @State var textInput: String = ""
   @Namespace var namespace
   func getPercentage(geo: GeometryProxy) -> Double {
     let maxDistance = UIScreen.main.bounds.height / 2
@@ -26,8 +27,11 @@ struct GeoReaderTest: View {
           Spacer()
             .frame(height: profilePictureEnlarge ? 390 : 0)
           textContent
+//          Spacer()
+//            .frame(height: 50)
         }
         
+
         header
         
         LivePostTutorialView(show: $showLiveTutorial)
@@ -49,10 +53,10 @@ struct GeoReaderTest: View {
               Text("Here's some Test code to blur and see how it goes. So let's say I ")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
-                .blur(radius: 30 * (1 - (midY / 150)))
+                .blur(radius: 30 * (1 - (midY / 130)))
             }
             .padding(.horizontal, 20)
-            .opacity(midY / 150 > 1 ? 1 : midY / 150)
+            .opacity(midY / 130 > 1 ? 1 : midY / 130)
           }
           .frame(maxWidth: .infinity, minHeight: 100, maxHeight: 400)
         }
@@ -63,8 +67,15 @@ struct GeoReaderTest: View {
             profilePictureEnlarge.toggle()
           }
         }
+        
+        hideKeyboardOnTap()
       }
     }
+    .safeAreaInset(edge: .bottom, content: {
+      inputField
+//        .opacity(profilePictureEnlarge ? 0 : 1)
+        .offset(x: 0, y: profilePictureEnlarge ? 150 : 0)
+    })
     .coordinateSpace(name: "scrollView")
   }
   
@@ -112,10 +123,30 @@ struct GeoReaderTest: View {
     
   }
   
+  var inputField: some View {
+    // Input Field
+    HStack {
+      TextField("Type here...", text: $textInput, axis: .vertical)
+        
+      Button {
+        
+      } label: {
+        Image(systemName: "paperplane.circle")
+          .resizable()
+          .frame(width: 25, height: 25)
+          .tint(.white)
+      }
+    }
+    .padding()
+    .background(.ultraThinMaterial)
+    .cornerRadius(10)
+    .padding()
+  }
+  
   var profilePictureLarge: some View {
     GeometryReader { proxy in
       let size = proxy.size
-      Image("Mad1Large")
+      Image("Joji1")
         .resizable()
         .scaledToFill()
         .frame(width: size.width, height: size.height)
@@ -130,7 +161,7 @@ struct GeoReaderTest: View {
   var profilePictureSmall: some View {
     GeometryReader { proxy in
       let size = proxy.size
-      Image("Mad1Large")
+      Image("Joji1")
         .resizable()
         .scaledToFill()
         .frame(width: size.width, height: size.height)
@@ -146,9 +177,9 @@ struct GeoReaderTest: View {
   
   var profileData: some View {
     VStack(alignment: .leading) {
-      Text("Madhan Mohan".uppercased())
+      Text("George Miller".uppercased())
         .fontWeight(.heavy)
-      Text("@madhansolo")
+      Text("@joji")
         .font(.subheadline)
         .foregroundColor(.secondary)
       Button {
