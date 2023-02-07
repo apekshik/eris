@@ -64,7 +64,7 @@ struct LivePostView: View {
         }
       
         // Footer for Adding LivePosts.
-//        AddLivePostView(forUser: user)
+        AddLivePostView(forUser: user)
       }
 //      .background(Color(hex: "#f5f5f2"))
       .background(.ultraThinMaterial)
@@ -124,6 +124,8 @@ struct LivePostView: View {
           scrollProxy?.scrollTo(boujees.last?.id, anchor: .bottom)
       }
   }
+  
+  
 }
 
 struct LiveBoujeeView_Previews: PreviewProvider {
