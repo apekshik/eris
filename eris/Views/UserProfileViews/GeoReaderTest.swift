@@ -29,25 +29,30 @@ struct GeoReaderTest: View {
   @State var anonymous: Bool = false
   
   var body: some View {
-    NavigationStack {
+    
       ZStack {
         NewGradientBackground()
           .opacity(0.3)
-        VStack {
-          Spacer()
-            .frame(height: profilePictureEnlarge ? 390 : 0)
-          textContent
-//          Spacer()
-//            .frame(height: 50)
-        }
         
+        Group {
+          VStack {
+            Spacer()
+              .frame(height: profilePictureEnlarge ? 390 : 0)
+            textContent
+  //          Spacer()
+  //            .frame(height: 50)
+          }
+          
 
-        header
+          header
+        }
+//        .offset(x: 0, y: 48)
         
         LivePostTutorialView(show: $showLiveTutorial)
       }
-      .toolbarBackground(.hidden, for: .tabBar)
-    }
+//      .ignoresSafeArea()
+//      .toolbarBackground(.hidden, for: .tabBar)
+    
   }
   
   var textContent: some View {
@@ -60,8 +65,12 @@ struct GeoReaderTest: View {
             let height: CGFloat = boujee.text.heightOfString(usingFont: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.heavy))
             let totalWidth: CGFloat = boujee.text.widthOfString(usingFont: UIFont.systemFont(ofSize: 24, weight: UIFont.Weight.heavy))
             let numberOfLines = ceil(totalWidth / (UIScreen.main.bounds.width))
+            let screenHeight = UIScreen.main.bounds.height
+            let blurHeight: CGFloat = 130
+            let blurHeightStart = screenHeight - blurHeight
             GeometryReader { geo in
               let minY = geo.frame(in: .named("scrollView")).minY
+              let maxY = geo.frame(in: .named("scrollView")).maxY
               VStack(alignment: .leading) {
                 HStack(spacing: 0) {
                   Text("@\(boujee.anonymous ? "anon".uppercased() : boujee.authorUsername.lowercased()) ")
@@ -78,11 +87,12 @@ struct GeoReaderTest: View {
                   .fontWeight(.heavy)
               }
                 .blur(radius: 30 * (1 - (minY / 80)))
+                .blur(radius: (minY < blurHeightStart) ? 0 : 20 * (minY - blurHeightStart) / (blurHeight))
                 .id(boujee.id)
                 .padding(.horizontal, 20)
                 .opacity(minY / 110 > 1 ? 1 : minY / 110)
             }
-            .frame(maxWidth: .infinity, minHeight: (height + 4) * (numberOfLines + 1), maxHeight: .infinity)
+            .frame(maxWidth: .infinity, minHeight: (height + 4) * (numberOfLines + 1))
           }
         }
         .onAppear {

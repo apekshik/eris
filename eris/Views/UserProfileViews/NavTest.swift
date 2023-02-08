@@ -15,25 +15,27 @@ struct NavTest: View {
   
   var body: some View {
     TabView(selection: $selectedTab) {
+    
       GeoReaderTest()
         .toolbar(.hidden, for: .tabBar)
         .tabItem {
-          Image(systemName: "mail")
+            Image(systemName: "tray")
         }
         .tag(0)
-        .highPriorityGesture(DragGesture().onEnded({
-          self.handleSwipe(translation: $0.translation.width)
-        }))
       
       AboutSheetView()
         .tabItem {
-          Image(systemName: "tray")
+            Image(systemName: "camera")
         }
         .tag(1)
-        .highPriorityGesture(DragGesture().onEnded({
-          self.handleSwipe(translation: $0.translation.width)
-        }))
+      AboutSheetView()
+        .tabItem {
+            Image(systemName: "camera")
+        }
+        .tag(2)
     }
+    .tabViewStyle(.page(indexDisplayMode: .never))
+    .ignoresSafeArea()
     
   }
   
