@@ -54,7 +54,7 @@ struct TestView: View {
   }
   
   private func addPost() {
-    let newPost = LivePost(userID: "", authorID: "", selfID: "", createdAt: Date(), text: newContent, authorUsername: user.userName, anonymous: false)
+    let newPost = LivePost(userID: "", authorID: "", selfID: "", createdAt: Date(), text: newContent, authorUsername: user.userName, recipientUsername: "", anonymous: false)
     
     boujees.append(newPost)
     newContent = ""

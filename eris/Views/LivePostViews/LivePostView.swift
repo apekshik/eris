@@ -21,6 +21,7 @@ struct LivePostView: View {
   
   var body: some View {
     VStack {
+      // Billboard Header HStack with name and help button.
       HStack {
         Text("BillBoard".uppercased())
           .font(.headline)

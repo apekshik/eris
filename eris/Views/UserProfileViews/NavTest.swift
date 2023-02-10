@@ -16,22 +16,13 @@ struct NavTest: View {
   var body: some View {
     TabView(selection: $selectedTab) {
     
-      GeoReaderTest()
-        .toolbar(.hidden, for: .tabBar)
-        .tabItem {
-            Image(systemName: "tray")
-        }
+      MyProfileView(boujees: exampleLivePosts)
         .tag(0)
+  
+      AboutSheetView()
+        .tag(1)
       
       AboutSheetView()
-        .tabItem {
-            Image(systemName: "camera")
-        }
-        .tag(1)
-      AboutSheetView()
-        .tabItem {
-            Image(systemName: "camera")
-        }
         .tag(2)
     }
     .tabViewStyle(.page(indexDisplayMode: .never))

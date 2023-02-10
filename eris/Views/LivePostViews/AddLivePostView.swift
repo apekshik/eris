@@ -71,7 +71,7 @@ struct AddLivePostView: View {
         let db = FirebaseManager.shared.firestore
         let newBoujeeRef = db.collection("LiveBoujees").document()
         // We can use the bang (!) operator on the author var becauase we know we fetched the data and then tried to create a new Comment Instance.
-        let newBoujee = LivePost(userID: forUser!.firestoreID, authorID: author!.firestoreID, selfID: newBoujeeRef.documentID, createdAt: Date(), text: newContent, authorUsername: author!.userName, anonymous: anonymous)
+        let newBoujee = LivePost(userID: forUser!.firestoreID, authorID: author!.firestoreID, selfID: newBoujeeRef.documentID, createdAt: Date(), text: newContent, authorUsername: author!.userName, recipientUsername: forUser!.userName, anonymous: anonymous)
         
         
         try db.collection("LiveBoujees").document(newBoujeeRef.documentID).setData(from: newBoujee)

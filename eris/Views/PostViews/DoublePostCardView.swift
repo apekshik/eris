@@ -35,12 +35,12 @@ struct DoublePostCardView: View {
           .foregroundColor(.secondary)
       }
       ZStack {
-//        LocalImage(url: authorFront ? $recipientUrl : $authorUrl, authorFront: $authorFront)
-//          .offset(x: -20, y: -30)
-//        LocalImage(url: authorFront ? $authorUrl : $recipientUrl, authorFront: $authorFront, front: true)
-//          .offset(x: 20, y: 30)
-        CustomWebImage(authorFront: $authorFront, post: authorFront ? recipientPost : authorPost)
-        CustomWebImage(authorFront: $authorFront, post: authorFront ? recipientPost : authorPost, front: true)
+        LocalImage(url: authorFront ? $recipientUrl : $authorUrl, authorFront: $authorFront)
+          .offset(x: -20, y: -30)
+        LocalImage(url: authorFront ? $authorUrl : $recipientUrl, authorFront: $authorFront, front: true)
+          .offset(x: 20, y: 30)
+//        CustomWebImage(authorFront: $authorFront, post: authorFront ? recipientPost : authorPost)
+//        CustomWebImage(authorFront: $authorFront, post: authorFront ? recipientPost : authorPost, front: true)
       }
       .padding(.horizontal, 8)
       //        .background(.blue)

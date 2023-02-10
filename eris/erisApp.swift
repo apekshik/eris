@@ -11,6 +11,7 @@ import SwiftUI
 import Firebase
 import FirebaseCore
 import FirebaseMessaging
+import Mixpanel
 
 @main
 struct erisApp: App {
@@ -59,6 +60,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     
     FirebaseApp.configure()
+    
+    // Mixpanel Analytics innitialization.
+    Mixpanel.initialize(token: "8a327744530ab43b4fce3131f1c9e6f8", trackAutomaticEvents: true)
+    Mixpanel.mainInstance().track(event: "Logged In", properties: [
+        "source": "Boujè App"
+    ])
     
     // Setting up Cloud Messaging
     Messaging.messaging().delegate = self

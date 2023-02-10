@@ -46,7 +46,7 @@ struct HomeView: View {
           Text("Recent Activities")
         }
       
-      MyProfileView(showCamera: $showCamera)
+      LMyProfileView(showCamera: $showCamera)
         .tabItem {
           Image(systemName: "person.circle.fill")
           Text("Profile Page")
@@ -57,6 +57,9 @@ struct HomeView: View {
           Image(systemName: "magnifyingglass")
           Text("Search")
         }
+      
+      // some new view()
+      // .tab
     } // End of TabView
     .tint(.white)
     .task {

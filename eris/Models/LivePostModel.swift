@@ -17,6 +17,7 @@ struct LivePost: Codable, Identifiable, Hashable {
   let createdAt: Date
   let text: String
   let authorUsername: String
+  let recipientUsername: String
   let anonymous: Bool
   
   enum CodingKeys: String, CodingKey {
@@ -26,6 +27,7 @@ struct LivePost: Codable, Identifiable, Hashable {
     case createdAt
     case text
     case authorUsername
+    case recipientUsername 
     case anonymous
   }
 }
