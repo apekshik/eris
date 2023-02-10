@@ -30,8 +30,8 @@ struct MyProfileView: View, KeyboardReadable {
   @State var anonymous: Bool = false
   
   // keyboard hiding/unhiding controls for views to move up and down accordingly.
-  @State var isKeyboardVisible: Bool = false
-  @ObservedObject var keyboardHeightHelper = KeyboardHeightHelper()
+//  @State var isKeyboardVisible: Bool = false
+//  @ObservedObject var keyboardHeightHelper = KeyboardHeightHelper()
   
   var body: some View {
     
@@ -47,7 +47,7 @@ struct MyProfileView: View, KeyboardReadable {
           }
           header
         }
-        .offset(y: isKeyboardVisible ? -self.keyboardHeightHelper.keyboardHeight + 40 : 0)
+//        .offset(y: isKeyboardVisible ? -self.keyboardHeightHelper.keyboardHeight + 40 : 0)
         
         LivePostTutorialView(show: $showLiveTutorial)
       }
@@ -119,11 +119,11 @@ struct MyProfileView: View, KeyboardReadable {
     }
     .safeAreaInset(edge: .bottom) {
       inputField
-        .onReceive(keyboardPublisher) { newIsKeyboardVisible in
-          withAnimation(.spring()) {
-            isKeyboardVisible = newIsKeyboardVisible
-          }
-        }
+//        .onReceive(keyboardPublisher) { newIsKeyboardVisible in
+//          withAnimation(.spring()) {
+//            isKeyboardVisible = newIsKeyboardVisible
+//          }
+//        }
         .offset(x: 0, y: profilePictureEnlarge ? 150 : 0)
         
     }

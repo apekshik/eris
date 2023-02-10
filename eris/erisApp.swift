@@ -21,6 +21,7 @@ struct erisApp: App {
   var body: some Scene {
     WindowGroup {
       HomeView()
+//        NewHomeView()
 //      VStack {
 //        Button {
 //          showCamera.toggle()

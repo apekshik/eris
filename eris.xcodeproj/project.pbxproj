@@ -91,6 +91,7 @@
 		89C9097E2995B87F00CF5AA0 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 89C9097D2995B87F00CF5AA0 /* Mixpanel */; };
 		89C909802996022C00CF5AA0 /* NewFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C9097F2996022C00CF5AA0 /* NewFeedView.swift */; };
 		89C909822996180300CF5AA0 /* GradientBackgroundFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C909812996180300CF5AA0 /* GradientBackgroundFeed.swift */; };
+		89C909842996205500CF5AA0 /* NewHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C909832996205500CF5AA0 /* NewHomeView.swift */; };
 		89D3ADAC2967AC22005B89FE /* AboutSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */; };
 		89D3ADAE2968C314005B89FE /* TFeedReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D3ADAD2968C314005B89FE /* TFeedReviewCardView.swift */; };
 		89E4AE6E29463985002BE54C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E4AE6D29463985002BE54C /* LoginView.swift */; };
@@ -173,6 +174,7 @@
 		89B53B1A295D393E00BAC746 /* Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examples.swift; sourceTree = "<group>"; };
 		89C9097F2996022C00CF5AA0 /* NewFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedView.swift; sourceTree = "<group>"; };
 		89C909812996180300CF5AA0 /* GradientBackgroundFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundFeed.swift; sourceTree = "<group>"; };
+		89C909832996205500CF5AA0 /* NewHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeView.swift; sourceTree = "<group>"; };
 		89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSheetView.swift; sourceTree = "<group>"; };
 		89D3ADAD2968C314005B89FE /* TFeedReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFeedReviewCardView.swift; sourceTree = "<group>"; };
 		89E4AE6D29463985002BE54C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				89B53B0E295CA99F00BAC746 /* HomeView.swift */,
+				89C909832996205500CF5AA0 /* NewHomeView.swift */,
 				893DF87B298626EE00EBCCCE /* CameraViews */,
 				895EEAC9297271B40047FBE1 /* TutorialViews */,
 				8938E90C296A5A690083378A /* OnboardingViews */,
@@ -585,6 +588,7 @@
 				8938E916296B0C530083378A /* MyDataModel.swift in Sources */,
 				893DF88E2986BA2B00EBCCCE /* PhotoCaptureProcessor.swift in Sources */,
 				894600EE2960B80B007D498C /* PostPageView.swift in Sources */,
+				89C909842996205500CF5AA0 /* NewHomeView.swift in Sources */,
 				89B53B0F295CA99F00BAC746 /* HomeView.swift in Sources */,
 				89B53B0B295BD2DD00BAC746 /* TLoginView.swift in Sources */,
 				89B4DFE22967682800BE584A /* ReportFormView.swift in Sources */,
