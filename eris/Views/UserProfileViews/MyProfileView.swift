@@ -37,7 +37,7 @@ struct MyProfileView: View, KeyboardReadable {
     
       ZStack {
         NewGradientBackground()
-          .opacity(0.3)
+          .opacity(0.6)
         
         Group {
           VStack {

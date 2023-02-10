@@ -1,17 +1,17 @@
 //
-//  NewGradientBackground.swift
+//  GradientBackgroundFeed.swift
 //  eris
 //
-//  Created by Apekshik Panigrahi on 2/5/23.
+//  Created by Apekshik Panigrahi on 2/10/23.
 //
 
 import SwiftUI
 
-struct NewGradientBackground: View {
+struct GradientBackgroundFeed: View {
   @State var start = UnitPoint(x: 0, y: -2)
   @State var end = UnitPoint(x: 4, y: 0)
   
-  let colors = [Color(#colorLiteral(red: 0.9843137255, green: 0.9176470588, blue: 0.6470588235, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.9108665586, blue: 0.653829813, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.7512738109, blue: 0.6763105392, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.2626227736, blue: 0.2668531835, alpha: 1)), Color(#colorLiteral(red: 0.001610695035, green: 0.08892402798, blue: 0.2752042115, alpha: 1))]
+  let colors = [Color(#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)), Color(#colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)), Color(#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1)), Color(#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)), Color(#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1))]
   let timer = Timer.publish(every: 1, on: .main, in: .default).autoconnect()
   
   var body: some View {
@@ -31,8 +31,8 @@ struct NewGradientBackground: View {
   }
 }
 
-struct NewGradientBackground_Previews: PreviewProvider {
-  static var previews: some View {
-    NewGradientBackground()
-  }
+struct GradientBackgroundFeed_Previews: PreviewProvider {
+    static var previews: some View {
+        GradientBackgroundFeed()
+    }
 }

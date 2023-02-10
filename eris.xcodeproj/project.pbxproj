@@ -89,6 +89,8 @@
 		89B53B19295D281C00BAC746 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B18295D281C00BAC746 /* PostCardView.swift */; };
 		89B53B1B295D393E00BAC746 /* Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B53B1A295D393E00BAC746 /* Examples.swift */; };
 		89C9097E2995B87F00CF5AA0 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 89C9097D2995B87F00CF5AA0 /* Mixpanel */; };
+		89C909802996022C00CF5AA0 /* NewFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C9097F2996022C00CF5AA0 /* NewFeedView.swift */; };
+		89C909822996180300CF5AA0 /* GradientBackgroundFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C909812996180300CF5AA0 /* GradientBackgroundFeed.swift */; };
 		89D3ADAC2967AC22005B89FE /* AboutSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */; };
 		89D3ADAE2968C314005B89FE /* TFeedReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D3ADAD2968C314005B89FE /* TFeedReviewCardView.swift */; };
 		89E4AE6E29463985002BE54C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E4AE6D29463985002BE54C /* LoginView.swift */; };
@@ -169,6 +171,8 @@
 		89B53B14295CDB5900BAC746 /* LMyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LMyProfileView.swift; sourceTree = "<group>"; };
 		89B53B18295D281C00BAC746 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		89B53B1A295D393E00BAC746 /* Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examples.swift; sourceTree = "<group>"; };
+		89C9097F2996022C00CF5AA0 /* NewFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedView.swift; sourceTree = "<group>"; };
+		89C909812996180300CF5AA0 /* GradientBackgroundFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundFeed.swift; sourceTree = "<group>"; };
 		89D3ADAB2967AC22005B89FE /* AboutSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSheetView.swift; sourceTree = "<group>"; };
 		89D3ADAD2968C314005B89FE /* TFeedReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFeedReviewCardView.swift; sourceTree = "<group>"; };
 		89E4AE6D29463985002BE54C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 				89099FAB2978827D00107977 /* TFeedPostPageView.swift */,
 				89B4DFDB296545FC00BE584A /* FeedPostCardView.swift */,
 				8938E90F296A92920083378A /* EmptyFeedView.swift */,
+				89C9097F2996022C00CF5AA0 /* NewFeedView.swift */,
+				89C909812996180300CF5AA0 /* GradientBackgroundFeed.swift */,
 			);
 			path = FeedViews;
 			sourceTree = "<group>";
@@ -573,6 +579,7 @@
 				89B4DFE0296629DC00BE584A /* LikeModel.swift in Sources */,
 				8938E90E296A5A840083378A /* OnboardingView.swift in Sources */,
 				89A005B9297E513000243973 /* DeveloperMastFooter.swift in Sources */,
+				89C909822996180300CF5AA0 /* GradientBackgroundFeed.swift in Sources */,
 				89099FB0297C9D2D00107977 /* CardGradient.swift in Sources */,
 				89B53B19295D281C00BAC746 /* PostCardView.swift in Sources */,
 				8938E916296B0C530083378A /* MyDataModel.swift in Sources */,
@@ -593,6 +600,7 @@
 				89870069296E051000042CA8 /* ScrollViewController.swift in Sources */,
 				8979E4BC295DDAF800B0DEEA /* LivePostView.swift in Sources */,
 				89A61BD0298F664500B63D9D /* NewProfileView.swift in Sources */,
+				89C909802996022C00CF5AA0 /* NewFeedView.swift in Sources */,
 				89A005C12985B4E700243973 /* CustomWebImage.swift in Sources */,
 				8938E91E296CF5E70083378A /* AddLivePostView.swift in Sources */,
 				893DF88D2986BA2B00EBCCCE /* CameraService+Extensions.swift in Sources */,
