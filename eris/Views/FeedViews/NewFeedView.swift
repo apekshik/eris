@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NewFeedView: View {
   @State var textInput: String = ""
+  @StateObject var model: FeedViewModel = FeedViewModel()
+  
   var body: some View {
     NavigationStack {
       ZStack {
