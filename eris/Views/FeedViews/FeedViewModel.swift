@@ -6,11 +6,21 @@
 //
 
 import Foundation
-
+import PhotosUI
+import _PhotosUI_SwiftUI
 
 class FeedViewModel: ObservableObject {
   @Published var posts: [Post] = []
+  
+  // MARK: User Data
   @Published var usersIFollow: [User] = []
+  @Published var myData: User? = nil
+  @Published var newPost: Post? = nil 
+  
+  // PhotoPicker vars
+  @Published var showPhotoPicker: Bool = false
+  @Published var photoItem: PhotosPickerItem? = nil
+  @Published var postImageData: Data?
   
   // MARK: Error Details.
   @Published var errorMessage: String = ""
@@ -18,6 +28,33 @@ class FeedViewModel: ObservableObject {
   
   // MARK: View vars
   @Published var isLoading: Bool = false
+  
+  func addUsersTo(usersIFollow users: [User]) {
+    usersIFollow.append(contentsOf: users)
+  }
+  
+  func addMyUserData(profileData: User, usersIFollow users: [User]) {
+    myData = profileData
+    usersIFollow = users 
+  }
+  
+  func makePost() {
+    
+  }
+  
+  func updatePhoto(selectedPhotoPickerItem : PhotosPickerItem?) {
+    if let selectedPhotoPickerItem {
+      Task {
+        if let rawImageData = try? await selectedPhotoPickerItem.loadTransferable(type: Data.self), let image = UIImage(data: rawImageData), let compressedImageData = image.jpegData(compressionQuality: 0.5) {
+          
+          await MainActor.run(body: {
+            postImageData = compressedImageData
+            photoItem = nil
+          })
+        }
+      }
+    }
+  }
   
   func fetchFeedReviews() {
     isLoading = true
