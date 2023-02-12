@@ -78,10 +78,10 @@ struct TFeedPostPageView: View {
         Text(showName ? (user?.fullName ?? "") : "")
           .font(.headline)
           .foregroundColor(.secondary)
-        Text("\(post.rating) Star Rating")
-          .font(.headline)
-          .foregroundColor(.secondary)
-          .frame(maxWidth: .infinity, alignment: .trailing)
+//        Text("\(post.rating) Star Rating")
+//          .font(.headline)
+//          .foregroundColor(.secondary)
+//          .frame(maxWidth: .infinity, alignment: .trailing)
       }
       .padding([.top, .horizontal])
       
@@ -107,9 +107,9 @@ struct TFeedPostPageView: View {
       
       // HStack under the written review.
       HStack {
-        Text("Written by a \(post.relation)".uppercased())
-          .font(.caption)
-          .foregroundColor(.secondary)
+//        Text("Written by a \(post.relation)".uppercased())
+//          .font(.caption)
+//          .foregroundColor(.secondary)
         HStack(spacing: 20) {
           // Button for Like/Unlike
           Button {
@@ -157,6 +157,6 @@ struct TFeedPostPageView: View {
 
 struct TFeedPostPageView_Previews: PreviewProvider {
     static var previews: some View {
-        TFeedPostPageView(user: exampleUsers[0], userID: "", post: exampleReviews[0])
+        TFeedPostPageView(user: exampleUsers[0], userID: "", post: examplePost)
     }
 }

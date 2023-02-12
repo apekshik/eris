@@ -24,6 +24,7 @@ struct ChainPost: Codable, Identifiable, Hashable {
     case authorPostID
     case recipientID 
     case recipientPostID
-    case chain 
+    case chain
+    
   }
 }

@@ -13,27 +13,47 @@ import FirebaseFirestoreSwift
 
 struct Post: Codable, Identifiable, Hashable {
   @DocumentID var id = UUID().uuidString // To be able to iterate through a list of Review Items.
-  let uid: String // associated uid in firestore. Tells which user the review is for.
-  let authorID: String // id that tells which user wrote the review.
-  let reviewID: String // stores the it's own firestore id for quick reference.
-  let createdAt: Date
-  let relation: String // type of relationship to the person who wrote the review.
-  let caption: String
-  let rating: Int
-  let experienceWithThem: String?
-  let imageURL: URL?
-  let username: String? // username for whom the post was made.
+  let authorUserID: String // id to tell who made the post.
+  let authorUsername: String // username of the person who made the post
+  let recipientUserID: String // userID to tell who the post is for.
+  let recipientUsername: String // username for whom the post was made.
+  let imageURL: URL? // Image URL for this post.
+  let caption: String // short caption if they'd like to add that.
+  // The bool conditions below are enough to let me know what type of post it is. For example,
+  // if a post is a parent and connected, then I know this post is the start of the chain AND his/her friend
+  // posted back. If a post is not a parent and connected, it is the post that the friend posted back, and so on...
+  let isParent: Bool // tells if the post is the start of a chain
+  let isConnected: Bool // tells if the recipient boujee'd back.
+  let hasChain: Bool // tells if the post has a chain attached to it.
+  // we don't need to store the username for the connected post ID because it has to be the recipientUsername.
+  let connectedPostID: String
+  let connectedPostImageURL: URL?
+  let connectedPostCaption: String
+  //  The creeatedAt stores the same value as mostRecentPostTime when only the first post exists in the chain.
+  let createdAt: Date // time of creation.
+  
+  
+//  let chainPostIDs: [String] // Chain of Post IDs associated with this post.
+//  let chainImageURLs: [URL]
+  
   
   enum CodingKeys: String, CodingKey {
-    case uid
-    case authorID
-    case reviewID
-    case createdAt
-    case relation
-    case caption = "comment"
-    case rating
-    case experienceWithThem
+    case authorUserID
+    case authorUsername
+    case recipientUserID
+    case recipientUsername
     case imageURL
-    case username
+    case caption = "comment"
+    case isParent
+    case isConnected
+    case hasChain
+    case connectedPostID
+    case connectedPostImageURL
+    case connectedPostCaption
+    case createdAt
+    
+    
+//    case chainPostIDs
+//    case chainImageURLs
   }
 }

@@ -190,31 +190,13 @@ struct PostForm: View {
           let _ = try await storageRef.putDataAsync(postImageData)
           let downloadURL = try await storageRef.downloadURL()
           
-          let newReview = Post(uid: user.firestoreID,
-                               authorID: userID,
-                               reviewID: documentReference.documentID,
-                               createdAt: Date(),
-                               relation: relation,
-                               caption: comment,
-                               rating: rating,
-                               experienceWithThem: experienceWithThem,
-                               imageURL: downloadURL,
-                               username: user.userName)
+          let newReview = Post(authorUserID: userID, authorUsername: "", recipientUserID: "", recipientUsername: "", imageURL: downloadURL, caption: "", isParent: true, isConnected: false, hasChain: false, connectedPostID: "", connectedPostImageURL: nil, connectedPostCaption: "", createdAt: Date())
           /// After uploading image to storage, upload document for new review to firestore.
           try documentReference.setData(from: newReview)
         } else {
           /// Else just upload a document to firestore.
           // create a new Review object with no image.
-          let newReview = Post(uid: user.firestoreID,
-                               authorID: userID,
-                               reviewID: documentReference.documentID,
-                               createdAt: Date(),
-                               relation: relation,
-                               caption: comment,
-                               rating: rating,
-                               experienceWithThem: experienceWithThem,
-                               imageURL: nil,
-                               username: user.userName)
+          let newReview = Post(authorUserID: userID, authorUsername: "", recipientUserID: "", recipientUsername: "", imageURL: nil, caption: "", isParent: true, isConnected: false, hasChain: false, connectedPostID: "", connectedPostImageURL: nil, connectedPostCaption: "", createdAt: Date())
           
           // finally post the data for the review to firestore.
           try documentReference.setData(from: newReview)

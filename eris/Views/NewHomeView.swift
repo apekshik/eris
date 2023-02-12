@@ -15,7 +15,7 @@ struct NewHomeView: View {
       NewFeedView()
         .tag(0)
         .tabItem {
-          Image(systemName: "camera")
+          Image(systemName: "house")
         }
         .toolbarBackground(.hidden, for: .navigationBar)
 //        .toolbarBackground(.hidden, for: .tabBar)

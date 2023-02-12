@@ -62,6 +62,6 @@ struct CustomWebImage: View {
 
 struct CustomWebImage_Previews: PreviewProvider {
     static var previews: some View {
-      CustomWebImage(authorFront: .constant(true), post: exampleReviews[0], front: true)
+      CustomWebImage(authorFront: .constant(true), post: examplePost, front: true)
     }
 }

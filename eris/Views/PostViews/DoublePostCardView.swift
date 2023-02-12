@@ -23,7 +23,7 @@ struct DoublePostCardView: View {
   var body: some View {
     VStack(spacing: 0) {
       HStack(spacing: 0) {
-        Text("\(recipientPost.username!) x \(authorPost.username!)")
+        Text("\(recipientPost.recipientUsername) x \(authorPost.authorUsername)")
           .font(.caption)
           .fontWeight(.bold)
         
@@ -89,6 +89,6 @@ struct DoublePostCardView: View {
 
 struct DoublePostCardView_Previews: PreviewProvider {
   static var previews: some View {
-    DoublePostCardView(chainPost: exampleChainPosts[0], authorPost: exampleReviews[0], recipientPost: exampleReviews[1])
+    DoublePostCardView(chainPost: exampleChainPosts[0], authorPost: examplePost, recipientPost: examplePost)
   }
 }

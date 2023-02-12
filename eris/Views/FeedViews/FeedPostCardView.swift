@@ -31,9 +31,9 @@ struct FeedPostCardView: View {
                 .font(.headline)
                 .fontWeight(.heavy)
               Spacer()
-              Text("\(post.rating) Star Rating")
-                .font(.headline)
-  //              .frame(maxWidth: .infinity, alignment: .trailing)
+//              Text("\(post.rating) Star Rating")
+//                .font(.headline)
+//  //              .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .foregroundColor(.white)
             .padding([.top, .horizontal], 16)
@@ -71,9 +71,9 @@ struct FeedPostCardView: View {
             
             // HStack Footer
             HStack {
-              Text("Written by a \(post.relation)".uppercased())
-                .font(.caption)
-                .foregroundColor(.white)
+//              Text("Written by a \(post.relation)".uppercased())
+//                .font(.caption)
+//                .foregroundColor(.white)
               HStack(spacing: 20) {
                 // Button for comments section.
                 Button {
@@ -146,7 +146,7 @@ struct FeedPostCardView: View {
   
   private func fetchUser() async {
     let db = FirebaseManager.shared.firestore
-    guard let temp = try? await db.collection("Users").document(post.uid).getDocument(as: User.self) else { return }
+    guard let temp = try? await db.collection("Users").document(post.recipientUserID).getDocument(as: User.self) else { return }
     
     await MainActor.run(body: {
       self.user = temp
@@ -170,12 +170,12 @@ struct FeedPostCardView: View {
     // Fetch your own uid
     guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
     // First get the "Likes" subcollection reference of the user whose review is being liked by you.
-    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(post.uid).collection("Likes")
+    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(post.recipientUserID).collection("Likes")
     Task {
       do {
         // delete the like that is associated with you and this specific review.
         let querySnapshot = try await likesRef
-          .whereField("reviewID", isEqualTo: post.reviewID)
+          .whereField("reviewID", isEqualTo: post.id)
           .whereField("authorID", isEqualTo: uid)
           .getDocuments()
         
@@ -205,8 +205,8 @@ struct FeedPostCardView: View {
       guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
       
       // First get the "Likes" subcollection reference of the user whose review is being liked by you.
-      let likeDocRef = FirebaseManager.shared.firestore.collection("Users").document(post.uid).collection("Likes").document()
-      let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: post.reviewID, authorID: uid)
+      let likeDocRef = FirebaseManager.shared.firestore.collection("Users").document(post.recipientUserID).collection("Likes").document()
+      let newLike: Like = Like(likeID: likeDocRef.documentID, reviewID: post.id!, authorID: uid)
       
       try likeDocRef.setData(from: newLike)
     } catch {
@@ -218,12 +218,12 @@ struct FeedPostCardView: View {
     // Fetch your own uid
     guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
     // First get the "Likes" subcollection reference of the user whose review is being liked by you.
-    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(post.uid).collection("Likes")
+    let likesRef = FirebaseManager.shared.firestore.collection("Users").document(post.recipientUserID).collection("Likes")
     Task {
       do {
         // delete the like that is associated with you and this specific review.
         let querySnapshot = try await likesRef
-          .whereField("reviewID", isEqualTo: post.reviewID)
+          .whereField("reviewID", isEqualTo: post.id)
           .whereField("authorID", isEqualTo: uid)
           .getDocuments()
         
@@ -243,6 +243,6 @@ struct FeedPostCardView: View {
 
 struct FeedPostCardView_Previews: PreviewProvider {
   static var previews: some View {
-    FeedPostCardView(user: exampleUsers[0], post: exampleReviews[0])
+    FeedPostCardView(user: exampleUsers[0], post: examplePost)
   }
 }

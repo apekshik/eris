@@ -77,10 +77,10 @@ struct FeedPostPageView: View {
         Text(showName ? (user?.fullName ?? "") : "")
           .font(.headline)
           .foregroundColor(.secondary)
-        Text("\(post.rating) Star Rating")
-          .font(.headline)
-          .foregroundColor(.secondary)
-          .frame(maxWidth: .infinity, alignment: .trailing)
+//        Text("\(post.rating) Star Rating")
+//          .font(.headline)
+//          .foregroundColor(.secondary)
+//          .frame(maxWidth: .infinity, alignment: .trailing)
       }
       .padding([.top, .horizontal])
       
@@ -106,9 +106,9 @@ struct FeedPostPageView: View {
       
       // HStack under the written review.
       HStack {
-        Text("Written by a \(post.relation)".uppercased())
-          .font(.caption)
-          .foregroundColor(.secondary)
+//        Text("Written by a \(post.relation)".uppercased())
+//          .font(.caption)
+//          .foregroundColor(.secondary)
         HStack(spacing: 20) {
           // Button for Like/Unlike
           Button {
@@ -175,7 +175,7 @@ struct FeedPostPageView: View {
   private func fetchComments() async -> [Comment] {
     do {
       let db = FirebaseManager.shared.firestore
-      let querySnapshot = try await db.collection("Comments").whereField("reviewID", isEqualTo: post.reviewID).getDocuments()
+      let querySnapshot = try await db.collection("Comments").whereField("reviewID", isEqualTo: post.id).getDocuments()
       let comments: [Comment] = querySnapshot.documents.compactMap { QueryDocumentSnapshot in
         try? QueryDocumentSnapshot.data(as: Comment.self)
       }
@@ -201,6 +201,6 @@ struct FeedPostPageView: View {
 
 struct FeedPostPageView_Previews: PreviewProvider {
   static var previews: some View {
-    FeedPostPageView(user: exampleUsers[0], userID: "", post: exampleReviews[0])
+    FeedPostPageView(user: exampleUsers[0], userID: "", post: examplePost)
   }
 }

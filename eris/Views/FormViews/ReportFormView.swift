@@ -59,7 +59,7 @@ struct ReportFormView: View {
       if review == nil {
         report = Report(authorID: myID, userID: user.firestoreID, content: reportContent)
       } else {
-        report = Report(authorID: myID, userID: user.firestoreID, content: reportContent, reviewID: review!.reviewID)
+        report = Report(authorID: myID, userID: user.firestoreID, content: reportContent, reviewID: review!.id)
       }
       
       let reportsRef = FirebaseManager.shared.firestore.collection("Reports")

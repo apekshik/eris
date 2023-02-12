@@ -22,10 +22,10 @@ struct TFeedReviewCardView: View {
               .font(.headline)
               .fontWeight(.heavy)
 //              .foregroundColor(.secondary)
-            Text("\(review.rating) Star Rating")
-              .font(.headline)
-//              .foregroundColor(.secondary)
-              .frame(maxWidth: .infinity, alignment: .trailing)
+//            Text("\(review.rating) Star Rating")
+//              .font(.headline)
+////              .foregroundColor(.secondary)
+//              .frame(maxWidth: .infinity, alignment: .trailing)
           }
           .foregroundColor(.black)
           .padding([.horizontal, .top])
@@ -43,9 +43,9 @@ struct TFeedReviewCardView: View {
           
           // HStack Footer
           HStack {
-            Text("Written by a \(review.relation)".uppercased())
-              .font(.caption)
-              .foregroundColor(.black)
+//            Text("Written by a \(review.relation)".uppercased())
+//              .font(.caption)
+//              .foregroundColor(.black)
             HStack(spacing: 20) {
               // Button for comments section.
               Button {
@@ -92,6 +92,6 @@ struct TFeedReviewCardView: View {
 
 struct TFeedReviewCardView_Previews: PreviewProvider {
     static var previews: some View {
-        TFeedReviewCardView(user: exampleUsers[0], review: exampleReviews[0], liked: false)
+        TFeedReviewCardView(user: exampleUsers[0], review: examplePost, liked: false)
     }
 }

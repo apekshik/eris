@@ -104,7 +104,7 @@ struct AddCommentView: View {
         // We can use the bang (!) operator on the author var becauase we know we fetched the data and then tried to create a new Comment Instance.
         let newComment = Comment(authorID: author!.firestoreID,
                                  authorUserName: author!.userName,
-                                 reviewID: review.reviewID,
+                                 reviewID: review.id,
                                  content: newCommentContent,
                                  createdAt: Date(),
                                  chainPostID: nil)
@@ -128,7 +128,7 @@ struct AddCommentView: View {
   private func updateComments() async {
     print("Comments: \(comments.count)")
     let db = FirebaseManager.shared.firestore
-    db.collection("Comments").whereField("reviewID", isEqualTo: review.reviewID).getDocuments { querySnapshot, error in
+    db.collection("Comments").whereField("reviewID", isEqualTo: review.id).getDocuments { querySnapshot, error in
       guard let documents = querySnapshot?.documents, error == nil else { return }
       
       // compactMap() -> Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
@@ -152,6 +152,6 @@ struct AddCommentView: View {
 
 struct AddCommentView_Previews: PreviewProvider {
   static var previews: some View {
-    AddCommentView(show: .constant(true), comments: .constant(exampleComments), review: exampleReviews[0])
+    AddCommentView(show: .constant(true), comments: .constant(exampleComments), review: examplePost)
   }
 }

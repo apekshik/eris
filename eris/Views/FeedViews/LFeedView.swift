@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseFirestoreSwift
 
-struct FeedView: View {
+struct LFeedView: View {
   @State var reviews: [Post] = []
   @State var usersIFollow: [User] = []
   
@@ -56,7 +56,7 @@ struct FeedView: View {
       ForEach(reviews, id: \.self) { review in
         NavigationLink {
           // Destination
-          FeedPostPageView(userID: review.uid, post: review)
+          FeedPostPageView(userID: review.recipientUserID, post: review)
             .onAppear {
               showAppTitle = false
             }
@@ -151,6 +151,6 @@ struct FeedView: View {
 
 struct FeedView_Previews: PreviewProvider {
   static var previews: some View {
-    FeedView()
+    LFeedView()
   }
 }

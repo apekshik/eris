@@ -10,7 +10,7 @@
 import SwiftUI
 import FirebaseMessaging
 
-struct HomeView: View {
+struct LHomeView: View {
   @AppStorage("log_status") var logStatus: Bool = false
   @AppStorage("showOnboardingView") var showOnboardingView: Bool = true
   @State var usersIFollow: [User] = []
@@ -40,7 +40,7 @@ struct HomeView: View {
   var mainView: some View {
     TabView {
       // TODO: Come up with a new name for recent posts/activities (like how twitter has tweets).
-      FeedView()
+      LFeedView()
         .tabItem {
           Image(systemName: "circle.hexagongrid.fill")
           Text("Recent Activities")
@@ -125,6 +125,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
-    HomeView(fcmTokenData: [:])
+    LHomeView(fcmTokenData: [:])
   }
 }

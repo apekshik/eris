@@ -11,7 +11,7 @@ import SwiftUI
 import FirebaseFirestore
 
 
-struct UserProfileView: View {
+struct LUserProfileView: View {
   @State var user: User
   @State var reviews: [Post] = []
   @State var following: Bool = false
@@ -385,6 +385,6 @@ struct UserProfileView: View {
 
 struct UserProfileView_Previews: PreviewProvider {
   static var previews: some View {
-    UserProfileView(user: exampleUsers[0], reviews: exampleReviews, usersIFollow: .constant([]))
+    LUserProfileView(user: exampleUsers[0], reviews: [examplePost], usersIFollow: .constant([]))
   }
 }
