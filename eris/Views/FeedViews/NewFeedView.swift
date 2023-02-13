@@ -60,6 +60,9 @@ struct NewFeedView: View {
       }
       .toolbarBackground(.hidden, for: .navigationBar)
     }
+    .task {
+      model.myData = myUserData.myUserProfile
+    }
     .sheet(isPresented: $showCamera, content: {
       CameraView(showCameraView: $showCamera)
     })

@@ -15,6 +15,7 @@ struct FeedViewPostView: View {
   @Environment(\.isSearching) var isSearching
   
   @ObservedObject var model: FeedViewModel
+  @EnvironmentObject var myUserData: MyData
   @State var userSelected: User? = nil
   @State var showCamera: Bool = false
   @Binding var showMakePostView: Bool
@@ -125,9 +126,8 @@ struct FeedViewPostView: View {
             .cornerRadius(5)
             .opacity(0.9)
             .onTapGesture {
-//              isSearching.toggle()
             }
-          /// – Delete Button
+            // Delete Button
             .overlay(alignment: .topTrailing) {
               Button {
                 withAnimation {
@@ -140,6 +140,7 @@ struct FeedViewPostView: View {
               }
               .padding()
             }
+            // Username on top left corner of the image selected.
             .overlay(alignment: .topLeading) {
               Text(userSelected?.userName.uppercased() ?? "")
                 .font(.title)
@@ -153,7 +154,10 @@ struct FeedViewPostView: View {
         
         // Post Button
         Button {
-          //          model.makePost()
+          if (userSelected != nil) {
+            model.makePost(for: userSelected!, by: myUserData.myUserProfile!)
+            showMakePostView = false
+          }
         } label: {
           Text("Post")
         }

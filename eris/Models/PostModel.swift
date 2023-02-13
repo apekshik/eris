@@ -43,7 +43,7 @@ struct Post: Codable, Identifiable, Hashable {
     case recipientUserID
     case recipientUsername
     case imageURL
-    case caption = "comment"
+    case caption
     case isParent
     case isConnected
     case hasChain

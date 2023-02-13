@@ -15,7 +15,7 @@ class FeedViewModel: ObservableObject {
   // MARK: User Data
   @Published var usersIFollow: [User] = []
   @Published var myData: User? = nil
-  @Published var newPost: Post? = nil 
+  @Published var newPost: Post? = nil
   
   // PhotoPicker vars
   @Published var showPhotoPicker: Bool = false
@@ -41,11 +41,54 @@ class FeedViewModel: ObservableObject {
   
   func addMyUserData(profileData: User, usersIFollow users: [User]) {
     myData = profileData
-    usersIFollow = users 
+    usersIFollow = users
   }
   
-  func makePost() {
-    
+  func makePost(for recipient: User, by author: User) {
+    isLoading = true
+    Task {
+      do {
+        
+        // guard to check if currentUserID can be extracted or not.
+        guard let userID = FirebaseManager.shared.auth.currentUser?.uid else {
+          // couldn't find signed in currentUserID
+          print("Couldn't find Current Signed in UserID!")
+          //      throw FirebaseManager.FirebaseError.currentUserIDNotFound
+          return
+        }
+        
+        /// create a document reference first because we need to store it as a field in the document
+        /// itself. The reason you can get it before the document is created is because it's generated
+        /// on the client when you create the document reference.
+        let db = FirebaseManager.shared.firestore
+        let documentReference = db.collection("Posts").document()
+        
+        /// Step 1:  Upload image if any.
+        let imageReferenceID = "\(userID)\(documentReference.documentID)\(Date())"
+        let storageRef = FirebaseManager.shared.storage.reference().child("PostImages").child(imageReferenceID)
+        
+        
+        
+        let _ = try await storageRef.putDataAsync(postImageData!)
+        let downloadURL = try await storageRef.downloadURL()
+        
+        let newPost = Post(authorUserID: author.id!, authorUsername: author.userName,
+                           recipientUserID: recipient.id!, recipientUsername: recipient.userName,
+                           imageURL: downloadURL,
+                           caption: "",
+                           isParent: true, isConnected: false, hasChain: false,
+                           connectedPostID: "", connectedPostImageURL: nil,
+                           connectedPostCaption: "",
+                           createdAt: Date())
+        
+        /// After uploading image to storage, upload document for new post to firestore.
+        try documentReference.setData(from: newPost)
+        
+        isLoading = false
+      } catch {
+        // Catch and handle errors.
+      }
+    }
   }
   
   func updatePhoto(selectedPhotoPickerItem : PhotosPickerItem?) {
