@@ -26,12 +26,17 @@ extension View {
     self
       .frame(maxHeight: .infinity, alignment: alignment)
   }
+
+  func hideKeyboard() {
+      UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+  }
   
   // When called inside .onTapGesture, tapping anywhere on the view dismissed the keyboard.
   func hideKeyboardOnTap() {
     let resign = #selector(UIResponder.resignFirstResponder)
     UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
   }
+  
   
 }
 
