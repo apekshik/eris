@@ -20,8 +20,8 @@ struct erisApp: App {
   @State var showCamera: Bool = false
   var body: some Scene {
     WindowGroup {
-      LHomeView()
-//        NewHomeView()
+//      LHomeView()
+        NewHomeView()
 //      VStack {
 //        Button {
 //          showCamera.toggle()

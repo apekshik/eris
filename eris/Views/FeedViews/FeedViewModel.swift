@@ -29,6 +29,12 @@ class FeedViewModel: ObservableObject {
   // MARK: View vars
   @Published var isLoading: Bool = false
   
+  init() {
+    Task {
+      self.usersIFollow = await fetchUsersIFollow()
+    }
+  }
+  
   func addUsersTo(usersIFollow users: [User]) {
     usersIFollow.append(contentsOf: users)
   }

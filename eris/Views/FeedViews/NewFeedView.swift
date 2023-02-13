@@ -9,10 +9,12 @@ import SwiftUI
 
 struct NewFeedView: View {
   @State var textInput: String = ""
+  @State var userSelected: User? = nil
   @State var showCamera: Bool = false
+  @State var showMakePostView: Bool = false
   @StateObject var model: FeedViewModel = FeedViewModel()
   @EnvironmentObject var myUserData: MyData
-  
+  @EnvironmentObject var camModel: CameraViewModel
   
   var body: some View {
     NavigationStack {
@@ -40,45 +42,7 @@ struct NewFeedView: View {
           }
           .tint(.white)
           .padding()
-          
-          
-          if let postImageData = model.postImageData, let image = UIImage(data: postImageData) {
-            VStack {
-              GeometryReader { proxy in
-                let size = proxy.size
-                Image(uiImage: image)
-                  .resizable()
-                  .scaledToFill()
-                  .frame(width: size.width, height: size.height)
-                  .cornerRadius(5)
-                  
-                /// – Delete Button
-                  .overlay(alignment: .topTrailing) {
-                    Button {
-                      withAnimation {
-                        model.postImageData = nil
-                      }
-                    } label: {
-                      Image(systemName: "trash")
-                        .fontWeight(.bold)
-                        .tint(.white)
-                    }
-                    .padding()
-                  }
-              }
-              .clipped()
-              .frame(height: 350)
-              .padding()
-              
-              // Post Button
-              Button {
-                model.makePost()
-              } label: {
-                Text("Post")
-              }
-            }
-          }
-          
+ 
           ForEach(0..<30) { _ in
             Rectangle()
               .fill(.ultraThinMaterial)
@@ -86,18 +50,22 @@ struct NewFeedView: View {
               .cornerRadius(10)
               .padding()
           }
+          .onChange(of: model.postImageData) { newValue in
+            if newValue != nil {
+              showMakePostView.toggle()
+            }
+          }
         }
         .searchable(text: $textInput, placement: .navigationBarDrawer)
-        
-       
-//        .background(.blue)
-        
       }
       .toolbarBackground(.hidden, for: .navigationBar)
     }
     .sheet(isPresented: $showCamera, content: {
       CameraView(showCameraView: $showCamera)
     })
+    .fullScreenCover(isPresented: $showMakePostView) {
+      FeedViewPostView(model: model, showMakePostView: $showMakePostView)
+    }
     .photosPicker(isPresented: $model.showPhotoPicker, selection: $model.photoItem)
     .onChange(of: model.photoItem) { newValue in
       model.updatePhoto(selectedPhotoPickerItem: newValue)
@@ -105,9 +73,7 @@ struct NewFeedView: View {
     .overlay {
       LoadingView(show: $model.isLoading)
     }
-    .onAppear {
-      Task { await model.fetchUsersIFollow() }
-    }
+//    .task { model.usersIFollow = await model.fetchUsersIFollow() }
     .refreshable {
       // do stuff to refresh
     }
