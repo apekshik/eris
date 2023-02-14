@@ -52,7 +52,12 @@ struct NewFeedView: View {
           }
           .onChange(of: model.postImageData) { newValue in
             if newValue != nil {
-              showMakePostView.toggle()
+              showMakePostView = true 
+            }
+          }
+          .onChange(of: camModel.photo) { newValue in
+            if newValue != nil {
+              model.postImageData = newValue?.compressedData
             }
           }
         }

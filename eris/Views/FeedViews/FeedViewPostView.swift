@@ -16,6 +16,7 @@ struct FeedViewPostView: View {
   
   @ObservedObject var model: FeedViewModel
   @EnvironmentObject var myUserData: MyData
+  @EnvironmentObject var camModel: CameraViewModel
   @State var userSelected: User? = nil
   @State var showCamera: Bool = false
   @Binding var showMakePostView: Bool
@@ -36,10 +37,12 @@ struct FeedViewPostView: View {
     NavigationStack {
       ScrollView {
         ZStack { // ZStack to overlay searchBar results on the current view
-          VStack {
+          VStack(spacing: 0) {
             headerButtons
             
-            imageAndPostButton
+            ZStack {
+              imageAndPostButton
+            }
           }
           
           if userQueries.count > 0 {
@@ -52,6 +55,9 @@ struct FeedViewPostView: View {
     .searchable(text: keywordBinding, prompt: "Find your friend to tag...")
     .sheet(isPresented: $showCamera) {
       CameraView(showCameraView: $showCamera)
+    }
+    .onChange(of: camModel.photo) { newValue in
+      model.postImageData = newValue?.compressedData
     }
   } // [End of NavigationStack]
   
@@ -93,7 +99,9 @@ struct FeedViewPostView: View {
       } label: {
         VStack {
           Image(systemName: "photo.on.rectangle.angled")
-          Text("Reselect")
+            .fontWeight(.bold)
+          Text("Reselect".uppercased())
+            .fontWeight(.heavy)
         }
       }
       Spacer()
@@ -105,14 +113,15 @@ struct FeedViewPostView: View {
       } label: {
         VStack {
           Image(systemName: "camera")
-          Text("Recapture")
+            .fontWeight(.bold)
+          Text("Recapture".uppercased())
+            .fontWeight(.heavy)
         }
       }
     } // [End of Hstack]
     .tint(.white)
     .padding()
   }
-  
   
   var imageAndPostButton: some View {
     VStack {
@@ -137,6 +146,9 @@ struct FeedViewPostView: View {
                 Image(systemName: "trash")
                   .fontWeight(.bold)
                   .tint(.white)
+                  .padding(8)
+                  .background(.ultraThinMaterial)
+                  .cornerRadius(5)
               }
               .padding()
             }
