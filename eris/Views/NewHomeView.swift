@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseMessaging
+import FirebaseFirestoreSwift
 
 struct NewHomeView: View {
   @AppStorage("log_status") var logStatus: Bool = false
@@ -16,29 +17,79 @@ struct NewHomeView: View {
   @StateObject var camModel: CameraViewModel = CameraViewModel()
   @StateObject var myData: MyData = MyData()
   
+  // MARK: Error Details.
+  @State var errorMessage: String = ""
+  @State var showError: Bool = false
+  
   var body: some View {
-    TabView(selection: $selectedTab) {   
-      NewFeedView()
-        .tag(0)
-        .tabItem {
-          Image(systemName: "house")
-        }
-        .toolbarBackground(.hidden, for: .navigationBar)
+    ZStack {
+      TabView(selection: $selectedTab) {
+        NewFeedView()
+          .tag(0)
+          .toolbarBackground(.hidden, for: .tabBar, .bottomBar, .navigationBar)
+          .toolbar(.hidden, for: .bottomBar, .tabBar)
+        
+        MyProfileView(boujees: exampleLivePosts)
+          .tag(1)
+          .toolbarBackground(.hidden, for: .tabBar, .bottomBar, .navigationBar)
+          .toolbar(.hidden, for: .bottomBar, .tabBar)
+        
+        AboutSheetView()
+          .tag(2)
+          .toolbarBackground(.hidden, for: .tabBar, .bottomBar, .navigationBar)
+          .toolbar(.hidden, for: .bottomBar, .tabBar)
+      }
+      .overlay {
+//        Text("usersIFollow: \(myData.usersIFollow.count)")
+      }
       
-      MyProfileView(boujees: exampleLivePosts)
-        .tag(1)
-        .tabItem {
-          Image(systemName: "magnifyingglass")
+      VStack {
+        Spacer()
+        HStack {
+          Spacer()
+          VStack {
+            Image(systemName: "house")
+            Text("Home")
+              .font(.caption)
+          }
+            .onTapGesture {
+              selectedTab = 0
+            }
+          Spacer()
+          VStack {
+            Image(systemName: "magnifyingglass")
+            Text("Search")
+              .font(.caption)
+          }
+            .onTapGesture {
+              selectedTab = 1
+            }
+          Spacer()
+          VStack {
+            Image(systemName: "tray")
+            Text("Tray")
+              .font(.caption)
+          }
+            .onTapGesture {
+              selectedTab = 2
+            }
+          Spacer()
         }
-      AboutSheetView()
-        .tag(2)
-        .tabItem {
-          Image(systemName: "tray")
-        }
+        .tint(.white)
+        .frame(maxWidth: .infinity, maxHeight: 50)
+        .background(.ultraThinMaterial)
+        .cornerRadius(12)
+        .padding()
+        .offset(y: -10)
+      }
+      .frame(maxHeight: .infinity)
+      .ignoresSafeArea()
     }
+    .toolbar(.hidden, for: .bottomBar, .tabBar)
     .task {
       myData.myUserProfile = await fetchCurrentUser()
       myData.usersIFollow = await fetchUsersIFollow()
+      
     }
     .environmentObject(camModel)
     .environmentObject(myData)
@@ -75,6 +126,7 @@ struct NewHomeView: View {
       // Fetch user data from Firestore using the userID.
       let user = try await FirebaseManager.shared.firestore.collection("Users").document(userID).getDocument(as: User.self)
       print("successfully Fetched logged in user")
+      print("currentUser documentID: \(user.id)")
       return user
     } catch {
       // handle errors
@@ -85,21 +137,36 @@ struct NewHomeView: View {
   }
   
   private func fetchUsersIFollow() async -> [User] {
-    var usersIFollow: [User] = []
-    guard let userID = FirebaseManager.shared.auth.currentUser?.uid else { return [] }
-    let followingRef = FirebaseManager.shared.firestore.collection("Users").document(userID).collection("Following")
-    followingRef.getDocuments { querySnapshot, error in
-      guard let documents = querySnapshot?.documents, error == nil else { return }
-      
-      // compactMap() -> Returns an array containing the non-nil results of calling the given transformation with each element of this sequence.
-      usersIFollow = documents.compactMap { queryDocumentSnapshot in
-        try? queryDocumentSnapshot.data(as: User.self)
-      }
+    var users: [User] = []
+    do {
+      print("FirestoreID: \(myData.myUserProfile?.firestoreID ?? "Something's off")")
+      print("FirestoreID: \(myData.myUserProfile?.id ?? "Something's off")")
+      let querySnapshot = try await FirebaseManager.shared.firestore
+        .collection("Users")
+        .document(myData.myUserProfile!.firestoreID)
+        .collection("Following").getDocuments()
+      let documentsRef = querySnapshot.documents
+      let temp = try documentsRef.compactMap({ QueryDocumentSnapshot in
+        try QueryDocumentSnapshot.data(as: User.self)
+      })
+      users.append(contentsOf: temp)
+      print("usersIFollow: \(users.count)")
+      return users
+    } catch {
+      await setError(error)
     }
-    
-    print("Successfully fetched users I follow")
-    return usersIFollow
+    print("Error Fetching usersIFollow!")
+    return users
   } // End of method fetchUsers()
+  
+  // MARK: Display Errors Via ALERT
+  private func setError(_ error: Error) async {
+    // UI Must be updated on Main Thread.
+    await MainActor.run(body: {
+      errorMessage = error.localizedDescription
+      showError.toggle()
+    })
+  }
 }
 
 struct NewHomeView_Previews: PreviewProvider {

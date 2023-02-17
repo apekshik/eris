@@ -72,8 +72,8 @@ class FeedViewModel: ObservableObject {
         let _ = try await storageRef.putDataAsync(postImageData!)
         let downloadURL = try await storageRef.downloadURL()
         
-        let newPost = Post(authorUserID: author.id!, authorUsername: author.userName,
-                           recipientUserID: recipient.id!, recipientUsername: recipient.userName,
+        let newPost = Post(authorUserID: author.firestoreID, authorUsername: author.userName,
+                           recipientUserID: recipient.firestoreID, recipientUsername: recipient.userName,
                            imageURL: downloadURL,
                            caption: "",
                            isParent: true, isConnected: false, hasChain: false,

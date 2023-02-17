@@ -61,7 +61,7 @@ struct LFeedView: View {
               showAppTitle = false
             }
         } label: {
-          FeedPostCardView(post: review)
+          LFeedPostCardView(post: review)
         }
         .onAppear {
           withAnimation { showAppTitle = true }

@@ -12,7 +12,8 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct Post: Codable, Identifiable, Hashable {
-  @DocumentID var id = UUID().uuidString // To be able to iterate through a list of Review Items.
+  @DocumentID var id: String? // To be able to iterate through a list of Review Items.
+//  let documentID: String
   let authorUserID: String // id to tell who made the post.
   let authorUsername: String // username of the person who made the post
   let recipientUserID: String // userID to tell who the post is for.
@@ -38,6 +39,7 @@ struct Post: Codable, Identifiable, Hashable {
   
   
   enum CodingKeys: String, CodingKey {
+//    case documentID
     case authorUserID
     case authorUsername
     case recipientUserID

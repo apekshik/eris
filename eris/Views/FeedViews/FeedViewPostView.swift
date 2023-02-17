@@ -105,7 +105,19 @@ struct FeedViewPostView: View {
         }
       }
       Spacer()
-      
+      Button {
+        // close this view
+        model.postImageData = nil
+        showMakePostView = false
+      } label: {
+        VStack {
+          Image(systemName: "xmark.circle")
+            .fontWeight(.bold)
+          Text("Discard Boujee".uppercased())
+            .fontWeight(.heavy)
+        }
+      }
+      Spacer()
       // Camera Button
       Button {
         print("Camera Button Pressed!")
@@ -165,13 +177,25 @@ struct FeedViewPostView: View {
         .padding()
         
         // Post Button
-        Button {
-          if (userSelected != nil) {
-            model.makePost(for: userSelected!, by: myUserData.myUserProfile!)
-            showMakePostView = false
+        if (userSelected != nil) {
+          Button {
+            if (userSelected != nil) {
+              model.makePost(for: userSelected!, by: myUserData.myUserProfile!)
+              showMakePostView = false
+            }
+          } label: {
+            Text("Post Boujee".uppercased())
+              .tint(.white)
+              .font(.title2)
+              .fontWeight(.heavy)
           }
-        } label: {
-          Text("Post")
+          .padding(8)
+          .background(.ultraThinMaterial)
+          .cornerRadius(5)
+        } else {
+          Text("Now tag a friend to boujee them!".uppercased())
+            .font(.caption)
+            .fontWeight(.bold)
         }
       } // [End of if statement]
     }
