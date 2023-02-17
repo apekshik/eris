@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct FeedPostCardView: View {
   @EnvironmentObject var model: FeedViewModel
@@ -18,39 +19,23 @@ struct FeedPostCardView: View {
   
   var imageView: some View {
     Group {
-      if let postImageData = model.postImageData, let image = UIImage(data: postImageData) {
+      // Image if it exists.
+      if let postImageUrl = post.imageURL {
         GeometryReader { proxy in
+          
           let size = proxy.size
-          Image(uiImage: image)
+          WebImage(url: postImageUrl)
             .resizable()
             .scaledToFill()
             .frame(width: size.width, height: size.height)
-            .cornerRadius(5)
-            .opacity(0.9)
-            .onTapGesture {
-            }
-          // Delete Button
-            .overlay(alignment: .topTrailing) {
-              Button {
-                withAnimation {
-                  model.postImageData = nil
-                }
-              } label: {
-                Image(systemName: "trash")
-                  .fontWeight(.bold)
-                  .tint(.white)
-                  .padding(8)
-                  .background(.ultraThinMaterial)
-                  .cornerRadius(5)
-              }
-              .padding()
-            }
-          // Username on top left corner of the image selected.
+            .cornerRadius(10)
+            // Username on top left corner of the image selected.
             .overlay(alignment: .topLeading) {
-              Text("\(post.authorUsername)→\(post.recipientUsername)")
-                .font(.title)
+              Text("\(post.authorUsername.lowercased())→\(post.recipientUsername.lowercased())")
+                .tint(.white)
+                .font(.caption)
                 .fontWeight(.black)
-                .padding(12)
+                .padding(8)
             }
         }
         .clipped()
@@ -60,7 +45,7 @@ struct FeedPostCardView: View {
     }
   }
 }
-  
+
 struct FeedPostCardView_Previews: PreviewProvider {
   static var previews: some View {
     FeedPostCardView(post: examplePost)

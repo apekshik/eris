@@ -13,7 +13,6 @@ struct NewFeedView: View {
   @State var showCamera: Bool = false
   @State var showMakePostView: Bool = false
   
-  @State var posts: [Post] = [] 
   @StateObject var model: FeedViewModel = FeedViewModel()
   @EnvironmentObject var myUserData: MyData
   @EnvironmentObject var camModel: CameraViewModel
@@ -29,11 +28,7 @@ struct NewFeedView: View {
           .opacity(0.6)
         ScrollView {
           headerButtons
-          
-          Text(myUserData.myUserProfile?.userName ?? "None")
-          Text("Number of usersIfollow: \(myUserData.usersIFollow.count)")
-          Text("Number of posts fetched: \(posts.count)")
-          if posts.count > 0 {
+          if model.posts.count > 0 {
             feed
               .environmentObject(model)
           } else {
@@ -56,7 +51,15 @@ struct NewFeedView: View {
       .toolbarBackground(.hidden, for: .navigationBar)
     }
     .task {
-      await fetchPostsForFollowedUsers()
+      if model.posts.count == 0 {
+        model.fetchFeedPosts()
+      }
+      // the reason these print statements give 0 while the textviews and feed views all update
+      // the data properly is because these print statements execute before the async downloads are
+      // fethched. Once the data is fetched the views surely update but .task doesn't call the print statements
+      // again.
+      print("Printing from .task: \(myUserData.usersIFollow.count)")
+      print("Printing from .task: \(model.posts.count)")
     }
     .sheet(isPresented: $showCamera, content: {
       CameraView(showCameraView: $showCamera)
@@ -102,7 +105,7 @@ struct NewFeedView: View {
   
   var feed: some View {
     LazyVStack(spacing: 8) {
-      ForEach(posts, id: \.self) { post in
+      ForEach(model.posts, id: \.self) { post in
         NavigationLink {
           // Destination
         } label: {
@@ -112,12 +115,8 @@ struct NewFeedView: View {
     } // End of LazyVStack
   }
   
-  func fetchPostsForFollowedUsers() async {
-      let users = myUserData.usersIFollow
-      let fetchedPosts = await fetchPosts(for: users)
-      posts = fetchedPosts
-  }
-  
+
+  // MARK: methods not needed. model: FeedViewModel handles fetching and storing posts for feed already.
   private func fetchPosts(for users: [User]) async -> [Post] {
     do {
       let postRef = FirebaseManager.shared.firestore.collection("Posts")

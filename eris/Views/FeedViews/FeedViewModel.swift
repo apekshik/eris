@@ -9,6 +9,7 @@ import Foundation
 import PhotosUI
 import _PhotosUI_SwiftUI
 
+@MainActor
 class FeedViewModel: ObservableObject {
   @Published var posts: [Post] = []
   
@@ -29,11 +30,6 @@ class FeedViewModel: ObservableObject {
   // MARK: View vars
   @Published var isLoading: Bool = false
   
-  init() {
-    Task {
-      self.usersIFollow = await fetchUsersIFollow()
-    }
-  }
   
   func addUsersTo(usersIFollow users: [User]) {
     usersIFollow.append(contentsOf: users)
@@ -105,7 +101,7 @@ class FeedViewModel: ObservableObject {
     }
   }
   
-  func fetchFeedReviews() {
+  func fetchFeedPosts() {
     isLoading = true
     Task {
       usersIFollow = await fetchUsersIFollow()
@@ -135,13 +131,14 @@ class FeedViewModel: ObservableObject {
     return []
   }
   
-  func fetchPosts(for users: [User]) async -> [Post] {
+  private func fetchPosts(for users: [User]) async -> [Post] {
     do {
-      let reviewRef = FirebaseManager.shared.firestore.collection("Posts")
-      var reviews: [Post] = []
-      for user in users  {
-        let querySnapshot = try await reviewRef
-          .whereField("reciepientUserID", isEqualTo: user.id)
+      let postRef = FirebaseManager.shared.firestore.collection("Posts")
+      var posts: [Post] = []
+      for author in users  {
+        let querySnapshot = try await postRef
+          .whereField("authorUserID", isEqualTo: author.firestoreID)
+          .whereField("isParent", isEqualTo: true)
           .order(by: "createdAt", descending: true)
           .limit(to: 3)
           .getDocuments()
@@ -149,9 +146,9 @@ class FeedViewModel: ObservableObject {
         let temp: [Post] = try documentsRef.compactMap({ QueryDocumentSnapshot in
           try QueryDocumentSnapshot.data(as: Post.self)
         })
-        reviews.append(contentsOf: temp)
+        posts.append(contentsOf: temp)
       }
-      return reviews
+      return posts
     } catch {
       await setError(error)
     }
