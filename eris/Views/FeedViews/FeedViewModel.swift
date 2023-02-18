@@ -30,7 +30,6 @@ class FeedViewModel: ObservableObject {
   // MARK: View vars
   @Published var isLoading: Bool = false
   
-  
   func addUsersTo(usersIFollow users: [User]) {
     usersIFollow.append(contentsOf: users)
   }
@@ -104,8 +103,12 @@ class FeedViewModel: ObservableObject {
   func fetchFeedPosts() {
     isLoading = true
     Task {
-      usersIFollow = await fetchUsersIFollow()
-      posts = await fetchPosts(for: usersIFollow)
+      if usersIFollow.count > 0 {
+        posts = await fetchPosts(for: usersIFollow)
+      } else {
+        usersIFollow = await fetchUsersIFollow()
+        posts = await fetchPosts(for: usersIFollow)
+      }
       // Handle Reviews here.
       isLoading = false
     }

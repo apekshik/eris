@@ -65,7 +65,7 @@ struct FeedViewPostView: View {
   var searchBarResults: some View {
     VStack {
       LazyVStack(alignment: .leading) {
-        ForEach(userQueries, id: \.id) { user in
+        ForEach(userQueries) { user in
           SearchUserCardView(user: user)
             .padding([.horizontal], 12)
             .padding([.vertical], 8)
@@ -85,7 +85,6 @@ struct FeedViewPostView: View {
       Spacer()
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    //    .background(.ultraThinMaterial)
     .zIndex(userQueries.count > 0 ? 1 : 0)
   }
   

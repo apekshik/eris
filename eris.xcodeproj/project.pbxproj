@@ -256,10 +256,7 @@
 		8938E904296A482B0083378A /* FeedViews */ = {
 			isa = PBXGroup;
 			children = (
-				89D3ADAD2968C314005B89FE /* TFeedReviewCardView.swift */,
-				89099FAB2978827D00107977 /* TFeedPostPageView.swift */,
-				89B4DFD729640C1E00BE584A /* LFeedView.swift */,
-				89B4DFDB296545FC00BE584A /* LFeedPostCardView.swift */,
+				8978DB0029A065FA00F27230 /* LegacyViews */,
 				89E05EC929985F45000DBD85 /* FeedViewModel.swift */,
 				89B4DFDD2965FAC400BE584A /* FeedPostPageView.swift */,
 				89E05ECD299ED81D000DBD85 /* FeedPostCardView.swift */,
@@ -407,6 +404,17 @@
 				895EEACA297271CD0047FBE1 /* LivePostTutorialView.swift */,
 			);
 			path = TutorialViews;
+			sourceTree = "<group>";
+		};
+		8978DB0029A065FA00F27230 /* LegacyViews */ = {
+			isa = PBXGroup;
+			children = (
+				89D3ADAD2968C314005B89FE /* TFeedReviewCardView.swift */,
+				89099FAB2978827D00107977 /* TFeedPostPageView.swift */,
+				89B4DFD729640C1E00BE584A /* LFeedView.swift */,
+				89B4DFDB296545FC00BE584A /* LFeedPostCardView.swift */,
+			);
+			path = LegacyViews;
 			sourceTree = "<group>";
 		};
 		89870082296F167600042CA8 /* Frameworks */ = {

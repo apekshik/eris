@@ -29,13 +29,20 @@ struct FeedPostCardView: View {
             .scaledToFill()
             .frame(width: size.width, height: size.height)
             .cornerRadius(10)
+            .opacity(0.9)
             // Username on top left corner of the image selected.
             .overlay(alignment: .topLeading) {
-              Text("\(post.authorUsername.lowercased())→\(post.recipientUsername.lowercased())")
-                .tint(.white)
-                .font(.caption)
-                .fontWeight(.black)
-                .padding(8)
+              HStack(spacing: 0) {
+                Text("\(post.authorUsername.lowercased())→\(post.recipientUsername.lowercased())")
+                  .tint(.white)
+                  .font(.caption)
+                  .fontWeight(.black)
+                Text(" • \(post.createdAt.time(since: Date()))")
+                  .foregroundColor(.secondary)
+                  .font(.caption)
+                  .fontWeight(.heavy)
+              }
+              .padding(8)
             }
         }
         .clipped()

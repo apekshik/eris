@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 // MARK: User model to store users in firestore database.
 struct User: Codable, Identifiable, Hashable  {
   
-  @DocumentID var id: String? 
+  let id = UUID().uuidString
   var firestoreID: String
   let firstName: String
   let lastName: String

@@ -101,7 +101,7 @@ struct NewHomeView: View {
       // If logStatus is true, user profile data does exist. So fetch it and store it in myData.
       // TODO: Then check if current FCM token is fresh. If not, then update it.
       if logStatus == true {
-        myData.myUserProfile = try await fetchCurrentUser()
+        myData.myUserProfile = await fetchCurrentUser()
         
         let token = try await Messaging.messaging().token()
         
@@ -139,8 +139,6 @@ struct NewHomeView: View {
   private func fetchUsersIFollow() async -> [User] {
     var users: [User] = []
     do {
-      print("FirestoreID: \(myData.myUserProfile?.firestoreID ?? "Something's off")")
-      print("FirestoreID: \(myData.myUserProfile?.id ?? "Something's off")")
       let querySnapshot = try await FirebaseManager.shared.firestore
         .collection("Users")
         .document(myData.myUserProfile!.firestoreID)
